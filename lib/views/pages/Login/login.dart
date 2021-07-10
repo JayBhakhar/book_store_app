@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:book_store_app/views/pages/Forget_Password/forget_password.dart';
 import 'package:book_store_app/views/pages/Home_Screen/home.dart';
 import 'package:http/http.dart';
 import 'package:book_store_app/views/pages/Registration/registration.dart';
@@ -92,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        ForgetPassword(), //forgot password screen
+                        ForgetPassword(),
                   ),
                 );
               },
