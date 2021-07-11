@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:book_store_app/views/pages/Login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -43,22 +42,6 @@ class _RegistrationState extends State<Registration> {
       var message = responseMessage['message'];
       // backend message needed
     }
-    print(json);
-    //   {
-    //   name: 'jay',
-    //   surename: 'jaybhakhar@gmail.com',
-    //   fatherName: '123456'
-    //   faculty: 1,
-    //   course: 2,
-    //   group: 'ap-31',
-    //   phoneNo: '+79961011395',
-    //   email: 'jaybhakhar@gmail.com',
-    //   password: '123465',
-    //   confirmPassword: '123456', #while not ready forget password
-    //   hostelNo: 1,
-    //   roomNo: 12,
-    //   position: 1
-    // }
   }
 
   @override
@@ -118,7 +101,7 @@ class _RegistrationState extends State<Registration> {
                     ),
                     validator: (String value) {
                       if (value.isEmpty) {
-                        return 'Please a Enter';
+                        return 'Please a Enter Email';
                       }
                       if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
                           .hasMatch(value)) {

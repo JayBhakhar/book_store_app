@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: ElevatedButton(
                 child: Text('Login'),
                 onPressed: () async {
-                  final url = Uri.parse('http://192.168.137.1:5000/login');
+                  final url = Uri.parse('http://192.168.0.112:5000//login');
                   Map<String, String> headers = {
                     "Content-type": "application/json"
                   };

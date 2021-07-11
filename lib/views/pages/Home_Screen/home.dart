@@ -1,5 +1,10 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:book_store_app/views/pages/Book_Details/book_details.dart';
+import 'package:book_store_app/views/widgets/Custom_Card.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -10,7 +15,35 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+    _getBooks();
   }
+
+  SharedPreferences prefs;
+
+
+  _getBooks() async{
+    prefs = await SharedPreferences.getInstance();
+    print('${prefs.getString('token')}');
+    final url = Uri.parse('http://192.168.0.112:5000/books');
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      'x-access-token': '${prefs.getString('token')}'
+    };
+    // make Get request
+    Response response = await get(url, headers: headers);
+    // check the status code for the result
+    int statusCode = response.statusCode;
+    print(statusCode);
+    // this API passes back the id of the new item added to the body
+    String body = response.body;
+    if(statusCode==200) {
+      Map<String, dynamic> convertBody = jsonDecode(body);
+      print(convertBody);
+    }
+  }
+
+
+
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,42 +76,7 @@ class _HomeState extends State<Home> {
       drawer: Drawer(),
       body: Column(
         children: [
-          Card(
-            clipBehavior: Clip.antiAlias,
-            child: Column(
-              children: [
-                InkWell(
-                  child: Container(
-                    width: 170,
-                    height: 190,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          // Image.network(src)
-                          Image(
-                            image: AssetImage('assets/images/image.jpg'),
-                          ),
-                          Text('book name'),
-                          Text('author name'),
-                          Text('price'),
-                        ],
-                      ),
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BookDetails(),
-                      ),
-                    );
-                  },
-                )
-              ],
-            ),
-          ),
+          CustomCard(),
         ],
       ),
     );

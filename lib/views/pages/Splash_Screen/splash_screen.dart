@@ -1,3 +1,5 @@
+import 'package:book_store_app/test.dart';
+import 'package:book_store_app/views/pages/Add_Book/add_book.dart';
 import 'package:book_store_app/views/pages/Home_Screen/home.dart';
 import 'package:book_store_app/views/pages/Login/login.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+
     _makePath();
   }
 
@@ -22,8 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            // builder: (context) => LoginScreen(), // login screen
-            builder: (context) => Home(), // login screen
+            builder: (context) => LoginScreen(), // login screen
           ),
         );
       });
@@ -31,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => Home(), //home screen
+          builder: (context) => AddBook(), //home screen
         ),
       );
     }
