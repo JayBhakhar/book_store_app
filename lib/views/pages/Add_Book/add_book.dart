@@ -1,9 +1,12 @@
+import 'dart:convert';
 import 'package:book_store_app/views/pages/Home_Screen/home.dart';
 import 'package:book_store_app/views/widgets/Custom_TextFormField_forInt.dart';
 import 'package:book_store_app/views/widgets/Custom_TextFormField_forInt_Withlen.dart';
 import 'package:book_store_app/views/widgets/Custom_TextFormField_forStr.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class AddBook extends StatefulWidget {
   @override
@@ -37,6 +40,55 @@ class _AddBookState extends State<AddBook> {
   String cover_type;
   String _dropdownErrorCoverType;
 
+
+  SharedPreferences prefs;
+
+  _addBookRequest() async {
+    prefs = await SharedPreferences.getInstance();
+    // set up POST request arguments
+    final url = Uri.parse('http://192.168.0.112:5000/book');
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      'x-access-token': '${prefs.getString('token')}'
+    };
+    String json =
+        '{'
+         '"bookName": "${bookName.text}",'
+         '"authors": "${authors.text}",'
+         '"illustrators": "${illustrators.text}",'
+         '"interpreters": "${interpreters.text}",'
+         '"publisher": "${publisher.text}",'
+         '"originalLanguage": "${originalLanguage.text}",'
+         '"year": "${year.text}",'
+         '"ISBN": "${ISBN.text}",'
+         '"EAN": "${EAN.text}",'
+         '"ISSN": "${ISSN.text}",'
+         '"numberOfPages": "${numberOfPages.text}",'
+         '"height": "${height.text}",'
+         '"width": "${width.text}",'
+         '"length": "${length.text}",'
+         '"weight": "${weight.text}",'
+         '"price": "${price.text}",'
+         '"quantity": "${quantity.text}",'
+         '"sellerBookID": "${sellerBookID.text}",'
+         '"briefAnnotation": "${briefAnnotation.text}",'
+         '"longAnnotation": "${longAnnotation.text}",'
+         '"price": "${price.text}",'
+         '"coverType": "$cover_type"'
+        '}';
+    // make POST request
+    Response response = await post(url, headers: headers, body: json);
+    // check the status code for the result
+    int statusCode = response.statusCode;
+    // this API passes back the id of the new item added to the body
+    String body = response.body;
+    if(statusCode==200){
+      Map<String, dynamic> responseMessage = jsonDecode(body);
+      var message = responseMessage['message'];
+      // backend message needed
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +112,10 @@ class _AddBookState extends State<AddBook> {
                   labelText: 'Illustrators',
                 ),
                 CustomTextFormFieldForStr(
+                  controller: interpreters,
+                  labelText: 'Interpreters',
+                ),
+                CustomTextFormFieldForStr(
                   controller: publisher,
                   labelText: 'Publisher',
                 ),
@@ -79,6 +135,10 @@ class _AddBookState extends State<AddBook> {
                 CustomTextFormFieldForInt(
                   controller: EAN,
                   labelText: 'EAN',
+                ),
+                CustomTextFormFieldForInt(
+                  controller: ISSN,
+                  labelText: 'ISSN',
                 ),
                 CustomTextFormFieldForInt(
                   controller: numberOfPages,
@@ -199,7 +259,7 @@ class _AddBookState extends State<AddBook> {
                         _isValid = false;
                       }
                       if (_isValid) {
-                        // _makePostRequest(); //need to make
+                        _addBookRequest(); //need to make
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(

@@ -6,6 +6,29 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+class Book {
+  String book_id;
+  String bookName;
+  String authors;
+  int price;
+
+  Book(this.book_id, this.bookName, this.authors, this.price);
+
+  factory Book.fromJson(dynamic json) {
+    return Book(
+      json['_id'] as String,
+      json['bookName'] as String,
+      json['authors'] as String,
+      json['price'] as int,
+    );
+  }
+
+  @override
+  String toString() {
+    return '{ ${this.book_id}, ${this.bookName}, ${this.authors}, ${this.price} }';
+  }
+}
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -19,9 +42,9 @@ class _HomeState extends State<Home> {
   }
 
   SharedPreferences prefs;
+  List<Book> books;
 
-
-  _getBooks() async{
+  _getBooks() async {
     prefs = await SharedPreferences.getInstance();
     print('${prefs.getString('token')}');
     final url = Uri.parse('http://192.168.0.112:5000/books');
@@ -36,14 +59,16 @@ class _HomeState extends State<Home> {
     print(statusCode);
     // this API passes back the id of the new item added to the body
     String body = response.body;
-    if(statusCode==200) {
-      Map<String, dynamic> convertBody = jsonDecode(body);
-      print(convertBody);
+    print(jsonDecode(body));
+    if (statusCode == 200) {
+      var booksObjs = jsonDecode(body)['books'] as List;
+      setState(() {
+        books = booksObjs.map((bookJson) => Book.fromJson(bookJson)).toList();
+      });
     }
+    print(jsonDecode(body)['books']);
+    print(books[0]);
   }
-
-
-
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,10 +99,22 @@ class _HomeState extends State<Home> {
         ],
       ),
       drawer: Drawer(),
-      body: Column(
-        children: [
-          CustomCard(),
-        ],
+      body: GridView.builder(
+        physics: ScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: books.length,
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 200.0,
+          mainAxisExtent: 230,
+          crossAxisSpacing: 1.0,
+          mainAxisSpacing: 1.0,
+        ),
+        itemBuilder: (BuildContext context, index) {
+          return CustomCard(
+            books_list: books,
+            index: index,
+          );
+        },
       ),
     );
   }

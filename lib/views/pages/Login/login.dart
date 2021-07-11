@@ -105,14 +105,14 @@ class _LoginScreenState extends State<LoginScreen> {
               child: ElevatedButton(
                 child: Text('Login'),
                 onPressed: () async {
-                  final url = Uri.parse('http://192.168.0.112:5000//login');
+                  final url = Uri.parse('http://192.168.0.112:5000/login');
                   Map<String, String> headers = {
                     "Content-type": "application/json"
                   };
                   String json = '{"email":"${email.text}",'
                       '"password":"${password.text}"}';
-
                   // make POST request
+                  print(json);
                   Response response =
                   await post(url, headers: headers, body: json);
                   // check the status code for the result

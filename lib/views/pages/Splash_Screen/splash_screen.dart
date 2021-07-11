@@ -14,7 +14,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
     _makePath();
   }
 
@@ -33,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => AddBook(), //home screen
+          builder: (context) => Home(), //home screen
         ),
       );
     }
