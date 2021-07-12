@@ -23,7 +23,7 @@ class _SellerRequestsState extends State<SellerRequests> {
   _getSellers() async {
     prefs = await SharedPreferences.getInstance();
     print('${prefs.getString('token')}');
-    final url = Uri.parse('http://192.168.0.112:5000/admin/newSellers');
+    final url = Uri.parse('http://192.168.0.112:5000/newSellers');
     Map<String, String> headers = {
       "Content-type": "application/json",
       'x-access-token': '${prefs.getString('token')}'

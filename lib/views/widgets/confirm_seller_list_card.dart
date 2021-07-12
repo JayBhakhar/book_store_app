@@ -1,3 +1,4 @@
+import 'package:book_store_app/models/User.dart';
 import 'package:book_store_app/views/pages/Confirm_Seller_List/cofirm_seller_list.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -6,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class ConfirmSellerListCard extends StatelessWidget {
-  final List<Sellers> sellers_list;
+  final List<User> sellers_list;
   final int index;
 
   ConfirmSellerListCard({this.sellers_list, this.index});
@@ -21,7 +22,7 @@ class ConfirmSellerListCard extends StatelessWidget {
       "Content-type": "application/json",
       'x-access-token': '${prefs.getString('token')}'
     };
-    String json = '{"_id": "${sellers_list[index].seller_id}" }';
+    String json = '{"_id": "${sellers_list[index].user_id}" }';
     print(json);
     Response response = await delete(url, headers: headers, body: json);
     // check the status code for the result

@@ -1,58 +1,10 @@
 import 'dart:convert';
-
+import 'package:book_store_app/models/User.dart';
 import 'package:book_store_app/views/widgets/confirm_seller_list_card.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Sellers {
-  String seller_id;
-  String userName;
-  String email;
-  String phone_number;
-  String address;
-  String passsword;
-  int city;
-  int country;
-  int postindex;
-  bool confirm_seller;
-
-  Sellers(
-    this.seller_id,
-    this.userName,
-    this.email,
-    this.phone_number,
-    this.address,
-    this.passsword,
-    this.city,
-    this.country,
-    this.postindex,
-    this.confirm_seller,
-  );
-
-  factory Sellers.fromJson(dynamic json) {
-    return Sellers(
-      json['_id'] as String,
-      json['userName'] as String,
-      json['email'] as String,
-      json['phoneNumber'] as String,
-      json['address'] as String,
-      json['passsword'] as String,
-      json['city'] as int,
-      json['country'] as int,
-      json['postindex'] as int,
-      json['confirmSeller'] as bool,
-    );
-  }
-
-  @override
-  String toString() {
-    return '{ ${this.seller_id}, ${this.userName}, ${this.email}, ${this.phone_number},'
-        '${this.address}, ${this.passsword}, ${this.city}, ${this.country},'
-        '${this.postindex},${this.confirm_seller},'
-        '}';
-  }
-}
 
 class ConfirmSellerList extends StatefulWidget {
   @override
@@ -61,7 +13,7 @@ class ConfirmSellerList extends StatefulWidget {
 
 class _ConfirmSellerListState extends State<ConfirmSellerList> {
   SharedPreferences prefs;
-  List<Sellers> sellers;
+  List<User> sellers;
 
   void initState() {
     super.initState();
@@ -87,7 +39,7 @@ class _ConfirmSellerListState extends State<ConfirmSellerList> {
       var userObjs = jsonDecode(body)['sellers'] as List;
       setState(() {
         sellers =
-            userObjs.map((bookJson) => Sellers.fromJson(bookJson)).toList();
+            userObjs.map((bookJson) => User.fromJson(bookJson)).toList();
       });
     }
   }

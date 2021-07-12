@@ -1,10 +1,52 @@
 import 'package:book_store_app/models/User.dart';
 import 'package:flutter/material.dart';
-
+import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SellerRequestsListCard extends StatelessWidget {
   final List<User> sellers_list;
   final int index;
+
+  SharedPreferences prefs;
+
+  _addConfirmSeller() async{
+    prefs = await SharedPreferences.getInstance();
+    print('${prefs.getString('token')}');
+    final url = Uri.parse('http://192.168.0.112:5000/newSellers');
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      'x-access-token': '${prefs.getString('token')}'
+    };
+    String json = '{"_id": "${sellers_list[index].user_id}" }';
+    print(json);
+    Response response = await put(url, headers: headers, body: json);
+    // check the status code for the result
+    int statusCode = response.statusCode;
+    print(statusCode);
+    // this API passes back the id of the new item added to the body
+    String body = response.body;
+    print(body);
+  }
+
+
+  _removeSellerRequest() async{
+    prefs = await SharedPreferences.getInstance();
+    print('${prefs.getString('token')}');
+    final url = Uri.parse('http://192.168.0.112:5000/confirm_seller');
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      'x-access-token': '${prefs.getString('token')}'
+    };
+    String json = '{"_id": "${sellers_list[index].user_id}" }';
+    print(json);
+    Response response = await delete(url, headers: headers, body: json);
+    // check the status code for the result
+    int statusCode = response.statusCode;
+    print(statusCode);
+    // this API passes back the id of the new item added to the body
+    String body = response.body;
+    print(body);
+  }
 
   SellerRequestsListCard({this.sellers_list, this.index});
 
