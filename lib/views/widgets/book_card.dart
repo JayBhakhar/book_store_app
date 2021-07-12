@@ -2,11 +2,11 @@ import 'package:book_store_app/views/pages/Book_Details/book_details.dart';
 import 'package:book_store_app/views/pages/Home_Screen/home.dart';
 import 'package:flutter/material.dart';
 
-class CustomCard extends StatelessWidget {
+class BookCard extends StatelessWidget {
   final List<Books> books_list;
   final int index;
 
-  CustomCard({this.books_list, this.index});
+  BookCard({this.books_list, this.index});
 
   @override
   Widget build(BuildContext context) {

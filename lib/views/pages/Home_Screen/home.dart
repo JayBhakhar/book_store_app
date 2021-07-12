@@ -1,7 +1,5 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:book_store_app/views/pages/Book_Details/book_details.dart';
-import 'package:book_store_app/views/widgets/Custom_Card.dart';
+import 'package:book_store_app/views/widgets/book_card.dart';
 import 'package:book_store_app/views/widgets/home_screen_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -29,6 +27,7 @@ class Books {
     return '{ ${this.book_id}, ${this.bookName}, ${this.authors}, ${this.price} }';
   }
 }
+
 
 class Home extends StatefulWidget {
   @override
@@ -111,7 +110,7 @@ class _HomeState extends State<Home> {
           mainAxisSpacing: 1.0,
         ),
         itemBuilder: (BuildContext context, index) {
-          return CustomCard(
+          return BookCard(
             books_list: books,
             index: index,
           );
