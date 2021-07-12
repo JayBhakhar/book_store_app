@@ -2,20 +2,21 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:book_store_app/views/pages/Book_Details/book_details.dart';
 import 'package:book_store_app/views/widgets/Custom_Card.dart';
+import 'package:book_store_app/views/widgets/home_screen_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Book {
+class Books {
   String book_id;
   String bookName;
   String authors;
   int price;
 
-  Book(this.book_id, this.bookName, this.authors, this.price);
+  Books(this.book_id, this.bookName, this.authors, this.price);
 
-  factory Book.fromJson(dynamic json) {
-    return Book(
+  factory Books.fromJson(dynamic json) {
+    return Books(
       json['_id'] as String,
       json['bookName'] as String,
       json['authors'] as String,
@@ -42,7 +43,7 @@ class _HomeState extends State<Home> {
   }
 
   SharedPreferences prefs;
-  List<Book> books;
+  List<Books> books;
 
   _getBooks() async {
     prefs = await SharedPreferences.getInstance();
@@ -63,11 +64,11 @@ class _HomeState extends State<Home> {
     if (statusCode == 200) {
       var booksObjs = jsonDecode(body)['books'] as List;
       setState(() {
-        books = booksObjs.map((bookJson) => Book.fromJson(bookJson)).toList();
+        books = booksObjs.map((bookJson) => Books.fromJson(bookJson)).toList();
       });
     }
-    print(jsonDecode(body)['books']);
-    print(books[0]);
+    // print(jsonDecode(body)['books']);
+    // print(books[0]);
   }
 
   Widget build(BuildContext context) {
@@ -98,7 +99,7 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-      drawer: Drawer(),
+      drawer: HomeScreenDrawer(),
       body: GridView.builder(
         physics: ScrollPhysics(),
         shrinkWrap: true,

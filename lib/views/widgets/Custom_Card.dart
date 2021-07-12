@@ -3,7 +3,7 @@ import 'package:book_store_app/views/pages/Home_Screen/home.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {
-  final List<Book> books_list;
+  final List<Books> books_list;
   final int index;
 
   CustomCard({this.books_list, this.index});
@@ -36,8 +36,9 @@ class CustomCard extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => BookDetails(),
-                  // ${books_list[index].book_id} <-- book id
+                  builder: (context) => BookDetails(
+                    bookID: '${books_list[index].book_id}',
+                  ),
                 ),
               );
             },
