@@ -65,7 +65,7 @@ class _EditBookState extends State<EditBook> {
       var booksObjs = jsonDecode(body)['book'] as List;
       setState(() {
         book = booksObjs.map((bookJson) => Book.fromJson(bookJson)).toList();
-        textbookName = book[0].bookName; //try
+        cover_type = book[0].coverType;
       });
     }
   }
@@ -73,8 +73,8 @@ class _EditBookState extends State<EditBook> {
   SharedPreferences prefs;
   List<Book> book;
 
-  final TextEditingController bookName = TextEditingController()..text = textbookName;
-  final TextEditingController bookName1 = TextEditingController()..text = '${book[0].bookName}';
+  final TextEditingController bookName = TextEditingController();
+  final TextEditingController bookName1 = TextEditingController();
   final TextEditingController authors = TextEditingController();
   final TextEditingController illustrators = TextEditingController();
   final TextEditingController interpreters = TextEditingController();
@@ -161,84 +161,84 @@ class _EditBookState extends State<EditBook> {
               children: [
                 SizedBox(height: 10),
                 CustomTextFormFieldForStr(
-                  controller: bookName,
+                  controller: bookName..text = '${book[0].bookName}',
                   labelText: 'Book Name',
                 ),
                 CustomTextFormFieldForStr(
-                  controller: authors,
+                  controller: authors..text = '${book[0].authors}',
                   labelText: 'Authors',
                 ),
                 CustomTextFormFieldForStr(
-                  controller: illustrators,
+                  controller: illustrators..text = '${book[0].illustrators}',
                   labelText: 'Illustrators',
                 ),
                 CustomTextFormFieldForStr(
-                  controller: interpreters,
+                  controller: interpreters..text = '${book[0].interpreters}',
                   labelText: 'Interpreters',
                 ),
                 CustomTextFormFieldForStr(
-                  controller: publisher,
+                  controller: publisher..text = '${book[0].publisher}',
                   labelText: 'Publisher',
                 ),
                 CustomTextFormFieldForStr(
-                  controller: originalLanguage,
+                  controller: originalLanguage..text = '${book[0].originalLanguage}',
                   labelText: 'Original Language',
                 ),
                 CustomTextFormFieldForIntWithlen(
-                  controller: year,
+                  controller: year..text = '${book[0].year}',
                   labelText: 'Year',
                   length: 4,
                 ),
                 CustomTextFormFieldForInt(
-                  controller: ISBN,
+                  controller: ISBN..text = '${book[0].ISBN}',
                   labelText: 'ISBN',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: EAN,
+                  controller: EAN..text = '${book[0].EAN}',
                   labelText: 'EAN',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: ISSN,
+                  controller: ISSN..text = '${book[0].ISSN}',
                   labelText: 'ISSN',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: numberOfPages,
+                  controller: numberOfPages..text = '${book[0].numberOfPages}',
                   labelText: 'Number Of Pages',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: height,
+                  controller: height..text = '${book[0].height}',
                   labelText: 'Height',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: width,
+                  controller: width..text = '${book[0].width}',
                   labelText: 'Width',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: length,
+                  controller: length..text = '${book[0].length}',
                   labelText: 'Length',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: weight,
+                  controller: weight..text = '${book[0].weight}',
                   labelText: 'Weight',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: price,
+                  controller: price..text = '${book[0].price}',
                   labelText: 'EAN',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: quantity,
+                  controller: quantity..text = '${book[0].quantity}',
                   labelText: 'Quantity',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: sellerBookID,
+                  controller: sellerBookID..text = '${book[0].sellerBookID}',
                   labelText: 'Your Book ID', // need to conform
                 ),
                 CustomTextFormFieldForStr(
-                  controller: briefAnnotation,
+                  controller: briefAnnotation..text = '${book[0].briefAnnotation}',
                   labelText: 'Brief Annotation',
                 ),
                 CustomTextFormFieldForStr(
-                  controller: longAnnotation,
+                  controller: longAnnotation..text = '${book[0].longAnnotation}',
                   labelText: 'Long Annotation',
                 ),
                 Padding(
@@ -329,7 +329,7 @@ class _EditBookState extends State<EditBook> {
                         );
                       }
                     },
-                    child: Text("Add Book"),
+                    child: Text("Update Book"),
                   ),
                 ),
               ],

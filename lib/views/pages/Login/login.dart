@@ -22,6 +22,32 @@ class _LoginScreenState extends State<LoginScreen> {
     await prefs.setString('token', token);
   }
 
+  _loginRequest() async {
+    final url = Uri.parse('http://192.168.0.112:5000/login');
+    Map<String, String> headers = {"Content-type": "application/json"};
+    String json = '{"email":"${email.text}",'
+        '"password":"${password.text}"}';
+    // make POST request
+    print(json);
+    Response response = await post(url, headers: headers, body: json);
+    // check the status code for the result
+    int statusCode = response.statusCode;
+    // this API passes back the id of the new item added to the body
+    String body = response.body;
+    // IF LOGIN OR PASSWORD NOT MATCH SEND RESPONSE MESSAGE
+    if (statusCode == 200) {
+      Map<String, dynamic> userToken = jsonDecode(body);
+      token = userToken['token'];
+      saveToken();
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Home(),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,8 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        ForgetPassword(),
+                    builder: (context) => ForgetPassword(),
                   ),
                 );
               },
@@ -103,36 +128,10 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 50,
               padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: ElevatedButton(
-                child: Text('Login'),
-                onPressed: () async {
-                  final url = Uri.parse('http://192.168.0.112:5000/login');
-                  Map<String, String> headers = {
-                    "Content-type": "application/json"
-                  };
-                  String json = '{"email":"${email.text}",'
-                      '"password":"${password.text}"}';
-                  // make POST request
-                  print(json);
-                  Response response =
-                  await post(url, headers: headers, body: json);
-                  // check the status code for the result
-                  int statusCode = response.statusCode;
-                  // this API passes back the id of the new item added to the body
-                  String body = response.body;
-                  // IF LOGIN OR PASSWORD NOT MATCH SEND RESPONSE MESSAGE
-                  if (statusCode==200) {
-                    Map<String, dynamic> userToken = jsonDecode(body);
-                    token = userToken['token'];
-                    saveToken();
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Home(),
-                      ),
-                    );
-                  }
-                },
-              ),
+                  child: Text('Login'),
+                  onPressed: () {
+                    _loginRequest();
+                  }),
             ),
             Container(
               child: Row(

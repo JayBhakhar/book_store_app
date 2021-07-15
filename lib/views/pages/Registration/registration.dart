@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:book_store_app/views/pages/Login/login.dart';
+import 'package:book_store_app/views/widgets/Custom_TextFormField_forInt_Withlen.dart';
+import 'package:book_store_app/views/widgets/Custom_TextFormField_forStr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
@@ -65,26 +67,9 @@ class _RegistrationState extends State<Registration> {
                 SizedBox(
                   height: 15,
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(bottom: 15, left: 10, right: 10),
-                  child: TextFormField(
-                    controller: userName,
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        borderSide: BorderSide(color: Colors.blue, width: 1.5),
-                      ),
-                      labelText: 'Name',
-                    ),
-                    validator: (String value) {
-                      if (value.isEmpty) {
-                        return 'Please Enter Name';
-                      }
-                      return null;
-                    },
-                  ),
+                CustomTextFormFieldForStr(
+                  controller: userName,
+                  labelText: 'Name',
                 ),
                 Padding(
                   padding:
@@ -111,26 +96,9 @@ class _RegistrationState extends State<Registration> {
                     },
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(bottom: 15, left: 10, right: 10),
-                  child: TextFormField(
-                    controller: password,
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        borderSide: BorderSide(color: Colors.blue, width: 1.5),
-                      ),
-                      labelText: 'Password',
-                    ),
-                    validator: (String value) {
-                      if (value.isEmpty) {
-                        return 'Please a Enter Password';
-                      }
-                      return null;
-                    },
-                  ),
+                CustomTextFormFieldForStr(
+                  controller: password,
+                  labelText: 'Password',
                 ),
                 Padding(
                   padding:
@@ -157,55 +125,17 @@ class _RegistrationState extends State<Registration> {
                     },
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(bottom: 15, left: 10, right: 10),
-                  child: TextFormField(
-                    controller: phoneNumber,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp('[0-9]'))
-                    ],
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        borderSide: BorderSide(color: Colors.blue, width: 1.5),
-                      ),
-                      labelText: 'Phone No',
-                    ),
-                    validator: (String value) {
-                      if (value.isEmpty) {
-                        return 'Please enter phone no';
-                      } else if (value.length != 10) {
-                        return 'Please enter 10 digits';
-                      }
-                      return null;
-                    },
-                  ),
+                CustomTextFormFieldForIntWithlen(
+                  controller: phoneNumber,
+                  labelText: 'Phone No',
+                  length: 10,
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(bottom: 15, left: 10, right: 10),
-                  child: TextFormField(
-                    controller: address,
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        borderSide: BorderSide(color: Colors.blue, width: 1.5),
-                      ),
-                      labelText: 'Address',
-                    ),
-                    validator: (String value) {
-                      if (value.isEmpty) {
-                        return 'Please Enter Adress';
-                      }
-                      return null;
-                    },
-                  ),
+                CustomTextFormFieldForStr(
+                  controller: address,
+                  labelText: 'Address',
                 ),
                 CheckboxListTile(
-                  title: Text("I'm a Seller"),
+                  title: Text("I want to be a Seller"),
                   controlAffinity: ListTileControlAffinity.leading,
                   value: isSeller,
                   onChanged: (bool value) {

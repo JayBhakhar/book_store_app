@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/models/Book.dart';
+import 'package:book_store_app/utils/ProgressIndicatorLoader.dart';
 import 'package:book_store_app/views/widgets/book_card.dart';
 import 'package:book_store_app/views/widgets/home_screen_drawer.dart';
 import 'package:flutter/material.dart';
@@ -18,14 +20,17 @@ class _HomeState extends State<Home> {
     super.initState();
     _getBooks();
   }
-
+  bool isLoading = false;
   SharedPreferences prefs;
   List<Book> books;
 
   _getBooks() async {
+    setState(() {
+      isLoading = true;
+    });
     prefs = await SharedPreferences.getInstance();
     print('${prefs.getString('token')}');
-    final url = Uri.parse('http://192.168.0.112:5000/books');
+    final url = Uri.parse('$apiBaseURL/books');
     Map<String, String> headers = {
       "Content-type": "application/json",
       'x-access-token': '${prefs.getString('token')}'
@@ -42,15 +47,14 @@ class _HomeState extends State<Home> {
       var booksObjs = jsonDecode(body)['books'] as List;
       setState(() {
         books = booksObjs.map((bookJson) => Book.fromJson(bookJson)).toList();
+        isLoading = false;
       });
     }
-    // print(jsonDecode(body)['books']);
-    // print(books[0]);
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar( // need to change
         title: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
@@ -77,22 +81,27 @@ class _HomeState extends State<Home> {
         ],
       ),
       drawer: HomeScreenDrawer(),
-      body: GridView.builder(
-        physics: ScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: books.length,
-        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 200.0,
-          mainAxisExtent: 230,
-          crossAxisSpacing: 1.0,
-          mainAxisSpacing: 1.0,
-        ),
-        itemBuilder: (BuildContext context, index) {
-          return BookCard(
-            books_list: books,
-            index: index,
-          );
-        },
+      body: Stack(
+        children: [
+          GridView.builder(
+            physics: ScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: books.length,
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 200.0,
+              mainAxisExtent: 180,
+              crossAxisSpacing: 1.0,
+              mainAxisSpacing: 1.0,
+            ),
+            itemBuilder: (BuildContext context, index) {
+              return BookCard(
+                books_list: books,
+                index: index,
+              );
+            },
+          ),
+          ProgressIndicatorLoader(Colors.white, isLoading)
+        ],
       ),
     );
   }
