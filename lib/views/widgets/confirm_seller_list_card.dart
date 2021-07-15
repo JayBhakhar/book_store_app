@@ -24,7 +24,7 @@ class ConfirmSellerListCard extends StatelessWidget {
     };
     String json = '{"_id": "${sellers_list[index].user_id}" }';
     print(json);
-    Response response = await delete(url, headers: headers, body: json);
+    Response response = await put(url, headers: headers, body: json);
     // check the status code for the result
     int statusCode = response.statusCode;
     print(statusCode);

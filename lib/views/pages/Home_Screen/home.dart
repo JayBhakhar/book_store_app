@@ -1,32 +1,10 @@
 import 'dart:convert';
+import 'package:book_store_app/models/Book.dart';
 import 'package:book_store_app/views/widgets/book_card.dart';
 import 'package:book_store_app/views/widgets/home_screen_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-class Books {
-  String book_id;
-  String bookName;
-  String authors;
-  int price;
-
-  Books(this.book_id, this.bookName, this.authors, this.price);
-
-  factory Books.fromJson(dynamic json) {
-    return Books(
-      json['_id'] as String,
-      json['bookName'] as String,
-      json['authors'] as String,
-      json['price'] as int,
-    );
-  }
-
-  @override
-  String toString() {
-    return '{ ${this.book_id}, ${this.bookName}, ${this.authors}, ${this.price} }';
-  }
-}
 
 
 class Home extends StatefulWidget {
@@ -42,7 +20,7 @@ class _HomeState extends State<Home> {
   }
 
   SharedPreferences prefs;
-  List<Books> books;
+  List<Book> books;
 
   _getBooks() async {
     prefs = await SharedPreferences.getInstance();
@@ -63,7 +41,7 @@ class _HomeState extends State<Home> {
     if (statusCode == 200) {
       var booksObjs = jsonDecode(body)['books'] as List;
       setState(() {
-        books = booksObjs.map((bookJson) => Books.fromJson(bookJson)).toList();
+        books = booksObjs.map((bookJson) => Book.fromJson(bookJson)).toList();
       });
     }
     // print(jsonDecode(body)['books']);

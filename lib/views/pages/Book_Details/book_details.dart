@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:book_store_app/models/Book.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -7,98 +7,6 @@ import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart';
 
-class Book {
-  String book_id;
-  String seller_id;
-  String bookName;
-  String authors;
-  String illustrators;
-  String interpreters;
-  String publisher;
-  String originalLanguage;
-  int year;
-  int ISBN;
-  int EAN;
-  int ISSN;
-  int numberOfPages;
-  int height;
-  int width;
-  int length;
-  int weight;
-  int price;
-  int quantity;
-  int sellerBookID;
-  String briefAnnotation;
-  String longAnnotation;
-  String coverType;
-  String sellerName;
-
-  Book(
-    this.book_id,
-    this.seller_id,
-    this.bookName,
-    this.authors,
-    this.illustrators,
-    this.interpreters,
-    this.publisher,
-    this.originalLanguage,
-    this.year,
-    this.ISBN,
-    this.EAN,
-    this.ISSN,
-    this.numberOfPages,
-    this.height,
-    this.width,
-    this.length,
-    this.weight,
-    this.price,
-    this.quantity,
-    this.sellerBookID,
-    this.briefAnnotation,
-    this.longAnnotation,
-    this.coverType,
-    this.sellerName,
-  );
-
-  factory Book.fromJson(dynamic json) {
-    return Book(
-      json['_id'] as String,
-      json['seller_id'] as String,
-      json['bookName'] as String,
-      json['authors'] as String,
-      json['illustrators'] as String,
-      json['interpreters'] as String,
-      json['publisher'] as String,
-      json['originalLanguage'] as String,
-      json['year'] as int,
-      json['ISBN'] as int,
-      json['EAN'] as int,
-      json['ISSN'] as int,
-      json['numberOfPages'] as int,
-      json['height'] as int,
-      json['width'] as int,
-      json['length'] as int,
-      json['weight'] as int,
-      json['price'] as int,
-      json['quantity'] as int,
-      json['sellerBookId'] as int,
-      json['briefAnnotation'] as String,
-      json['longAnnotation'] as String,
-      json['coverType'] as String,
-      json['sellerName'] as String,
-    );
-  }
-
-  @override
-  String toString() {
-    return '{ ${this.book_id}, ${this.seller_id}, ${this.bookName}, ${this.authors},'
-              '${this.illustrators}, ${this.interpreters}, ${this.publisher}, ${this.originalLanguage},'
-              '${this.year}, ${this.ISBN}, ${this.EAN}, ${this.ISSN},'
-              '${this.numberOfPages}, ${this.height}, ${this.width}, ${this.length},'
-              '${this.weight}, ${this.price}, ${this.quantity}, ${this.sellerBookID},'
-              '${this.briefAnnotation}, ${this.longAnnotation}, ${this.coverType}, ${this.sellerName}, }';
-  }
-}
 
 class BookDetails extends StatefulWidget {
   String bookID;
@@ -120,16 +28,15 @@ class _BookDetailsState extends State<BookDetails> {
 
   _getBook() async {
     prefs = await SharedPreferences.getInstance();
-    final url = Uri.parse('http://192.168.0.112:5000/get_book');
+    final url = Uri.parse('http://192.168.0.112:5000/book');
     Map<String, String> headers = {
       'Content-type': 'application/json',
-      'x-access-token': '${prefs.getString('token')}'
+      'x-access-token': '${prefs.getString('token')}',
+      'book_id' : '${widget.bookID}'
     };
     print('${prefs.getString('token')}');
-    String json = '{"book_id" : "${widget.bookID}" }';
     // make Post request
-    print(json);
-    Response response = await post(url, headers: headers, body: json);
+    Response response = await get(url, headers: headers);
     // check the status code for the result
     int statusCode = response.statusCode;
     print(statusCode);
@@ -144,7 +51,7 @@ class _BookDetailsState extends State<BookDetails> {
       });
     }
     // print(jsonDecode(body)['books']);
-    print(book);
+    // print(book);
   }
 
   @override

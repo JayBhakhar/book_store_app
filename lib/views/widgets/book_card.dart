@@ -1,9 +1,9 @@
+import 'package:book_store_app/models/Book.dart';
 import 'package:book_store_app/views/pages/Book_Details/book_details.dart';
-import 'package:book_store_app/views/pages/Home_Screen/home.dart';
 import 'package:flutter/material.dart';
 
 class BookCard extends StatelessWidget {
-  final List<Books> books_list;
+  final List<Book> books_list;
   final int index;
 
   BookCard({this.books_list, this.index});

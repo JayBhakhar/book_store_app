@@ -1,19 +1,80 @@
 import 'dart:convert';
-import 'package:book_store_app/views/pages/Home_Screen/home.dart';
+import 'package:book_store_app/models/Book.dart';
+import 'package:book_store_app/views/pages/Your_Books/your_books.dart';
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart';
 import 'package:book_store_app/views/widgets/Custom_TextFormField_forInt.dart';
 import 'package:book_store_app/views/widgets/Custom_TextFormField_forInt_Withlen.dart';
 import 'package:book_store_app/views/widgets/Custom_TextFormField_forStr.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class AddBook extends StatefulWidget {
+class EditBook extends StatefulWidget {
+  String bookID;
+  EditBook({this.bookID});
+
   @override
-  _AddBookState createState() => _AddBookState();
+  _EditBookState createState() => _EditBookState();
 }
 
-class _AddBookState extends State<AddBook> {
-  final TextEditingController bookName = TextEditingController();
+class _EditBookState extends State<EditBook> {
+  void initState() {
+    super.initState();
+    _getBook();
+  }
+
+  String textbookName;
+  String textauthors;
+  String textillustrators;
+  String textinterpreters;
+  String textpublisher;
+  String textoriginalLanguage;
+  int textyear;
+  int textISBN;
+  int textEAN;
+  int textISSN;
+  int textnumberOfPages;
+  int textheight;
+  int textwidth;
+  int textlength;
+  int textweight;
+  int textprice;
+  int textquantity;
+  int textsellerBookID;
+  String textbriefAnnotation;
+  String textlongAnnotation;
+  String textcoverType;
+
+  _getBook() async {
+    prefs = await SharedPreferences.getInstance();
+    final url = Uri.parse('http://192.168.0.112:5000/book');
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'x-access-token': '${prefs.getString('token')}',
+      'book_id' : '${widget.bookID}'
+    };
+    print('${prefs.getString('token')}');
+    // make Post request
+    Response response = await get(url, headers: headers);
+    // check the status code for the result
+    int statusCode = response.statusCode;
+    print(statusCode);
+    // this API passes back the id of the new item added to the body
+    String body = response.body;
+    print(body);
+    if (statusCode == 200) {
+      var booksObjs = jsonDecode(body)['book'] as List;
+      setState(() {
+        book = booksObjs.map((bookJson) => Book.fromJson(bookJson)).toList();
+        textbookName = book[0].bookName; //try
+      });
+    }
+  }
+
+  SharedPreferences prefs;
+  List<Book> book;
+
+  final TextEditingController bookName = TextEditingController()..text = textbookName;
+  final TextEditingController bookName1 = TextEditingController()..text = '${book[0].bookName}';
   final TextEditingController authors = TextEditingController();
   final TextEditingController illustrators = TextEditingController();
   final TextEditingController interpreters = TextEditingController();
@@ -38,9 +99,9 @@ class _AddBookState extends State<AddBook> {
   String cover_type;
   String _dropdownErrorCoverType;
 
-  SharedPreferences prefs;
 
-  _addBookRequest() async {
+
+  _updateBook() async {
     prefs = await SharedPreferences.getInstance();
     // set up POST request arguments
     final url = Uri.parse('http://192.168.0.112:5000/book');
@@ -73,7 +134,7 @@ class _AddBookState extends State<AddBook> {
         '"coverType": "$cover_type"'
         '}';
     // make POST request
-    Response response = await post(url, headers: headers, body: json);
+    Response response = await put(url, headers: headers, body: json);
     // check the status code for the result
     int statusCode = response.statusCode;
     // this API passes back the id of the new item added to the body
@@ -89,7 +150,7 @@ class _AddBookState extends State<AddBook> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add a new Book'),
+        title: Text('Edit book'),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -98,6 +159,7 @@ class _AddBookState extends State<AddBook> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                SizedBox(height: 10),
                 CustomTextFormFieldForStr(
                   controller: bookName,
                   labelText: 'Book Name',
@@ -181,7 +243,7 @@ class _AddBookState extends State<AddBook> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.only(bottom: 15, left: 10, right: 10),
+                  const EdgeInsets.only(bottom: 15, left: 10, right: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -240,9 +302,9 @@ class _AddBookState extends State<AddBook> {
                       _dropdownErrorCoverType == null
                           ? SizedBox.shrink()
                           : Text(
-                              _dropdownErrorCoverType ?? "",
-                              style: TextStyle(color: Colors.red),
-                            ),
+                        _dropdownErrorCoverType ?? "",
+                        style: TextStyle(color: Colors.red),
+                      ),
                     ],
                   ),
                 ),
@@ -254,15 +316,15 @@ class _AddBookState extends State<AddBook> {
                       bool _isValid = _formKey.currentState.validate();
                       if (cover_type == null) {
                         setState(() => _dropdownErrorCoverType =
-                            "Please select Cover Type");
+                        "Please select Cover Type");
                         _isValid = false;
                       }
                       if (_isValid) {
-                        _addBookRequest(); //need to make
+                        _updateBook(); //need to make
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Home(), // login screen
+                            builder: (context) => YourBooks(), // login screen
                           ),
                         );
                       }

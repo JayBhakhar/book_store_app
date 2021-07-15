@@ -4,6 +4,7 @@ import 'package:book_store_app/views/pages/Add_Book/add_book.dart';
 import 'package:book_store_app/views/pages/Confirm_Seller_List/cofirm_seller_list.dart';
 import 'package:book_store_app/views/pages/Login/login.dart';
 import 'package:book_store_app/views/pages/Seller_Requests_List/seller_requests.dart';
+import 'package:book_store_app/views/pages/Your_Books/your_books.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -135,13 +136,25 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer> {
                   title: Text('I am seller'),
                   children: [
                     ListTile(
-                      leading: Icon(Icons.book),
+                      leading: Icon(Icons.add_box_outlined),
                       title: Text('Add a book'),
                       onTap: () {
-                        Navigator.pushReplacement(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => AddBook(),
+                          ),
+                        );
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.book),
+                      title: Text('Yours books'),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => YourBooks(),
                           ),
                         );
                       },
