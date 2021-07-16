@@ -6,7 +6,7 @@ class ProgressIndicatorLoader extends StatefulWidget {
   final bool isLoading;
   final Color color;
 
-  ProgressIndicatorLoader(this.color, this.isLoading);
+  ProgressIndicatorLoader({this.color, this.isLoading});
 
   @override
   _ProgressIndicatorState createState() => _ProgressIndicatorState();

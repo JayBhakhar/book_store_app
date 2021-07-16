@@ -1,51 +1,54 @@
 import 'dart:convert';
 import 'package:book_store_app/consts/constants.dart';
-import 'package:book_store_app/models/Book.dart';
+import 'package:book_store_app/models/User.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 SharedPreferences prefs;
 
-class BookAPI {
+class UserAPI {
 
-  Future<List<Book>> getBooks() async {
-    prefs = await SharedPreferences.getInstance();
-    final url = Uri.parse('$apiBaseURL/books');
-    Map<String, String> headers = {
-      "Content-type": "application/json",
-      'x-access-token': '${prefs.getString('token')}'
-    };
-    // make Get request
-    Response response = await get(url, headers: headers);
-    // check the status code for the result
-    int statusCode = response.statusCode;
-    // this API passes back the id of the new item added to the body
-    String body = response.body;
-    if (statusCode == 200) {
-      var booksObjs = jsonDecode(body)['books'] as List;
-        return booksObjs.map((bookJson) => Book.fromJson(bookJson)).toList();
-    }
-  }
-
-
-  Future<List<Book>> getSellerBooks() async {
+  Future<List<User>> getCurrentUser() async {
     prefs = await SharedPreferences.getInstance();
     print('${prefs.getString('token')}');
-    final url = Uri.parse('$apiBaseURL/seller/books');
+    final url = Uri.parse('$apiBaseURL/user');
     Map<String, String> headers = {
       "Content-type": "application/json",
       'x-access-token': '${prefs.getString('token')}'
     };
-    // make Get request
+// make Post request
+    Response response = await get(url, headers: headers);
+// check the status code for the result
+    int statusCode = response.statusCode;
+    print(statusCode);
+// this API passes back the id of the new item added to the body
+    String body = response.body;
+    if (statusCode == 200) {
+      var userObjs = jsonDecode(body)['user'] as List;
+      return userObjs.map((bookJson) => User.fromJson(bookJson)).toList();
+    }
+  }
+
+
+  Future<List<User>> getSellers() async {
+    prefs = await SharedPreferences.getInstance();
+    print('${prefs.getString('token')}');
+    final url = Uri.parse('$apiBaseURL/newSellers');
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      'x-access-token': '${prefs.getString('token')}'
+    };
+    // make Post request
     Response response = await get(url, headers: headers);
     // check the status code for the result
     int statusCode = response.statusCode;
-    // this API passes back the id of the new item added to the body
+    print(statusCode);
     String body = response.body;
     if (statusCode == 200) {
-      var booksObjs = jsonDecode(body)['sellerBook'] as List;
-      return booksObjs.map((bookJson) => Book.fromJson(bookJson)).toList();
+      var userObjs = jsonDecode(body)['newSellers'] as List;
+        return userObjs.map((bookJson) => User.fromJson(bookJson)).toList();
     }
   }
+
 
 }

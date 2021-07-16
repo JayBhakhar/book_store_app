@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:book_store_app/views/pages/Login/login.dart';
+import 'package:book_store_app/views/widgets/Custom_TextFormField_forEmail.dart';
 import 'package:book_store_app/views/widgets/Custom_TextFormField_forInt_Withlen.dart';
 import 'package:book_store_app/views/widgets/Custom_TextFormField_forStr.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class _RegistrationState extends State<Registration> {
     String body = response.body;
     if(statusCode==200){
       Map<String, dynamic> responseMessage = jsonDecode(body);
-      var message = responseMessage['message'];
+      // var message = responseMessage['message'];
       // backend message needed
     }
   }
@@ -71,30 +72,8 @@ class _RegistrationState extends State<Registration> {
                   controller: userName,
                   labelText: 'Name',
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(bottom: 15, left: 10, right: 10),
-                  child: TextFormField(
-                    controller: email,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        borderSide: BorderSide(color: Colors.blue, width: 1.5),
-                      ),
-                      labelText: 'Email',
-                    ),
-                    validator: (String value) {
-                      if (value.isEmpty) {
-                        return 'Please a Enter Email';
-                      }
-                      if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                          .hasMatch(value)) {
-                        return 'Please a valid Email';
-                      }
-                      return null;
-                    },
-                  ),
+                CustomTextFormFieldForEmail(
+                  controller: email,
                 ),
                 CustomTextFormFieldForStr(
                   controller: password,

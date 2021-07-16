@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/views/pages/Forget_Password/forget_password.dart';
 import 'package:book_store_app/views/pages/Home_Screen/home.dart';
+import 'package:book_store_app/views/widgets/Custom_TextFormField_forEmail.dart';
+import 'package:book_store_app/views/widgets/Custom_TextFormField_forStr.dart';
 import 'package:http/http.dart';
 import 'package:book_store_app/views/pages/Registration/registration.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,12 +26,11 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   _loginRequest() async {
-    final url = Uri.parse('http://192.168.0.112:5000/login');
+    final url = Uri.parse('$apiBaseURL/login');
     Map<String, String> headers = {"Content-type": "application/json"};
     String json = '{"email":"${email.text}",'
         '"password":"${password.text}"}';
     // make POST request
-    print(json);
     Response response = await post(url, headers: headers, body: json);
     // check the status code for the result
     int statusCode = response.statusCode;
@@ -69,49 +71,12 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: 50,
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 15, left: 10, right: 10),
-              child: TextFormField(
-                controller: email,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                    borderSide: BorderSide(color: Colors.blue, width: 1.5),
-                  ),
-                  labelText: 'Email',
-                ),
-                validator: (String value) {
-                  if (value.isEmpty) {
-                    return 'Please a Enter';
-                  }
-                  if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                      .hasMatch(value)) {
-                    return 'Please a valid Email';
-                  }
-                  return null;
-                },
-              ),
+            CustomTextFormFieldForEmail(
+              controller: email,
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 15, left: 10, right: 10),
-              child: TextFormField(
-                controller: password,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                    borderSide: BorderSide(color: Colors.blue, width: 1.5),
-                  ),
-                  labelText: 'Password',
-                ),
-                validator: (String value) {
-                  if (value.isEmpty) {
-                    return 'Please a Enter Password';
-                  }
-                  return null;
-                },
-              ),
+            CustomTextFormFieldForStr(
+              controller: password,
+              labelText: 'Password',
             ),
             TextButton(
               onPressed: () {

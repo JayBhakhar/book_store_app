@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:book_store_app/views/pages/Home_Screen/home.dart';
+import 'package:book_store_app/views/pages/Splash_Screen/splash_screen.dart';
 import 'package:book_store_app/views/widgets/Custom_TextFormField_forInt.dart';
 import 'package:book_store_app/views/widgets/Custom_TextFormField_forInt_Withlen.dart';
 import 'package:book_store_app/views/widgets/Custom_TextFormField_forStr.dart';
@@ -80,7 +80,7 @@ class _AddBookState extends State<AddBook> {
     String body = response.body;
     if (statusCode == 200) {
       Map<String, dynamic> responseMessage = jsonDecode(body);
-      var message = responseMessage['message'];
+      // var message = responseMessage['message'];
       // backend message needed
     }
   }
@@ -262,7 +262,7 @@ class _AddBookState extends State<AddBook> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Home(), // login screen
+                            builder: (context) => SplashScreen(),
                           ),
                         );
                       }

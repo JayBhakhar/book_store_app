@@ -1,6 +1,7 @@
 import 'dart:convert';
+import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/models/Book.dart';
-import 'package:book_store_app/views/pages/Your_Books/your_books.dart';
+import 'package:book_store_app/views/pages/My_Books/my_books.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart';
@@ -46,7 +47,7 @@ class _EditBookState extends State<EditBook> {
 
   _getBook() async {
     prefs = await SharedPreferences.getInstance();
-    final url = Uri.parse('http://192.168.0.112:5000/book');
+    final url = Uri.parse('$apiBaseURL/book');
     Map<String, String> headers = {
       'Content-type': 'application/json',
       'x-access-token': '${prefs.getString('token')}',
@@ -100,10 +101,8 @@ class _EditBookState extends State<EditBook> {
   String _dropdownErrorCoverType;
 
 
-
   _updateBook() async {
     prefs = await SharedPreferences.getInstance();
-    // set up POST request arguments
     final url = Uri.parse('http://192.168.0.112:5000/book');
     Map<String, String> headers = {
       "Content-type": "application/json",
@@ -141,7 +140,7 @@ class _EditBookState extends State<EditBook> {
     String body = response.body;
     if (statusCode == 200) {
       Map<String, dynamic> responseMessage = jsonDecode(body);
-      var message = responseMessage['message'];
+      // var message = responseMessage['message'];
       // backend message needed
     }
   }
@@ -324,7 +323,7 @@ class _EditBookState extends State<EditBook> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => YourBooks(), // login screen
+                            builder: (context) => MyBooks(), // login screen
                           ),
                         );
                       }

@@ -1,9 +1,8 @@
+import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/models/User.dart';
-import 'package:book_store_app/views/pages/Confirm_Seller_List/cofirm_seller_list.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 
 class ConfirmSellerListCard extends StatelessWidget {
@@ -17,7 +16,7 @@ class ConfirmSellerListCard extends StatelessWidget {
   _removeConfirmSeller() async{
     prefs = await SharedPreferences.getInstance();
     print('${prefs.getString('token')}');
-    final url = Uri.parse('http://192.168.0.112:5000/confirm_seller');
+    final url = Uri.parse('$apiBaseURL/confirm_seller');
     Map<String, String> headers = {
       "Content-type": "application/json",
       'x-access-token': '${prefs.getString('token')}'

@@ -1,3 +1,4 @@
+import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/models/Book.dart';
 import 'package:book_store_app/views/pages/Edit_Book/edit_book.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,13 +7,16 @@ import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class YourBooksCard extends StatelessWidget {
-
   SharedPreferences prefs;
+  final List<Book> books_list;
+  final int index;
+
+  YourBooksCard({this.books_list, this.index});
 
   _removebook() async{
     prefs = await SharedPreferences.getInstance();
     print('${prefs.getString('token')}');
-    final url = Uri.parse('http://192.168.0.112:5000/book');
+    final url = Uri.parse('$apiBaseURL/book');
     Map<String, String> headers = {
       "Content-type": "application/json",
       'x-access-token': '${prefs.getString('token')}'
@@ -26,12 +30,6 @@ class YourBooksCard extends StatelessWidget {
     String body = response.body;
     print(body);
   }
-
-
-  final List<Book> books_list;
-  final int index;
-
-  YourBooksCard({this.books_list, this.index});
 
   @override
   Widget build(BuildContext context) {

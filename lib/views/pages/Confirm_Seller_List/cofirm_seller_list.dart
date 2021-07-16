@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/models/User.dart';
 import 'package:book_store_app/views/widgets/confirm_seller_list_card.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class _ConfirmSellerListState extends State<ConfirmSellerList> {
   _getSellers() async {
     prefs = await SharedPreferences.getInstance();
     print('${prefs.getString('token')}');
-    final url = Uri.parse('http://192.168.0.112:5000/confirm_sellers');
+    final url = Uri.parse('$apiBaseURL/confirm_sellers');
     Map<String, String> headers = {
       "Content-type": "application/json",
       'x-access-token': '${prefs.getString('token')}'

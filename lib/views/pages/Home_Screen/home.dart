@@ -1,11 +1,13 @@
 import 'package:book_store_app/models/Book.dart';
+import 'package:book_store_app/models/User.dart';
+import 'package:book_store_app/services/user_api.dart';
 import 'package:book_store_app/utils/ProgressIndicatorLoader.dart';
 import 'package:book_store_app/views/widgets/book_card.dart';
 import 'package:book_store_app/views/widgets/home_screen_drawer.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
-  List<Book> books;
+  final List<Book> books;
   Home({this.books});
 
   @override
@@ -13,9 +15,19 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  @override
-  bool isLoading = false;
+  void initState() {
+    super.initState();
+    UserAPI().getCurrentUser().then((List<User> _user) {
+      setState(() {
+        user = _user;
+      });
+    });
+  }
 
+  bool isLoading = false;
+  List<User> user = [];
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -45,7 +57,7 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-      drawer: HomeScreenDrawer(),
+      drawer: HomeScreenDrawer(user: user),
       body: Stack(
         children: [
           GridView.builder(
@@ -60,12 +72,14 @@ class _HomeState extends State<Home> {
             ),
             itemBuilder: (BuildContext context, index) {
               return BookCard(
-                books_list: widget.books,
                 index: index,
               );
             },
           ),
-          ProgressIndicatorLoader(Colors.white, isLoading)
+          ProgressIndicatorLoader(
+            color: Colors.white,
+            isLoading: isLoading,
+          )
         ],
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/models/User.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -12,7 +13,7 @@ class SellerRequestsListCard extends StatelessWidget {
   _addConfirmSeller() async{
     prefs = await SharedPreferences.getInstance();
     print('${prefs.getString('token')}');
-    final url = Uri.parse('http://192.168.0.112:5000/newSellers');
+    final url = Uri.parse('$apiBaseURL/newSellers');
     Map<String, String> headers = {
       "Content-type": "application/json",
       'x-access-token': '${prefs.getString('token')}'
@@ -25,14 +26,13 @@ class SellerRequestsListCard extends StatelessWidget {
     print(statusCode);
     // this API passes back the id of the new item added to the body
     String body = response.body;
-    print(body);
   }
 
 
   _removeSellerRequest() async{
     prefs = await SharedPreferences.getInstance();
     print('${prefs.getString('token')}');
-    final url = Uri.parse('http://192.168.0.112:5000/confirm_seller');
+    final url = Uri.parse('$apiBaseURL/confirm_seller');
     Map<String, String> headers = {
       "Content-type": "application/json",
       'x-access-token': '${prefs.getString('token')}'
@@ -45,7 +45,6 @@ class SellerRequestsListCard extends StatelessWidget {
     print(statusCode);
     // this API passes back the id of the new item added to the body
     String body = response.body;
-    print(body);
   }
 
   SellerRequestsListCard({this.sellers_list, this.index});

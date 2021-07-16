@@ -1,55 +1,15 @@
-import 'dart:convert';
 import 'package:book_store_app/models/User.dart';
+import 'package:book_store_app/utils/token.dart';
 import 'package:book_store_app/views/pages/Add_Book/add_book.dart';
 import 'package:book_store_app/views/pages/Confirm_Seller_List/cofirm_seller_list.dart';
 import 'package:book_store_app/views/pages/Login/login.dart';
+import 'package:book_store_app/views/pages/My_Books/my_books.dart';
 import 'package:book_store_app/views/pages/Seller_Requests_List/seller_requests.dart';
-import 'package:book_store_app/views/pages/Your_Books/your_books.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-Future<void> _removeToken() async {
-  final prefs = await SharedPreferences.getInstance();
-  await prefs.remove('token');
-}
-
-class HomeScreenDrawer extends StatefulWidget {
-  @override
-  _HomeScreenDrawerState createState() => _HomeScreenDrawerState();
-}
-
-class _HomeScreenDrawerState extends State<HomeScreenDrawer> {
-  void initState() {
-    super.initState();
-    _getCurrentUser();
-  }
-
-  SharedPreferences prefs;
-  List<User> user;
-
-  _getCurrentUser() async {
-    prefs = await SharedPreferences.getInstance();
-    print('${prefs.getString('token')}');
-    final url = Uri.parse('http://192.168.0.112:5000/user');
-    Map<String, String> headers = {
-      "Content-type": "application/json",
-      'x-access-token': '${prefs.getString('token')}'
-    };
-    // make Post request
-    Response response = await get(url, headers: headers);
-    // check the status code for the result
-    int statusCode = response.statusCode;
-    print(statusCode);
-    // this API passes back the id of the new item added to the body
-    String body = response.body;
-    if (statusCode == 200) {
-      var userObjs = jsonDecode(body)['user'] as List;
-      setState(() {
-        user = userObjs.map((bookJson) => User.fromJson(bookJson)).toList();
-      });
-    }
-  }
+class HomeScreenDrawer extends StatelessWidget {
+  final List<User> user;
+  HomeScreenDrawer({this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -149,12 +109,12 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer> {
                     ),
                     ListTile(
                       leading: Icon(Icons.book),
-                      title: Text('Yours books'),
+                      title: Text('My books'),
                       onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => YourBooks(),
+                            builder: (context) => MyBooks(),
                           ),
                         );
                       },
@@ -169,7 +129,7 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer> {
               leading: Icon(Icons.logout),
               title: Text('Sign out'),
               onTap: () {
-                _removeToken();
+                Token().removeToken();
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
@@ -184,3 +144,6 @@ class _HomeScreenDrawerState extends State<HomeScreenDrawer> {
     );
   }
 }
+
+
+

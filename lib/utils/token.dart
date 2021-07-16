@@ -1,10 +1,13 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Token {
-  SharedPreferences prefs;
+SharedPreferences prefs;
+// String token = prefs.getString('token');
 
-  getCurrentUser() async {
-    prefs = await SharedPreferences.getInstance();
-    print('${prefs.getString('token')}');
+class Token {
+
+  Future<void> removeToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('token');
   }
+
 }

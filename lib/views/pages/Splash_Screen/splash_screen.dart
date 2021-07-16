@@ -39,23 +39,12 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
         );
       });
-      // BookAPI().getBooks().whenComplete(() => (List<Book> books){
-      //   print('whrn complate');
-      //   Navigator.pushReplacement(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => Home(
-      //       books: books,
-      //     ), //home screen
-      //   ),
-      // );
-      // });
     }
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Image.asset('assets/images/image.jpg'),
+      body: Image.asset('assets/images/my_photo.jpg'),
       // need to change
     );
   }
