@@ -1,5 +1,5 @@
-import 'package:book_store_app/test.dart';
-import 'package:book_store_app/views/pages/Add_Book/add_book.dart';
+import 'package:book_store_app/models/Book.dart';
+import 'package:book_store_app/services/book_api.dart';
 import 'package:book_store_app/views/pages/Home_Screen/home.dart';
 import 'package:book_store_app/views/pages/Login/login.dart';
 import 'package:flutter/material.dart';
@@ -29,12 +29,27 @@ class _SplashScreenState extends State<SplashScreen> {
         );
       });
     } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Home(), //home screen
-        ),
-      );
+      BookAPI().getBooks().then((List<Book> books){
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Home(
+              books: books,
+            ), //home screen
+          ),
+        );
+      });
+      // BookAPI().getBooks().whenComplete(() => (List<Book> books){
+      //   print('whrn complate');
+      //   Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => Home(
+      //       books: books,
+      //     ), //home screen
+      //   ),
+      // );
+      // });
     }
   }
 
