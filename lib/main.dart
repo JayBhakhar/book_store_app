@@ -1,3 +1,4 @@
+import 'package:book_store_app/test.dart';
 import 'package:book_store_app/views/pages/Splash_Screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SplashScreen(),
+      home: Test(),
     );
   }
 }
