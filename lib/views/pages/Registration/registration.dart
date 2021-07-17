@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/views/pages/Login/login.dart';
+import 'package:book_store_app/views/widgets/Custom_TextFormField_Forcountry.dart';
 import 'package:book_store_app/views/widgets/Custom_TextFormField_forEmail.dart';
 import 'package:book_store_app/views/widgets/Custom_TextFormField_forInt_Withlen.dart';
 import 'package:book_store_app/views/widgets/Custom_TextFormField_forStr.dart';
@@ -19,12 +21,13 @@ class _RegistrationState extends State<Registration> {
   TextEditingController confirmpassword = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
   TextEditingController address = TextEditingController();
+  int countryCode;
   bool isSeller = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   _makePostRequest() async {
     // set up POST request arguments
-    final url = Uri.parse('http://192.168.137.1:5000/registration');
+    final url = Uri.parse('$apiBaseURL/registration');
     Map<String, String> headers = {"Content-type": "application/json"};
     String json = '{'
         '"userName": "${userName.text}",'
@@ -32,6 +35,7 @@ class _RegistrationState extends State<Registration> {
         '"password": "${password.text}",'
         '"phoneNumber": "${phoneNumber.text}",'
         '"address": "${address.text}",'
+        '"country": $countryCode'
         '"seller": "$isSeller",'
         '}';
     // make POST request
@@ -112,6 +116,9 @@ class _RegistrationState extends State<Registration> {
                 CustomTextFormFieldForStr(
                   controller: address,
                   labelText: 'Address',
+                ),
+                CustomTextFormFieldForCountry(
+                  countryCode: countryCode,
                 ),
                 CheckboxListTile(
                   title: Text("I want to be a Seller"),
