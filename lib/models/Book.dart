@@ -54,7 +54,7 @@ class Book {
   factory Book.fromJson(dynamic json) {
     return Book(
       json['_id'] as String,
-      json['seller_id'] as String,
+      json['sellerId'] as String,
       json['bookName'] as String,
       json['authors'] as String,
       json['illustrators'] as String,
@@ -87,6 +87,8 @@ class Book {
         '${this.year}, ${this.ISBN}, ${this.EAN}, ${this.ISSN},'
         '${this.numberOfPages}, ${this.height}, ${this.width}, ${this.length},'
         '${this.weight}, ${this.price}, ${this.quantity}, ${this.sellerBookID},'
-        '${this.briefAnnotation}, ${this.longAnnotation}, ${this.coverType}, ${this.sellerName}, }';
+        '${this.briefAnnotation}, ${this.longAnnotation}, ${this.coverType}, ${this.sellerName}}';
   }
 }
+
+

@@ -2,6 +2,7 @@ import 'package:book_store_app/models/Book.dart';
 import 'package:book_store_app/models/User.dart';
 import 'package:book_store_app/services/user_api.dart';
 import 'package:book_store_app/utils/ProgressIndicatorLoader.dart';
+import 'package:book_store_app/views/pages/Cart/cart.dart';
 import 'package:book_store_app/views/widgets/book_card.dart';
 import 'package:book_store_app/views/widgets/home_screen_drawer.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,15 @@ class _HomeState extends State<Home> {
         ),
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      Cart(),
+                ),
+              );
+            },
             child: Icon(
               Icons.shopping_cart,
               color: Colors.white,

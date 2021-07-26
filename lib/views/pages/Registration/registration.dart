@@ -12,6 +12,9 @@ import 'package:http/http.dart';
 class Registration extends StatefulWidget {
   @override
   _RegistrationState createState() => _RegistrationState();
+
+  static _RegistrationState of(BuildContext context) =>
+      context.findAncestorStateOfType<_RegistrationState>();
 }
 
 class _RegistrationState extends State<Registration> {
@@ -118,7 +121,6 @@ class _RegistrationState extends State<Registration> {
                   labelText: 'Address',
                 ),
                 CustomTextFormFieldForCountry(
-                  countryCode: countryCode,
                 ),
                 CheckboxListTile(
                   title: Text("I want to be a Seller"),

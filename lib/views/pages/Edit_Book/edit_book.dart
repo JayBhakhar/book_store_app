@@ -103,7 +103,7 @@ class _EditBookState extends State<EditBook> {
 
   _updateBook() async {
     prefs = await SharedPreferences.getInstance();
-    final url = Uri.parse('http://192.168.0.112:5000/book');
+    final url = Uri.parse('$apiBaseURL/book');
     Map<String, String> headers = {
       "Content-type": "application/json",
       'x-access-token': '${prefs.getString('token')}'

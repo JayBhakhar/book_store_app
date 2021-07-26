@@ -4,9 +4,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:book_store_app/views/pages/Book_Details/book_details.dart';
 import 'package:flutter/material.dart';
 
-
 class BookCard extends StatefulWidget {
   final int index;
+
   BookCard({this.index});
 
   @override
@@ -15,16 +15,12 @@ class BookCard extends StatefulWidget {
 
 class _BookCardState extends State<BookCard> {
   List<Book> books = [];
-  SharedPreferences prefs;
-
   void initState() {
     super.initState();
-    BookAPI().getBooks().then((List<Book> _books){
+    BookAPI().getBooks().then((List<Book> _books) {
       books = _books;
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {

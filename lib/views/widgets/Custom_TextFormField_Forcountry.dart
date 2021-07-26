@@ -1,11 +1,9 @@
 import 'package:book_store_app/utils/country_list.dart';
+import 'package:book_store_app/views/pages/Registration/registration.dart';
+import 'package:book_store_app/views/pages/Registration/registration.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormFieldForCountry extends StatefulWidget {
-  int countryCode;
-
-  CustomTextFormFieldForCountry({this.countryCode});
-
   @override
   _CustomTextFormFieldForCountryState createState() =>
       _CustomTextFormFieldForCountryState();
@@ -14,8 +12,6 @@ class CustomTextFormFieldForCountry extends StatefulWidget {
 class _CustomTextFormFieldForCountryState
     extends State<CustomTextFormFieldForCountry> {
   TextEditingController country = TextEditingController();
-
-  // This list holds the data for the list view
   List<Map<String, dynamic>> _foundCountry = [];
 
   @override
@@ -50,65 +46,58 @@ class _CustomTextFormFieldForCountryState
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 250,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            TextFormField(
-                controller: country,
-                onChanged: (value) => _runFilter(value),
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                    borderSide: BorderSide(color: Colors.blue, width: 1.5),
-                  ),
-                  labelText: 'Country',
+    return ListView(
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 15, left: 10, right: 10),
+          child: TextFormField(
+              controller: country,
+              onChanged: (value) => _runFilter(value),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                  borderSide: BorderSide(color: Colors.blue, width: 1.5),
                 ),
-                validator: (String value) {
-                  if (value.isEmpty) {
-                    return 'Please Enter Country';
-                  }
-                  return null;
-                }),
-            SizedBox(
-              height: 20,
-            ),
-            Expanded(
-              child: _foundCountry.length > 0
-                  ? ListView.builder(
-                      itemCount: _foundCountry.length,
-                      itemBuilder: (context, index) => InkWell(
-                        onTap: () {
-                          setState(() {
-                            widget.countryCode =
-                                _foundCountry[index]["code"].toInt();
-                            country.text =
-                                _foundCountry[index]["shortName"].toString();
-                            _foundCountry = [];
-                          });
-                        },
-                        child: ListTile(
-                          title: Text(
-                            '${_foundCountry[index]["shortName"].toString()} ( ${_foundCountry[index]["alpha_3"].toString()})',
-                            style: TextStyle(fontSize: 12),
-                          ),
-                        ),
-                      ),
-                    )
-                  // : Text(
-                  //     'No results found',
-                  //     style: TextStyle(fontSize: 12),
-                  //   ),
-                  : Container(),
-            ),
-          ],
+                labelText: 'Country',
+              ),
+              validator: (String value) {
+                if (value.isEmpty) {
+                  return 'Please Enter Country';
+                }
+                return null;
+              }),
         ),
-      ),
+        Container(
+          height: _foundCountry.length > 0 ? 200 : 0,
+          child: _foundCountry.length > 0
+              ? ListView.builder(
+                  itemCount: _foundCountry.length,
+                  itemBuilder: (context, index) => InkWell(
+                    onTap: () {
+                      setState(() {
+                        Registration.of(context).countryCode =
+                            _foundCountry[index]["code"].toInt();
+                        country.text =
+                            _foundCountry[index]["shortName"].toString();
+                        _foundCountry = [];
+                      });
+                    },
+                    child: ListTile(
+                      title: Text(
+                        '${_foundCountry[index]["shortName"].toString()} (${_foundCountry[index]["alpha_3"].toString()})',
+                        style: TextStyle(fontSize: 12),
+                      ),
+                    ),
+                  ),
+                )
+              : Container(
+                  height: 0,
+                  width: 0,
+                ),
+        ),
+      ],
     );
   }
 }

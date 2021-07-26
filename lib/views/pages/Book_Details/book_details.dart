@@ -27,6 +27,36 @@ class _BookDetailsState extends State<BookDetails> {
   List<Book> book = [];
   bool isLoading = false;
 
+  _add_item_to_cart() async {
+    // set up POST request arguments
+    final url = Uri.parse('$apiBaseURL/cart');
+    prefs = await SharedPreferences.getInstance();
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      'x-access-token': '${prefs.getString('token')}'
+    };
+    String json = '{'
+        '"book_id": "${book[0].book_id}",'
+        '"seller_id": "${book[0].seller_id}",'
+        '"seller_book_id": "${book[0].sellerBookID}"'
+        '}';
+    // make POST request
+    print(json);
+    Response response = await post(url, headers: headers, body: json);
+    // check the status code for the result
+    int statusCode = response.statusCode;
+    // this API passes back the id of the new item added to the body
+    String body = response.body;
+    print(statusCode);
+    print(body);
+    if(statusCode==200){
+      Map<String, dynamic> responseMessage = jsonDecode(body);
+      print(responseMessage);
+      // var message = responseMessage['message'];
+      // backend message needed
+    }
+  }
+
   _getBook() async {
     setState(() {
       isLoading = true;
@@ -106,6 +136,9 @@ class _BookDetailsState extends State<BookDetails> {
                     Text('briefAnnotation :- ${book[0].briefAnnotation}'),
                     Text('longAnnotation :- ${book[0].longAnnotation}'),
                     Text('cover_type :- ${book[0].coverType}'),
+                    Text('seller_id :- ${book[0].seller_id}'),
+                    Text('book_id :- ${book[0].book_id}'),
+                    Text('seller_book_id :- ${book[0].sellerBookID}'),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         shape: StadiumBorder(),
@@ -114,6 +147,7 @@ class _BookDetailsState extends State<BookDetails> {
                         child: Text('add to cart'),
                       ),
                       onPressed: () {
+                        _add_item_to_cart();
                         // ${book[0].book_id} <-- book id
                         // ${book[0].seller_id} <-- seller id
                         // ${book[0].sellerBookID} <-- seller book id
