@@ -10,7 +10,7 @@ class SellerRequestsListCard extends StatelessWidget {
 
   SharedPreferences prefs;
 
-  _addConfirmSeller() async{
+  _addConfirmSeller() async {
     prefs = await SharedPreferences.getInstance();
     print('${prefs.getString('token')}');
     final url = Uri.parse('$apiBaseURL/newSellers');
@@ -28,8 +28,7 @@ class SellerRequestsListCard extends StatelessWidget {
     String body = response.body;
   }
 
-
-  _removeSellerRequest() async{
+  _removeSellerRequest() async {
     prefs = await SharedPreferences.getInstance();
     print('${prefs.getString('token')}');
     final url = Uri.parse('$apiBaseURL/confirm_seller');
@@ -39,7 +38,7 @@ class SellerRequestsListCard extends StatelessWidget {
     };
     String json = '{"_id": "${sellers_list[index].user_id}" }';
     print(json);
-    Response response = await delete(url, headers: headers, body: json);
+    Response response = await put(url, headers: headers, body: json);
     // check the status code for the result
     int statusCode = response.statusCode;
     print(statusCode);
@@ -57,7 +56,8 @@ class SellerRequestsListCard extends StatelessWidget {
         children: <Widget>[
           ListTile(
             title: Text('${sellers_list[index].userName}'),
-            subtitle: Text('${sellers_list[index].email} (${sellers_list[index].phone_number})\n'
+            subtitle: Text(
+                '${sellers_list[index].email} (${sellers_list[index].phone_number})\n'
                 '${sellers_list[index].address}, ${sellers_list[index].city}, ${sellers_list[index].country}'),
             isThreeLine: true,
           ),

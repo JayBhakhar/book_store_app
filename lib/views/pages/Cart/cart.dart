@@ -14,6 +14,7 @@ class Cart extends StatefulWidget {
 
 class _CartState extends State<Cart> {
   SharedPreferences prefs;
+  List items = [];
   List<Book> book = [];
   bool isLoading = false;
   void initState() {
@@ -35,31 +36,48 @@ class _CartState extends State<Cart> {
     Response response = await get(url, headers: headers);
     // check the status code for the result
     int statusCode = response.statusCode;
-    print(statusCode);
     // this API passes back the id of the new item added to the body
     String body = response.body;
+    setState(() {
+      items = jsonDecode(body)['cart'];
+    });
     if (statusCode == 200) {
-      var booksObjs = jsonDecode(body)['cart'] as List;
-      var cart = jsonDecode(body)['cart'];
-      for(var a1 in cart) {
-        print(a1['bookID']);
+      var _items = jsonDecode(body)['cart'];
+      for (var bookID in _items) {
+        final url = Uri.parse('$apiBaseURL/book');
+        prefs = await SharedPreferences.getInstance();
+        Map<String, String> headers = {
+          'Content-type': 'application/json',
+          'x-access-token': '${prefs.getString('token')}',
+          'book_id': bookID['bookID'].toString()
+        };
+        // make Post request
+        Response response = await get(url, headers: headers);
+        // check the status code for the result
+        int statusCode = response.statusCode;
+        // this API passes back the id of the new item added to the body
+        String body = response.body;
+        if (statusCode == 200) {
+          var booksObjs = jsonDecode(body)['book'] as List;
+          setState(() {
+            book.add(booksObjs
+                .map((bookJson) => Book.fromJson(bookJson))
+                .toList()
+                .first);
+          });
+        }
       }
-      // make a loop for take books in cart
-      setState(() {
-        // book = booksObjs.map((bookJson) => Book.fromJson(bookJson)).toList();
-        isLoading = false;
-      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Your Cart'),
+      ),
       body: SingleChildScrollView(
-        child: CartCard(
-
-        ),
+        child: CartCard(items: items, book: book),
       ),
     );
   }
