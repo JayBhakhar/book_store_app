@@ -15,7 +15,6 @@ class YourBooksCard extends StatelessWidget {
 
   _removebook() async{
     prefs = await SharedPreferences.getInstance();
-    print('${prefs.getString('token')}');
     final url = Uri.parse('$apiBaseURL/book');
     Map<String, String> headers = {
       "Content-type": "application/json",

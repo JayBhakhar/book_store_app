@@ -23,7 +23,6 @@ class _ConfirmSellerListState extends State<ConfirmSellerList> {
 
   _getSellers() async {
     prefs = await SharedPreferences.getInstance();
-    print('${prefs.getString('token')}');
     final url = Uri.parse('$apiBaseURL/confirm_sellers');
     Map<String, String> headers = {
       "Content-type": "application/json",

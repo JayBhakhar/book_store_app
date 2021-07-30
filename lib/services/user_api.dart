@@ -7,10 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 SharedPreferences prefs;
 
 class UserAPI {
-
   Future<List<User>> getCurrentUser() async {
     prefs = await SharedPreferences.getInstance();
-    print('${prefs.getString('token')}');
     final url = Uri.parse('$apiBaseURL/user');
     Map<String, String> headers = {
       "Content-type": "application/json",
@@ -20,7 +18,6 @@ class UserAPI {
     Response response = await get(url, headers: headers);
 // check the status code for the result
     int statusCode = response.statusCode;
-    print(statusCode);
 // this API passes back the id of the new item added to the body
     String body = response.body;
     if (statusCode == 200) {
@@ -32,7 +29,6 @@ class UserAPI {
 
   Future<List<User>> getSellers() async {
     prefs = await SharedPreferences.getInstance();
-    print('${prefs.getString('token')}');
     final url = Uri.parse('$apiBaseURL/newSellers');
     Map<String, String> headers = {
       "Content-type": "application/json",
@@ -42,13 +38,10 @@ class UserAPI {
     Response response = await get(url, headers: headers);
     // check the status code for the result
     int statusCode = response.statusCode;
-    print(statusCode);
     String body = response.body;
     if (statusCode == 200) {
       var userObjs = jsonDecode(body)['newSellers'] as List;
         return userObjs.map((bookJson) => User.fromJson(bookJson)).toList();
     }
   }
-
-
 }

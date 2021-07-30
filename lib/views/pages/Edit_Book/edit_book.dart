@@ -53,7 +53,6 @@ class _EditBookState extends State<EditBook> {
       'x-access-token': '${prefs.getString('token')}',
       'book_id' : '${widget.bookID}'
     };
-    print('${prefs.getString('token')}');
     // make Post request
     Response response = await get(url, headers: headers);
     // check the status code for the result

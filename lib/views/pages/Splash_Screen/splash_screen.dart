@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
         );
       });
     } else {
-      BookAPI().getBooks().then((List<Book> books){
+      BookAPI().getBooks().then((List<Book> books) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(

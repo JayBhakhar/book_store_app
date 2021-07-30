@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/views/pages/Forget_Password/forget_password.dart';
 import 'package:book_store_app/views/pages/Home_Screen/home.dart';
+import 'package:book_store_app/views/pages/Splash_Screen/splash_screen.dart';
 import 'package:book_store_app/views/widgets/Custom_TextFormField_forEmail.dart';
 import 'package:book_store_app/views/widgets/Custom_TextFormField_forStr.dart';
 import 'package:http/http.dart';
@@ -44,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => Home(),
+          builder: (context) => SplashScreen(),
         ),
       );
     }

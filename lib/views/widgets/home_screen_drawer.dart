@@ -1,6 +1,7 @@
 import 'package:book_store_app/models/User.dart';
 import 'package:book_store_app/utils/token.dart';
 import 'package:book_store_app/views/pages/Add_Book/add_book.dart';
+import 'package:book_store_app/views/pages/Cart/cart.dart';
 import 'package:book_store_app/views/pages/Confirm_Seller_List/cofirm_seller_list.dart';
 import 'package:book_store_app/views/pages/Login/login.dart';
 import 'package:book_store_app/views/pages/My_Books/my_books.dart';
@@ -37,8 +38,12 @@ class HomeScreenDrawer extends StatelessWidget {
               leading: Icon(Icons.shopping_cart),
               title: Text('My cart'),
               onTap: () {
-                // Update the state of the app.
-                // ...
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Cart(),
+                  ),
+                );
               },
             ),
             ListTile(
@@ -89,8 +94,8 @@ class HomeScreenDrawer extends StatelessWidget {
                   height: 0,
                 );
             }),
-            Builder(builder: (context){
-              if(user[0].confirm_seller){
+            Builder(builder: (context) {
+              if (user[0].confirm_seller) {
                 return ExpansionTile(
                   leading: Icon(Icons.add_shopping_cart),
                   title: Text('I am seller'),
@@ -121,8 +126,7 @@ class HomeScreenDrawer extends StatelessWidget {
                     ),
                   ],
                 );
-              }
-              else
+              } else
                 return Container();
             }),
             ListTile(
@@ -144,6 +148,3 @@ class HomeScreenDrawer extends StatelessWidget {
     );
   }
 }
-
-
-

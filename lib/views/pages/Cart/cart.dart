@@ -77,7 +77,10 @@ class _CartState extends State<Cart> {
         title: Text('Your Cart'),
       ),
       body: SingleChildScrollView(
-        child: CartCard(items: items, book: book),
+        child: CartCard(
+          items: items,
+          book: book,
+        ),
       ),
     );
   }

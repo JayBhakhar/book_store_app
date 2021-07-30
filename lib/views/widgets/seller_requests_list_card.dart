@@ -12,7 +12,6 @@ class SellerRequestsListCard extends StatelessWidget {
 
   _addConfirmSeller() async {
     prefs = await SharedPreferences.getInstance();
-    print('${prefs.getString('token')}');
     final url = Uri.parse('$apiBaseURL/newSellers');
     Map<String, String> headers = {
       "Content-type": "application/json",
@@ -30,7 +29,6 @@ class SellerRequestsListCard extends StatelessWidget {
 
   _removeSellerRequest() async {
     prefs = await SharedPreferences.getInstance();
-    print('${prefs.getString('token')}');
     final url = Uri.parse('$apiBaseURL/confirm_seller');
     Map<String, String> headers = {
       "Content-type": "application/json",

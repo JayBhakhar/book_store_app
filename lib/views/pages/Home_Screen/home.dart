@@ -25,6 +25,7 @@ class _HomeState extends State<Home> {
     });
   }
 
+  String abc = 'abc';
   bool isLoading = false;
   List<User> user = [];
 
@@ -54,8 +55,7 @@ class _HomeState extends State<Home> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      Cart(),
+                  builder: (context) => Cart(),
                 ),
               );
             },
@@ -82,6 +82,7 @@ class _HomeState extends State<Home> {
             itemBuilder: (BuildContext context, index) {
               return BookCard(
                 index: index,
+                books: widget.books,
               );
             },
           ),

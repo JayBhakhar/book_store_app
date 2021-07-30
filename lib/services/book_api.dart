@@ -7,7 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 SharedPreferences prefs;
 
 class BookAPI {
-
   Future<List<Book>> getBooks() async {
     prefs = await SharedPreferences.getInstance();
     final url = Uri.parse('$apiBaseURL/books');
@@ -30,7 +29,6 @@ class BookAPI {
 
   Future<List<Book>> getSellerBooks() async {
     prefs = await SharedPreferences.getInstance();
-    print('${prefs.getString('token')}');
     final url = Uri.parse('$apiBaseURL/seller/books');
     Map<String, String> headers = {
       "Content-type": "application/json",
