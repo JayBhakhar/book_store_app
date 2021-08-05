@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/models/Book.dart';
+import 'package:book_store_app/views/pages/Cart/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart';
@@ -60,9 +61,18 @@ class _CartCardState extends State<CartCard> {
                             await delete(url, headers: headers, body: json);
                         // check the status code for the result
                         int statusCode = response.statusCode;
-                        print(statusCode);
                         // this API passes back the id of the new item added to the body
                         String body = response.body;
+                        Map<String, dynamic> message = jsonDecode(body);
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(message['message']),
+                        ));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Cart(),
+                          ),
+                        );
                       },
                     ),
                     const SizedBox(width: 8),

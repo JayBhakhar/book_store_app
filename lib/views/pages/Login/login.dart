@@ -48,6 +48,10 @@ class _LoginScreenState extends State<LoginScreen> {
           builder: (context) => SplashScreen(),
         ),
       );
+    } else if (statusCode == 401) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(body),
+      ));
     }
   }
 

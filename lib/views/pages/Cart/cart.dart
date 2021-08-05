@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/models/Book.dart';
+import 'package:book_store_app/utils/ProgressIndicatorLoader.dart';
 import 'package:book_store_app/views/widgets/cart_card.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,7 +17,7 @@ class _CartState extends State<Cart> {
   SharedPreferences prefs;
   List items = [];
   List<Book> book = [];
-  bool isLoading = false;
+  bool isLoading = true;
   void initState() {
     super.initState();
     _getCart();
@@ -24,7 +25,8 @@ class _CartState extends State<Cart> {
 
   _getCart() async {
     setState(() {
-      isLoading = true;
+      items = [];
+      book = [];
     });
     final url = Uri.parse('$apiBaseURL/cart');
     prefs = await SharedPreferences.getInstance();
@@ -44,6 +46,7 @@ class _CartState extends State<Cart> {
     if (statusCode == 200) {
       var _items = jsonDecode(body)['cart'];
       for (var bookID in _items) {
+        print('+++++++++ $bookID');
         final url = Uri.parse('$apiBaseURL/book');
         prefs = await SharedPreferences.getInstance();
         Map<String, String> headers = {
@@ -68,6 +71,11 @@ class _CartState extends State<Cart> {
         }
       }
     }
+    if (items.length == book.length) {
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override
@@ -76,12 +84,31 @@ class _CartState extends State<Cart> {
       appBar: AppBar(
         title: Text('Your Cart'),
       ),
-      body: SingleChildScrollView(
-        child: CartCard(
-          items: items,
-          book: book,
+      body: Stack(children: [
+        Builder(builder: (context) {
+          if (items.length == book.length) {
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  ListTile(
+                    title: Text('Items :- ${items.length}'),
+                  ),
+                  CartCard(
+                    items: items,
+                    book: book,
+                  ),
+                ],
+              ),
+            );
+          } else {
+            return Container(width: 0.0, height: 0.0);
+          }
+        }),
+        ProgressIndicatorLoader(
+          color: Colors.pink,
+          isLoading: isLoading,
         ),
-      ),
+      ]),
     );
   }
 }

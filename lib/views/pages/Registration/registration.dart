@@ -47,9 +47,14 @@ class _RegistrationState extends State<Registration> {
     int statusCode = response.statusCode;
     // this API passes back the id of the new item added to the body
     String body = response.body;
-    if(statusCode==200){
+    if (statusCode == 200) {
       Map<String, dynamic> responseMessage = jsonDecode(body);
-      // var message = responseMessage['message'];
+      var message = responseMessage['message'];
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+        ),
+      );
       // backend message needed
     }
   }
@@ -120,8 +125,7 @@ class _RegistrationState extends State<Registration> {
                   controller: address,
                   labelText: 'Address',
                 ),
-                CustomTextFormFieldForCountry(
-                ),
+                CustomTextFormFieldForCountry(),
                 CheckboxListTile(
                   title: Text("I want to be a Seller"),
                   controlAffinity: ListTileControlAffinity.leading,
@@ -148,8 +152,7 @@ class _RegistrationState extends State<Registration> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                LoginScreen(), // login screen
+                            builder: (context) => LoginScreen(), // login screen
                           ),
                         );
                       }
