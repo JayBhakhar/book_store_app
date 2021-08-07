@@ -63,8 +63,6 @@ class _EditBookState extends State<EditBook> {
   final TextEditingController longAnnotation = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  String cover_type;
-  String _dropdownErrorCoverType;
   SharedPreferences prefs;
 
   _updateBook() async {
@@ -97,7 +95,7 @@ class _EditBookState extends State<EditBook> {
         '"briefAnnotation": "${briefAnnotation.text}",'
         '"longAnnotation": "${longAnnotation.text}",'
         '"price": "${price.text}",'
-        '"coverType": "$cover_type"'
+        '"coverType": "${widget.book[0].coverType}"'
         '}';
     // make POST request
     Response response = await put(url, headers: headers, body: json);
@@ -126,6 +124,10 @@ class _EditBookState extends State<EditBook> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(height: 10),
+                // CustomTextFormFieldForStr(
+                //   controller: bookName, 
+                //   labelText: 'Book Name',
+                // ),
                 CustomTextFormFieldForStr(
                   controller: bookName..text = '${widget.book[0].bookName}',
                   labelText: 'Book Name',
@@ -261,23 +263,16 @@ class _EditBookState extends State<EditBook> {
                               ),
                               onChanged: (String value) {
                                 setState(() {
-                                  cover_type =
+                                  widget.book[0].coverType =
                                       value; // saving the selected value
-                                  _dropdownErrorCoverType = null;
                                 });
                               },
-                              value: cover_type,
+                              value: widget.book[0].coverType,
                               // displaying the selected value
                             ),
                           ),
                         ),
                       ),
-                      _dropdownErrorCoverType == null
-                          ? SizedBox.shrink()
-                          : Text(
-                              _dropdownErrorCoverType ?? "",
-                              style: TextStyle(color: Colors.red),
-                            ),
                     ],
                   ),
                 ),
@@ -287,11 +282,6 @@ class _EditBookState extends State<EditBook> {
                   child: TextButton(
                     onPressed: () {
                       bool _isValid = _formKey.currentState.validate();
-                      if (cover_type == null) {
-                        setState(() => _dropdownErrorCoverType =
-                            "Please select Cover Type");
-                        _isValid = false;
-                      }
                       if (_isValid) {
                         _updateBook(); //need to make
                         BookAPI().getSellerBooks().then((List<Book> _my_books) {
