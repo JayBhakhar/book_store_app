@@ -1,21 +1,17 @@
 import 'dart:convert';
 import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/models/Book.dart';
-import 'package:book_store_app/services/book_api.dart';
 import 'package:book_store_app/views/pages/Edit_Book/edit_book.dart';
-import 'package:book_store_app/views/pages/My_Books/my_books.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class YourBooksCard extends StatelessWidget {
+Widget YourBooksCard(
+  BuildContext context,
+  final List<Book> book,
+  final int index,
+) {
   SharedPreferences prefs;
-  final List<Book> book;
-  final int index;
-
-  YourBooksCard({this.book, this.index});
-
   Future<List<Book>> _get_edit_book() async {
     prefs = await SharedPreferences.getInstance();
     final url = Uri.parse('$apiBaseURL/book');
@@ -53,51 +49,53 @@ class YourBooksCard extends StatelessWidget {
     // todo: if need to show
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ListTile(
-            leading: Image.asset('assets/images/image.jpg'),
-            title: Text('${book[index].bookName}'),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text('Price :- \$ ${book[index].price}'),
-                Text('Quatity :- ${book[index].quantity}'),
-              ],
-            ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextButton(
-                  child: const Text('Edit'),
-                  onPressed: () {
-                    _get_edit_book().then((List<Book> book) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EditBook(
-                            book: book,
-                          ),
-                        ),
-                      );
-                    });
-                  },
-                ),
-                TextButton(
-                  child: const Text('Remove'),
-                  onPressed: () {
-                    _removebook();                    
-                  },
-                ),
-              ],
-            ),
+  return Card(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        ListTile(
+          leading: Image.asset('assets/images/image.jpg'),
+          title: Text('${book[index].bookName}'),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text('Price :- \$ ${book[index].price}'),
+              Text('Quatity :- ${book[index].quantity}'),
+            ],
           ),
-        ],
-      ),
-    );
-  }
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextButton(
+                child: const Text('Edit'),
+                onPressed: () {
+                  _get_edit_book().then((List<Book> book) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditBook(
+                          book: book,
+                        ),
+                      ),
+                    );
+                  });
+                },
+              ),
+              TextButton(
+                child: const Text('Remove'),
+                onPressed: () {
+                  _removebook();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Book removed !!'),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
 }

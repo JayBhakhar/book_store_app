@@ -27,8 +27,9 @@ class SellerRequests extends StatelessWidget {
           ),
           itemBuilder: (BuildContext context, index) {
             return SellerRequestsListCard(
-              sellers_list: seller_requests,
-              index: index,
+              context,
+              seller_requests,
+              index,
             );
           },
         ),

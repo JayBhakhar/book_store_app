@@ -45,7 +45,6 @@ class _CartState extends State<Cart> {
     if (statusCode == 200) {
       var _items = jsonDecode(body)['cart'];
       for (var bookID in _items) {
-        print('+++++++++ $bookID');
         final url = Uri.parse('$apiBaseURL/book');
         prefs = await SharedPreferences.getInstance();
         Map<String, String> headers = {
@@ -93,9 +92,10 @@ class _CartState extends State<Cart> {
                     title: Text('Items :- ${items.length}'),
                   ),
                   CartCard(
-                    items: items,
-                    book: book,
-                  ),
+                    context,
+                    items,
+                    book
+                  )
                 ],
               ),
             );

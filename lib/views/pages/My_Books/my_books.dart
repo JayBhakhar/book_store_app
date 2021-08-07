@@ -26,8 +26,9 @@ class MyBooks extends StatelessWidget {
             ),
             itemBuilder: (BuildContext context, index) {
               return YourBooksCard(
-                book: my_books,
-                index: index,
+                context,
+                my_books,
+                index,
               );
             },
           ),

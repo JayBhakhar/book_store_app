@@ -23,8 +23,9 @@ class ConfirmSellerList extends StatelessWidget {
         ),
         itemBuilder: (BuildContext context, index) {
           return ConfirmSellerListCard(
-            sellers_list: confirmSellers,
-            index: index,
+            context,
+            confirmSellers,
+            index,
           );
         },
       ),
