@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/models/User.dart';
 import 'package:flutter/material.dart';
@@ -17,14 +19,13 @@ class SellerRequestsListCard extends StatelessWidget {
       "Content-type": "application/json",
       'x-access-token': '${prefs.getString('token')}'
     };
-    String json = '{"_id": "${sellers_list[index].user_id}" }';
-    print(json);
+    String json = '{"user_id": "${sellers_list[index].user_id}" }';
     Response response = await put(url, headers: headers, body: json);
     // check the status code for the result
     int statusCode = response.statusCode;
-    print(statusCode);
     // this API passes back the id of the new item added to the body
-    String body = response.body;
+    var message = jsonDecode(response.body)['message'];
+    print(message);
   }
 
   _removeSellerRequest() async {
@@ -34,14 +35,16 @@ class SellerRequestsListCard extends StatelessWidget {
       "Content-type": "application/json",
       'x-access-token': '${prefs.getString('token')}'
     };
-    String json = '{"_id": "${sellers_list[index].user_id}" }';
+    String json = '{"user_id": "${sellers_list[index].user_id}" }';
     print(json);
     Response response = await put(url, headers: headers, body: json);
     // check the status code for the result
     int statusCode = response.statusCode;
     print(statusCode);
     // this API passes back the id of the new item added to the body
-    String body = response.body;
+    var message = jsonDecode(response.body)['message'];
+    print(message);
+    // todo: somewhere need to show
   }
 
   SellerRequestsListCard({this.sellers_list, this.index});

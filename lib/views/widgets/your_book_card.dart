@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/models/Book.dart';
+import 'package:book_store_app/services/book_api.dart';
 import 'package:book_store_app/views/pages/Edit_Book/edit_book.dart';
+import 'package:book_store_app/views/pages/My_Books/my_books.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -8,26 +11,46 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class YourBooksCard extends StatelessWidget {
   SharedPreferences prefs;
-  final List<Book> books_list;
+  final List<Book> book;
   final int index;
 
-  YourBooksCard({this.books_list, this.index});
+  YourBooksCard({this.book, this.index});
 
-  _removebook() async{
+  Future<List<Book>> _get_edit_book() async {
+    prefs = await SharedPreferences.getInstance();
+    final url = Uri.parse('$apiBaseURL/book');
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'x-access-token': '${prefs.getString('token')}',
+      'book_id': '${book[index].book_id}'
+    };
+    // make Post request
+    Response response = await get(url, headers: headers);
+    // check the status code for the result
+    int statusCode = response.statusCode;
+    // this API passes back the id of the new item added to the body
+    String body = response.body;
+    if (statusCode == 200) {
+      var booksObjs = jsonDecode(body)['book'] as List;
+      return booksObjs.map((bookJson) => Book.fromJson(bookJson)).toList();
+    }
+  }
+
+  _removebook() async {
     prefs = await SharedPreferences.getInstance();
     final url = Uri.parse('$apiBaseURL/book');
     Map<String, String> headers = {
       "Content-type": "application/json",
       'x-access-token': '${prefs.getString('token')}'
     };
-    String json = '{"book_id": "${books_list[index].book_id}" }';
+    String json = '{"book_id": "${book[index].book_id}" }';
     Response response = await delete(url, headers: headers, body: json);
     // check the status code for the result
     int statusCode = response.statusCode;
-    print(statusCode);
     // this API passes back the id of the new item added to the body
-    String body = response.body;
-    print(body);
+    var message = jsonDecode(response.body)['message'];
+    print(message);
+    // todo: if need to show
   }
 
   @override
@@ -38,13 +61,12 @@ class YourBooksCard extends StatelessWidget {
         children: <Widget>[
           ListTile(
             leading: Image.asset('assets/images/image.jpg'),
-            title: Text(
-                '${books_list[index].bookName}'),
+            title: Text('${book[index].bookName}'),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text('Price :- \$ ${books_list[index].price}'),
-                Text('Quatity :- ${books_list[index].quantity}'),
+                Text('Price :- \$ ${book[index].price}'),
+                Text('Quatity :- ${book[index].quantity}'),
               ],
             ),
             trailing: Row(
@@ -53,20 +75,22 @@ class YourBooksCard extends StatelessWidget {
                 TextButton(
                   child: const Text('Edit'),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditBook(
-                          bookID: '${books_list[index].book_id}',
+                    _get_edit_book().then((List<Book> book) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditBook(
+                            book: book,
+                          ),
                         ),
-                      ),
-                    );
+                      );
+                    });
                   },
                 ),
                 TextButton(
                   child: const Text('Remove'),
                   onPressed: () {
-                    _removebook();
+                    _removebook();                    
                   },
                 ),
               ],

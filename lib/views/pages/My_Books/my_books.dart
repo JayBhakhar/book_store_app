@@ -1,26 +1,10 @@
 import 'package:book_store_app/models/Book.dart';
-import 'package:book_store_app/services/book_api.dart';
 import 'package:book_store_app/views/widgets/your_book_card.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class MyBooks extends StatefulWidget {
-  @override
-  _MyBooksState createState() => _MyBooksState();
-}
-
-class _MyBooksState extends State<MyBooks> {
-  void initState() {
-    super.initState();
-    BookAPI().getSellerBooks().then((List<Book> _sellerBook){
-      setState(() {
-        books = _sellerBook;
-      });
-    });
-  }
-
-  SharedPreferences prefs;
-  List<Book> books;
+class MyBooks extends StatelessWidget {
+  List<Book> my_books;
+  MyBooks({@required this.my_books});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +17,7 @@ class _MyBooksState extends State<MyBooks> {
           child: GridView.builder(
             physics: ScrollPhysics(),
             shrinkWrap: true,
-            itemCount: books.length,
+            itemCount: my_books.length,
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 400.0,
               mainAxisExtent: 75,
@@ -42,7 +26,7 @@ class _MyBooksState extends State<MyBooks> {
             ),
             itemBuilder: (BuildContext context, index) {
               return YourBooksCard(
-                books_list: books,
+                book: my_books,
                 index: index,
               );
             },

@@ -38,15 +38,17 @@ class _RegistrationState extends State<Registration> {
         '"password": "${password.text}",'
         '"phoneNumber": "${phoneNumber.text}",'
         '"address": "${address.text}",'
-        '"country": $countryCode'
-        '"seller": "$isSeller",'
+        '"country": $countryCode,'
+        '"seller": $isSeller'
         '}';
     // make POST request
+    print(json);
     Response response = await post(url, headers: headers, body: json);
     // check the status code for the result
     int statusCode = response.statusCode;
     // this API passes back the id of the new item added to the body
     String body = response.body;
+    print(body);
     if (statusCode == 200) {
       Map<String, dynamic> responseMessage = jsonDecode(body);
       var message = responseMessage['message'];

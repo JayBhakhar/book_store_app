@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/models/Book.dart';
+import 'package:book_store_app/services/book_api.dart';
 import 'package:book_store_app/views/pages/My_Books/my_books.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,19 +11,14 @@ import 'package:book_store_app/views/widgets/Custom_TextFormField_forInt_Withlen
 import 'package:book_store_app/views/widgets/Custom_TextFormField_forStr.dart';
 
 class EditBook extends StatefulWidget {
-  String bookID;
-  EditBook({this.bookID});
+  List<Book> book;
+  EditBook({this.book});
 
   @override
   _EditBookState createState() => _EditBookState();
 }
 
 class _EditBookState extends State<EditBook> {
-  void initState() {
-    super.initState();
-    _getBook();
-  }
-
   String textbookName;
   String textauthors;
   String textillustrators;
@@ -45,36 +41,7 @@ class _EditBookState extends State<EditBook> {
   String textlongAnnotation;
   String textcoverType;
 
-  _getBook() async {
-    prefs = await SharedPreferences.getInstance();
-    final url = Uri.parse('$apiBaseURL/book');
-    Map<String, String> headers = {
-      'Content-type': 'application/json',
-      'x-access-token': '${prefs.getString('token')}',
-      'book_id' : '${widget.bookID}'
-    };
-    // make Post request
-    Response response = await get(url, headers: headers);
-    // check the status code for the result
-    int statusCode = response.statusCode;
-    print(statusCode);
-    // this API passes back the id of the new item added to the body
-    String body = response.body;
-    print(body);
-    if (statusCode == 200) {
-      var booksObjs = jsonDecode(body)['book'] as List;
-      setState(() {
-        book = booksObjs.map((bookJson) => Book.fromJson(bookJson)).toList();
-        cover_type = book[0].coverType;
-      });
-    }
-  }
-
-  SharedPreferences prefs;
-  List<Book> book;
-
   final TextEditingController bookName = TextEditingController();
-  final TextEditingController bookName1 = TextEditingController();
   final TextEditingController authors = TextEditingController();
   final TextEditingController illustrators = TextEditingController();
   final TextEditingController interpreters = TextEditingController();
@@ -98,7 +65,7 @@ class _EditBookState extends State<EditBook> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String cover_type;
   String _dropdownErrorCoverType;
-
+  SharedPreferences prefs;
 
   _updateBook() async {
     prefs = await SharedPreferences.getInstance();
@@ -108,6 +75,7 @@ class _EditBookState extends State<EditBook> {
       'x-access-token': '${prefs.getString('token')}'
     };
     String json = '{'
+        '"book_id": "${widget.book[0].book_id}",'
         '"bookName": "${bookName.text}",'
         '"authors": "${authors.text}",'
         '"illustrators": "${illustrators.text}",'
@@ -159,89 +127,96 @@ class _EditBookState extends State<EditBook> {
               children: [
                 SizedBox(height: 10),
                 CustomTextFormFieldForStr(
-                  controller: bookName..text = '${book[0].bookName}',
+                  controller: bookName..text = '${widget.book[0].bookName}',
                   labelText: 'Book Name',
                 ),
                 CustomTextFormFieldForStr(
-                  controller: authors..text = '${book[0].authors}',
+                  controller: authors..text = '${widget.book[0].authors}',
                   labelText: 'Authors',
                 ),
                 CustomTextFormFieldForStr(
-                  controller: illustrators..text = '${book[0].illustrators}',
+                  controller: illustrators
+                    ..text = '${widget.book[0].illustrators}',
                   labelText: 'Illustrators',
                 ),
                 CustomTextFormFieldForStr(
-                  controller: interpreters..text = '${book[0].interpreters}',
+                  controller: interpreters
+                    ..text = '${widget.book[0].interpreters}',
                   labelText: 'Interpreters',
                 ),
                 CustomTextFormFieldForStr(
-                  controller: publisher..text = '${book[0].publisher}',
+                  controller: publisher..text = '${widget.book[0].publisher}',
                   labelText: 'Publisher',
                 ),
                 CustomTextFormFieldForStr(
-                  controller: originalLanguage..text = '${book[0].originalLanguage}',
+                  controller: originalLanguage
+                    ..text = '${widget.book[0].originalLanguage}',
                   labelText: 'Original Language',
                 ),
                 CustomTextFormFieldForIntWithlen(
-                  controller: year..text = '${book[0].year}',
+                  controller: year..text = '${widget.book[0].year}',
                   labelText: 'Year',
                   length: 4,
                 ),
                 CustomTextFormFieldForInt(
-                  controller: ISBN..text = '${book[0].ISBN}',
+                  controller: ISBN..text = '${widget.book[0].ISBN}',
                   labelText: 'ISBN',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: EAN..text = '${book[0].EAN}',
+                  controller: EAN..text = '${widget.book[0].EAN}',
                   labelText: 'EAN',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: ISSN..text = '${book[0].ISSN}',
+                  controller: ISSN..text = '${widget.book[0].ISSN}',
                   labelText: 'ISSN',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: numberOfPages..text = '${book[0].numberOfPages}',
+                  controller: numberOfPages
+                    ..text = '${widget.book[0].numberOfPages}',
                   labelText: 'Number Of Pages',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: height..text = '${book[0].height}',
+                  controller: height..text = '${widget.book[0].height}',
                   labelText: 'Height',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: width..text = '${book[0].width}',
+                  controller: width..text = '${widget.book[0].width}',
                   labelText: 'Width',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: length..text = '${book[0].length}',
+                  controller: length..text = '${widget.book[0].length}',
                   labelText: 'Length',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: weight..text = '${book[0].weight}',
+                  controller: weight..text = '${widget.book[0].weight}',
                   labelText: 'Weight',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: price..text = '${book[0].price}',
+                  controller: price..text = '${widget.book[0].price}',
                   labelText: 'EAN',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: quantity..text = '${book[0].quantity}',
+                  controller: quantity..text = '${widget.book[0].quantity}',
                   labelText: 'Quantity',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: sellerBookID..text = '${book[0].sellerBookID}',
+                  controller: sellerBookID
+                    ..text = '${widget.book[0].sellerBookID}',
                   labelText: 'Your Book ID', // need to conform
                 ),
                 CustomTextFormFieldForStr(
-                  controller: briefAnnotation..text = '${book[0].briefAnnotation}',
+                  controller: briefAnnotation
+                    ..text = '${widget.book[0].briefAnnotation}',
                   labelText: 'Brief Annotation',
                 ),
                 CustomTextFormFieldForStr(
-                  controller: longAnnotation..text = '${book[0].longAnnotation}',
+                  controller: longAnnotation
+                    ..text = '${widget.book[0].longAnnotation}',
                   labelText: 'Long Annotation',
                 ),
                 Padding(
                   padding:
-                  const EdgeInsets.only(bottom: 15, left: 10, right: 10),
+                      const EdgeInsets.only(bottom: 15, left: 10, right: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -300,9 +275,9 @@ class _EditBookState extends State<EditBook> {
                       _dropdownErrorCoverType == null
                           ? SizedBox.shrink()
                           : Text(
-                        _dropdownErrorCoverType ?? "",
-                        style: TextStyle(color: Colors.red),
-                      ),
+                              _dropdownErrorCoverType ?? "",
+                              style: TextStyle(color: Colors.red),
+                            ),
                     ],
                   ),
                 ),
@@ -314,17 +289,21 @@ class _EditBookState extends State<EditBook> {
                       bool _isValid = _formKey.currentState.validate();
                       if (cover_type == null) {
                         setState(() => _dropdownErrorCoverType =
-                        "Please select Cover Type");
+                            "Please select Cover Type");
                         _isValid = false;
                       }
                       if (_isValid) {
                         _updateBook(); //need to make
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MyBooks(), // login screen
-                          ),
-                        );
+                        BookAPI().getSellerBooks().then((List<Book> _my_books) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MyBooks(
+                                my_books: _my_books,
+                              ),
+                            ),
+                          );
+                        });
                       }
                     },
                     child: Text("Update Book"),

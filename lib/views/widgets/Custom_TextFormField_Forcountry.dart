@@ -1,6 +1,5 @@
 import 'package:book_store_app/utils/country_list.dart';
 import 'package:book_store_app/views/pages/Registration/registration.dart';
-import 'package:book_store_app/views/pages/Registration/registration.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormFieldForCountry extends StatefulWidget {
@@ -66,6 +65,10 @@ class _CustomTextFormFieldForCountryState
                 if (value.isEmpty) {
                   return 'Please Enter Country';
                 }
+                // todo: validation for selected country is from classifired
+                // } else if (value.isNotEmpty) {
+                //   return 'Please Enter Select Country';
+                // }
                 return null;
               }),
         ),

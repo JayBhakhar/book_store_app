@@ -1,4 +1,7 @@
+import 'package:book_store_app/models/Book.dart';
 import 'package:book_store_app/models/User.dart';
+import 'package:book_store_app/services/book_api.dart';
+import 'package:book_store_app/services/user_api.dart';
 import 'package:book_store_app/utils/token.dart';
 import 'package:book_store_app/views/pages/Add_Book/add_book.dart';
 import 'package:book_store_app/views/pages/Cart/cart.dart';
@@ -61,29 +64,39 @@ class HomeScreenDrawer extends StatelessWidget {
                   title: Text('I am admin'),
                   children: [
                     ListTile(
-                      leading: Icon(Icons.person),
-                      title: Text('Confirm Sellers List'),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ConfirmSellerList(),
-                            // Sellers List screen
-                          ),
-                        );
-                      },
-                    ),
+                        leading: Icon(Icons.person),
+                        title: Text('Confirm Sellers List'),
+                        onTap: () {
+                          UserAPI()
+                              .get_confirm_sellers_list()
+                              .then((List<User> _confirmlist) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ConfirmSellerList(
+                                  confirmSellers: _confirmlist,
+                                ),
+                                // Sellers List screen
+                              ),
+                            );
+                          });
+                        }),
                     ListTile(
                       leading: Icon(Icons.person_add),
                       title: Text('Sellers Requests'),
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SellerRequests(),
-                            // Sellers List requst
-                          ),
-                        );
+                        UserAPI()
+                            .get_sellers_requests()
+                            .then((List<User> _seller_requests) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SellerRequests(
+                                seller_requests: _seller_requests,
+                              ),
+                            ),
+                          );
+                        });
                       },
                     ),
                   ],
@@ -116,12 +129,16 @@ class HomeScreenDrawer extends StatelessWidget {
                       leading: Icon(Icons.book),
                       title: Text('My books'),
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MyBooks(),
-                          ),
-                        );
+                        BookAPI().getSellerBooks().then((List<Book> _my_books) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MyBooks(
+                                my_books: _my_books,
+                              ),
+                            ),
+                          );
+                        });
                       },
                     ),
                   ],
