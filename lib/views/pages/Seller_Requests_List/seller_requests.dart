@@ -10,31 +10,39 @@ class SellerRequests extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Seller Requests List'),
-      ),
-      body: SingleChildScrollView(
-        child: GridView.builder(
-          physics: ScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: seller_requests.length,
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 450.0,
-            mainAxisExtent: 145,
-            crossAxisSpacing: 1.0,
-            mainAxisSpacing: 1.0,
-          ),
-          itemBuilder: (BuildContext context, index) {
-            return SellerRequestsListCard(
-              context,
-              seller_requests,
-              index,
-            );
-          },
+    if (seller_requests.length != 0) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Seller Requests List'),
         ),
-      ),
-    );
+        body: SingleChildScrollView(
+          child: GridView.builder(
+            physics: ScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: seller_requests.length,
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 450.0,
+              mainAxisExtent: 145,
+              crossAxisSpacing: 1.0,
+              mainAxisSpacing: 1.0,
+            ),
+            itemBuilder: (BuildContext context, index) {
+              return SellerRequestsListCard(
+                context,
+                seller_requests,
+                index,
+              );
+            },
+          ),
+        ),
+      );
+    } else {
+      return Scaffold(
+        appBar: AppBar(),
+        body: Center(
+          child: Text('No Seller\'s requsts'),
+        ),
+      );
+    }
   }
 }
-

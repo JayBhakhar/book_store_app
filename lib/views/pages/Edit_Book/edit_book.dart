@@ -62,6 +62,30 @@ class _EditBookState extends State<EditBook> {
   final TextEditingController briefAnnotation = TextEditingController();
   final TextEditingController longAnnotation = TextEditingController();
 
+  @override
+  void initState() {
+    bookName.text = widget.book[0].bookName;
+    authors.text = widget.book[0].authors;
+    illustrators.text = widget.book[0].illustrators;
+    interpreters.text = widget.book[0].interpreters;
+    publisher.text = widget.book[0].publisher;
+    originalLanguage.text = widget.book[0].originalLanguage;
+    year.text = widget.book[0].year.toString();
+    ISBN.text = widget.book[0].ISBN.toString();
+    EAN.text = widget.book[0].EAN.toString();
+    ISSN.text = widget.book[0].ISSN.toString();
+    numberOfPages.text = widget.book[0].numberOfPages.toString();
+    height.text = widget.book[0].height.toString();
+    width.text = widget.book[0].width.toString();
+    weight.text = widget.book[0].weight.toString();
+    length.text = widget.book[0].length.toString();
+    price.text = widget.book[0].price.toString();
+    quantity.text = widget.book[0].quantity.toString();
+    sellerBookID.text = widget.book[0].sellerBookID.toString();
+    briefAnnotation.text = widget.book[0].briefAnnotation.toString();
+    longAnnotation.text = widget.book[0].longAnnotation.toString();
+  }
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   SharedPreferences prefs;
 
@@ -112,6 +136,7 @@ class _EditBookState extends State<EditBook> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.book[0].bookName);
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit book'),
@@ -125,95 +150,90 @@ class _EditBookState extends State<EditBook> {
               children: [
                 SizedBox(height: 10),
                 // CustomTextFormFieldForStr(
-                //   controller: bookName, 
+                //   controller: bookName,
                 //   labelText: 'Book Name',
                 // ),
                 CustomTextFormFieldForStr(
-                  controller: bookName..text = '${widget.book[0].bookName}',
+                  controller: bookName,
                   labelText: 'Book Name',
                 ),
                 CustomTextFormFieldForStr(
-                  controller: authors..text = '${widget.book[0].authors}',
+                  controller: authors,
                   labelText: 'Authors',
                 ),
                 CustomTextFormFieldForStr(
-                  controller: illustrators
-                    ..text = '${widget.book[0].illustrators}',
+                  controller: illustrators,
                   labelText: 'Illustrators',
                 ),
                 CustomTextFormFieldForStr(
                   controller: interpreters
-                    ..text = '${widget.book[0].interpreters}',
+                    ,
                   labelText: 'Interpreters',
                 ),
                 CustomTextFormFieldForStr(
-                  controller: publisher..text = '${widget.book[0].publisher}',
+                  controller: publisher,
                   labelText: 'Publisher',
                 ),
                 CustomTextFormFieldForStr(
-                  controller: originalLanguage
-                    ..text = '${widget.book[0].originalLanguage}',
+                  controller: originalLanguage,
                   labelText: 'Original Language',
                 ),
                 CustomTextFormFieldForIntWithlen(
-                  controller: year..text = '${widget.book[0].year}',
+                  controller: year,
                   labelText: 'Year',
                   length: 4,
                 ),
                 CustomTextFormFieldForInt(
-                  controller: ISBN..text = '${widget.book[0].ISBN}',
+                  controller: ISBN,
                   labelText: 'ISBN',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: EAN..text = '${widget.book[0].EAN}',
+                  controller: EAN,
                   labelText: 'EAN',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: ISSN..text = '${widget.book[0].ISSN}',
+                  controller: ISSN,
                   labelText: 'ISSN',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: numberOfPages
-                    ..text = '${widget.book[0].numberOfPages}',
+                  controller: numberOfPages,
+                    
                   labelText: 'Number Of Pages',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: height..text = '${widget.book[0].height}',
+                  controller: height,
                   labelText: 'Height',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: width..text = '${widget.book[0].width}',
+                  controller: width,
                   labelText: 'Width',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: length..text = '${widget.book[0].length}',
+                  controller: length,
                   labelText: 'Length',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: weight..text = '${widget.book[0].weight}',
+                  controller: weight,
                   labelText: 'Weight',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: price..text = '${widget.book[0].price}',
+                  controller: price,
                   labelText: 'EAN',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: quantity..text = '${widget.book[0].quantity}',
+                  controller: quantity,
                   labelText: 'Quantity',
                 ),
                 CustomTextFormFieldForInt(
-                  controller: sellerBookID
-                    ..text = '${widget.book[0].sellerBookID}',
+                  controller: sellerBookID,
                   labelText: 'Your Book ID', // need to conform
                 ),
                 CustomTextFormFieldForStr(
-                  controller: briefAnnotation
-                    ..text = '${widget.book[0].briefAnnotation}',
+                  controller: briefAnnotation,
                   labelText: 'Brief Annotation',
                 ),
                 CustomTextFormFieldForStr(
-                  controller: longAnnotation
-                    ..text = '${widget.book[0].longAnnotation}',
+                  controller: longAnnotation,
                   labelText: 'Long Annotation',
                 ),
                 Padding(
