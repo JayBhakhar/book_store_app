@@ -1,94 +1,110 @@
 class Book {
-  String book_id;
-  String seller_id;
-  String bookName;
+  String bookID;
+  String isbn;
   String authors;
-  String illustrators;
-  String interpreters;
+  String bookName;
   String publisher;
   String originalLanguage;
   int year;
-  int ISBN;
-  int EAN;
-  int ISSN;
   int numberOfPages;
-  int height;
-  int width;
-  int length;
-  int weight;
-  int price;
-  int quantity;
-  int sellerBookID;
-  String briefAnnotation;
-  String longAnnotation;
+  String size;
+  double weight;
   String coverType;
-  String sellerName;
+  String annotation;
+  String coverFileUrl;
+  double priceOfSupplier;
+  int ownBookID;
+  int supplierBookID;
+  String supplier;
+  int supplierDeliveryTime;
+  String wayAccess0;
+  String wayAccess1;
+  String wayAccess2;
+  String wayAccess3;
+  String wayAccess4;
+  String wayAccess5;
+  String wayAccess6;
+  String wayAccess7;
+  String wayAccess8;
+  String wayAccess9;
 
-  Book(
-      this.book_id,
-      this.seller_id,
-      this.bookName,
-      this.authors,
-      this.illustrators,
-      this.interpreters,
-      this.publisher,
-      this.originalLanguage,
-      this.year,
-      this.ISBN,
-      this.EAN,
-      this.ISSN,
-      this.numberOfPages,
-      this.height,
-      this.width,
-      this.length,
-      this.weight,
-      this.price,
-      this.quantity,
-      this.sellerBookID,
-      this.briefAnnotation,
-      this.longAnnotation,
-      this.coverType,
-      this.sellerName,
-      );
+  Book({
+    this.bookID,
+    this.isbn,
+    this.authors,
+    this.bookName,
+    this.publisher,
+    this.originalLanguage,
+    this.year,
+    this.numberOfPages,
+    this.size,
+    this.weight,
+    this.coverType,
+    this.annotation,
+    this.coverFileUrl,
+    this.priceOfSupplier,
+    this.ownBookID,
+    this.supplierBookID,
+    this.supplier,
+    this.supplierDeliveryTime,
+    this.wayAccess0,
+    this.wayAccess1,
+    this.wayAccess2,
+    this.wayAccess3,
+    this.wayAccess4,
+    this.wayAccess5,
+    this.wayAccess6,
+    this.wayAccess7,
+    this.wayAccess8,
+    this.wayAccess9,
+  });
 
   factory Book.fromJson(dynamic json) {
     return Book(
-      json['_id'] as String,
-      json['sellerId'] as String,
-      json['bookName'] as String,
-      json['authors'] as String,
-      json['illustrators'] as String,
-      json['interpreters'] as String,
-      json['publisher'] as String,
-      json['originalLanguage'] as String,
-      json['year'] as int,
-      json['ISBN'] as int,
-      json['EAN'] as int,
-      json['ISSN'] as int,
-      json['numberOfPages'] as int,
-      json['height'] as int,
-      json['width'] as int,
-      json['length'] as int,
-      json['weight'] as int,
-      json['price'] as int,
-      json['quantity'] as int,
-      json['sellerBookId'] as int,
-      json['briefAnnotation'] as String,
-      json['longAnnotation'] as String,
-      json['coverType'] as String,
-      json['sellerName'] as String,
+      bookID: json['_id'] as String,
+      isbn: json['ISBN'] as String,
+      authors: json['Автор'] as String,
+      bookName: json['Название'] as String,
+      publisher: json['Издательство'] as String,
+      originalLanguage: json['язык_оригинала'] as String,
+      year: json['Год'] as int,
+      numberOfPages: json['Кол-во_стр.'] as int,
+      size: json['Размер'] as String,
+      weight: json['Вес'] as double,
+      coverType: json['Тип_обл.'] as String,
+      annotation: json['Аннотация'] as String,
+      coverFileUrl: json['файл_обложки'] as String,
+      priceOfSupplier: json['Цена_поставщика'] as double,
+      ownBookID: json['id_книги_наш'] as int,
+      supplierBookID: json['id_книги_поставщика'] as int,
+      supplier: json['поставщик'] as String,
+      supplierDeliveryTime: json['срок_отправки_поставщика'] as int,
+      wayAccess0: json['способ_дост_0'] as String,
+      wayAccess1: json['способ_дост_1'] as String,
+      wayAccess2: json['способ_дост_2'] as String,
+      wayAccess3: json['способ_дост_3'] as String,
+      wayAccess4: json['способ_дост_4'] as String,
+      wayAccess5: json['способ_дост_5'] as String,
+      wayAccess6: json['способ_дост_6'] as String,
+      wayAccess7: json['способ_дост_7'] as String,
+      wayAccess8: json['способ_дост_8'] as String,
+      wayAccess9: json['способ_дост_9'] as String,
     );
   }
 
-  @override
-  String toString() {
-    return '{ ${this.book_id}, ${this.seller_id}, ${this.bookName}, ${this.authors},'
-        '${this.illustrators}, ${this.interpreters}, ${this.publisher}, ${this.originalLanguage},'
-        '${this.year}, ${this.ISBN}, ${this.EAN}, ${this.ISSN},'
-        '${this.numberOfPages}, ${this.height}, ${this.width}, ${this.length},'
-        '${this.weight}, ${this.price}, ${this.quantity}, ${this.sellerBookID},'
-        '${this.briefAnnotation}, ${this.longAnnotation}, ${this.coverType}, ${this.sellerName}}';
-  }
+  // @override
+  // String toString() {
+  //   return '{ ${this.bookID}, ${this.isbn}, ${this.authors}, ${this.bookName},'
+  //       '${this.publisher}, ${this.originalLanguage}, ${this.year},'
+  //       '${this.numberOfPages}, ${this.size}, ${this.weight}, ${this.coverType},'
+  //       '${this.annotation}, ${this.coverFileUrl}, ${this.priceOfSupplier},'
+  //       '${this.ownBookID}, ${this.supplierBookID}, ${this.supplier},'
+  //       '${this.supplierDeliveryTime}, ${this.wayAccess0}, ${this.wayAccess1},'
+  //       '${this.wayAccess2}, ${this.wayAccess3}, ${this.wayAccess4},'
+  //       '${this.wayAccess5}, ${this.wayAccess6}, ${this.wayAccess7},'
+  //       '${this.wayAccess8}, ${this.wayAccess9}}';
+  // }
+
+  static List<Book> listFromJson(list) =>
+      List<Book>.from(list.map((x) => Book.fromJson(x)));
 }
-
-

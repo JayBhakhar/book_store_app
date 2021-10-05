@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget CustomTextFormFieldForEmail({final TextEditingController controller}) {
+Widget customTextFormFieldForEmail({final TextEditingController controller}) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 15, left: 10, right: 10),
     child: TextFormField(

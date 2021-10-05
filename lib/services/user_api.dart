@@ -27,7 +27,7 @@ class UserAPI {
   }
 
   Future<List<User>> get_confirm_sellers_list() async {
-    prefs = await SharedPreferences.getInstance();
+     prefs = await SharedPreferences.getInstance();
     final url = Uri.parse('$apiBaseURL/confirm_sellers');
     Map<String, String> headers = {
       "Content-type": "application/json",

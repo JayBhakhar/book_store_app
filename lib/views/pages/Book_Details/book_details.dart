@@ -31,9 +31,9 @@ class _BookDetailsState extends State<BookDetails> {
       'x-access-token': '${prefs.getString('token')}'
     };
     String json = '{'
-        '"book_id": "${widget.book[0].book_id}",'
-        '"seller_id": "${widget.book[0].seller_id}",'
-        '"seller_book_id": "${widget.book[0].sellerBookID}"'
+        '"book_id": "${widget.book[0].bookID}",'
+        '"seller_id": "${widget.book[0].isbn}",'
+        // '"seller_book_id": "${widget.book[0].sellerBookID}"'
         '}';
     // make POST request
     Response response = await post(url, headers: headers, body: json);
@@ -93,32 +93,30 @@ class _BookDetailsState extends State<BookDetails> {
                       ],
                       autoPlayInterval: 10000,
                     ),
-                    Text('Book name :- ${widget.book[0].bookName}'),
-                    Text('Author :- ${widget.book[0].authors}'),
-                    Text('illustrators :- ${widget.book[0].illustrators}'),
-                    Text('interpreters :- ${widget.book[0].interpreters}'),
-                    Text('publisher :- ${widget.book[0].publisher}'),
+                    // Text('Book name :- ${widget.book[0].bookName}'),
+                    // Text('Author :- ${widget.book[0].authors}'),
+                    // Text('illustrators :- ${widget.book[0].size}'),
+                    // Text('publisher :- ${widget.book[0].publisher}'),
+                    // Text(
+                    //     'originalLanguage :- ${widget.book[0].originalLanguage}'),
+                    // Text('year :- ${widget.book[0].year} '),
+                    // Text('EAN :- ${widget.book[0].priceOfSupplier}'),
+                    // Text('ISSN :- ${widget.book[0].ownBookID}'),
+                    // Text('numberOfPages :- ${widget.book[0].numberOfPages}'),
+                    // Text('height :- ${widget.book[0].supplierBookID}'),
+                    // Text('width :- ${widget.book[0].supplier}'),
+                    // Text('length :- ${widget.book[0].supplierDeliveryTime}'),
+                    // Text('weight :- ${widget.book[0].weight}'),
+                    // Text('price :- ${widget.book[0].price}'),
+                    // Text('quantity :- ${widget.book[0].quantity}'),
+                    // Text('sellerBookID :- ${widget.book[0].sellerBookID}'),
                     Text(
-                        'originalLanguage :- ${widget.book[0].originalLanguage}'),
-                    Text('year :- ${widget.book[0].year} '),
-                    Text('ISBN :- ${widget.book[0].ISBN}'),
-                    Text('EAN :- ${widget.book[0].EAN}'),
-                    Text('ISSN :- ${widget.book[0].ISSN}'),
-                    Text('numberOfPages :- ${widget.book[0].numberOfPages}'),
-                    Text('height :- ${widget.book[0].height}'),
-                    Text('width :- ${widget.book[0].width}'),
-                    Text('length :- ${widget.book[0].length}'),
-                    Text('weight :- ${widget.book[0].weight}'),
-                    Text('price :- ${widget.book[0].price}'),
-                    Text('quantity :- ${widget.book[0].quantity}'),
-                    Text('sellerBookID :- ${widget.book[0].sellerBookID}'),
-                    Text(
-                        'briefAnnotation :- ${widget.book[0].briefAnnotation}'),
-                    Text('longAnnotation :- ${widget.book[0].longAnnotation}'),
+                        'briefAnnotation :- ${widget.book[0].coverFileUrl}'),
+                    Text('longAnnotation :- ${widget.book[0].annotation}'),
                     Text('cover_type :- ${widget.book[0].coverType}'),
-                    Text('seller_id :- ${widget.book[0].seller_id}'),
-                    Text('book_id :- ${widget.book[0].book_id}'),
-                    Text('seller_book_id :- ${widget.book[0].sellerBookID}'),
+                    Text('seller_id :- ${widget.book[0].isbn}'),
+                    Text('book_id :- ${widget.book[0].bookID}'),
+                    // Text('seller_book_id :- ${widget.book[0].sellerBookID}'),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         shape: StadiumBorder(),

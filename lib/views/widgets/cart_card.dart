@@ -52,7 +52,7 @@ Widget CartCard(
                   image: AssetImage('assets/images/image.jpg'),
                 ),
                 title: Text('${book[index].bookName}'),
-                subtitle: Text('${book[index].sellerName}'),
+                // subtitle: Text('${book[index].sellerName}'),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,

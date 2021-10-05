@@ -4,6 +4,7 @@ import 'package:book_store_app/views/pages/Home_Screen/home.dart';
 import 'package:book_store_app/views/pages/Login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -19,23 +20,26 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _makePath() async {
     final prefs = await SharedPreferences.getInstance();
-    if (prefs.getString('token') == null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => LoginScreen(), // login screen
-          ),
-        );
-      });
+    if (prefs.getString('token') != null) {
+      Get.toNamed('/login');
+      // WidgetsBinding.instance.addPostFrameCallback(
+      //   (_) {
+      //     Navigator.pushReplacement(
+      //       context,
+      //       MaterialPageRoute(
+      //         builder: (context) => Login(), // login screen
+      //       ),
+      //     );
+      //   },
+      // );
     } else {
       BookAPI().getBooks().then((List<Book> books) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Home(
-              books: books,
-            ), //home screen
+            // builder: (context) => Home(
+            //   books: books,
+            // ), //home screen
           ),
         );
       });

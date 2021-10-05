@@ -6,7 +6,6 @@ import 'package:book_store_app/utils/token.dart';
 import 'package:book_store_app/views/pages/Add_Book/add_book.dart';
 import 'package:book_store_app/views/pages/Cart/cart.dart';
 import 'package:book_store_app/views/pages/Confirm_Seller_List/cofirm_seller_list.dart';
-import 'package:book_store_app/views/pages/Login/login.dart';
 import 'package:book_store_app/views/pages/My_Books/my_books.dart';
 import 'package:book_store_app/views/pages/Seller_Requests_List/seller_requests.dart';
 import 'package:flutter/material.dart';
@@ -154,7 +153,7 @@ class HomeScreenDrawer extends StatelessWidget {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => LoginScreen(),
+                    // builder: (context) => Login(),
                   ),
                 );
               },

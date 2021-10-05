@@ -18,7 +18,7 @@ Widget YourBooksCard(
     Map<String, String> headers = {
       'Content-type': 'application/json',
       'x-access-token': '${prefs.getString('token')}',
-      'book_id': '${book[index].book_id}'
+      'book_id': '${book[index].bookID}'
     };
     // make Post request
     Response response = await get(url, headers: headers);
@@ -39,7 +39,7 @@ Widget YourBooksCard(
       "Content-type": "application/json",
       'x-access-token': '${prefs.getString('token')}'
     };
-    String json = '{"book_id": "${book[index].book_id}" }';
+    String json = '{"book_id": "${book[index].bookID}" }';
     Response response = await delete(url, headers: headers, body: json);
     // check the status code for the result
     int statusCode = response.statusCode;
@@ -59,8 +59,8 @@ Widget YourBooksCard(
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text('Price :- \$ ${book[index].price}'),
-              Text('Quatity :- ${book[index].quantity}'),
+              // Text('Price :- \$ ${book[index].priceOfSupplier}'),
+              // Text('Quatity :- ${book[index].quantity}'),
             ],
           ),
           trailing: Row(
@@ -70,14 +70,14 @@ Widget YourBooksCard(
                 child: const Text('Edit'),
                 onPressed: () {
                   _get_edit_book().then((List<Book> book) {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditBook(
-                          book: book,
-                        ),
-                      ),
-                    );
+                    // Navigator.pushReplacement(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => EditBook(
+                    //       book: book,
+                    //     ),
+                    //   ),
+                    // );
                   });
                 },
               ),

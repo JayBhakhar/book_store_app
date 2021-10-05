@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:book_store_app/consts/constants.dart';
-import 'package:book_store_app/views/pages/Login/login.dart';
 import 'package:book_store_app/views/widgets/Custom_TextFormField_Forcountry.dart';
 import 'package:book_store_app/views/widgets/Custom_TextFormField_forEmail.dart';
 import 'package:book_store_app/views/widgets/Custom_TextFormField_forInt_Withlen.dart';
@@ -86,7 +85,7 @@ class _RegistrationState extends State<Registration> {
                   controller: userName,
                   labelText: 'Name',
                 ),
-                CustomTextFormFieldForEmail(
+                customTextFormFieldForEmail(
                   controller: email,
                 ),
                 CustomTextFormFieldForStr(
@@ -154,7 +153,7 @@ class _RegistrationState extends State<Registration> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => LoginScreen(), // login screen
+                            // builder: (context) => Login(), // login screen
                           ),
                         );
                       }
