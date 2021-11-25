@@ -5,18 +5,18 @@ class Book {
   String bookName;
   String publisher;
   String originalLanguage;
-  int year;
-  int numberOfPages;
+  num year;
+  num numberOfPages;
   String size;
-  double weight;
+  num weight;
   String coverType;
   String annotation;
   String coverFileUrl;
-  double priceOfSupplier;
-  int ownBookID;
-  int supplierBookID;
+  num priceOfSupplier;
+  num ownBookID;
+  num supplierBookID;
   String supplier;
-  int supplierDeliveryTime;
+  num supplierDeliveryTime;
   String wayAccess0;
   String wayAccess1;
   String wayAccess2;
@@ -67,18 +67,18 @@ class Book {
       bookName: json['Название'] as String,
       publisher: json['Издательство'] as String,
       originalLanguage: json['язык_оригинала'] as String,
-      year: json['Год'] as int,
-      numberOfPages: json['Кол-во_стр.'] as int,
+      year: json['Год'] as num,
+      numberOfPages: json['Кол-во_стр.'] as num,
       size: json['Размер'] as String,
-      weight: json['Вес'] as double,
+      weight: json['Вес'] as num,
       coverType: json['Тип_обл.'] as String,
       annotation: json['Аннотация'] as String,
       coverFileUrl: json['файл_обложки'] as String,
-      priceOfSupplier: json['Цена_поставщика'] as double,
-      ownBookID: json['id_книги_наш'] as int,
-      supplierBookID: json['id_книги_поставщика'] as int,
+      priceOfSupplier: json['Цена_поставщика'] as num,
+      ownBookID: json['id_книги_наш'] as num,
+      supplierBookID: json['id_книги_поставщика'] as num,
       supplier: json['поставщик'] as String,
-      supplierDeliveryTime: json['срок_отправки_поставщика'] as int,
+      supplierDeliveryTime: json['срок_отправки_поставщика'] as num,
       wayAccess0: json['способ_дост_0'] as String,
       wayAccess1: json['способ_дост_1'] as String,
       wayAccess2: json['способ_дост_2'] as String,
