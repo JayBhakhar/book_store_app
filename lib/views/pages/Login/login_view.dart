@@ -1,10 +1,9 @@
 import 'package:book_store_app/views/pages/Login/login_controller.dart';
-import 'package:book_store_app/views/widgets/Custom_TextFormField_forEmail.dart';
-import 'package:book_store_app/views/widgets/Custom_TextFormField_forStr.dart';
+import 'package:book_store_app/views/widgets/custom_textFormField_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginPage extends GetView<LoginController> {
+class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,13 +30,13 @@ class LoginPage extends GetView<LoginController> {
               customTextFormFieldForEmail(
                 controller: controller.emailController,
               ),
-              CustomTextFormFieldForStr(
+              customTextFormFieldForPassword(
                 controller: controller.passwordController,
                 labelText: 'Password',
               ),
               TextButton(
                 onPressed: () {
-                  Get.toNamed('/forgetPassword');                  
+                  Get.toNamed('/forgetPassword');
                 },
                 child: Text('Forgot Password'),
               ),
@@ -64,7 +63,7 @@ class LoginPage extends GetView<LoginController> {
                         ),
                       ),
                       onPressed: () {
-                        Get.toNamed('/registration');                        
+                        Get.toNamed('/registration');
                       },
                     )
                   ],

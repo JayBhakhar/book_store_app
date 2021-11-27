@@ -80,11 +80,11 @@ class _CustomTextFormFieldForCountryState
                   itemBuilder: (context, index) => InkWell(
                     onTap: () {
                       setState(() {
-                        Registration.of(context).countryCode =
-                            _foundCountry[index]["code"].toInt();
-                        country.text =
-                            _foundCountry[index]["shortName"].toString();
-                        _foundCountry = [];
+                        // Registration.of(context).countryCode =
+                        //     _foundCountry[index]["code"].toInt();
+                        // country.text =
+                        //     _foundCountry[index]["shortName"].toString();
+                        // _foundCountry = [];
                       });
                     },
                     child: ListTile(

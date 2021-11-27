@@ -11,6 +11,8 @@ import 'package:book_store_app/views/pages/Home_Screen/home_view.dart';
 import 'package:book_store_app/views/pages/Login/login_binding.dart';
 import 'package:book_store_app/views/pages/Login/login_view.dart';
 import 'package:book_store_app/views/pages/Registration/registration.dart';
+import 'package:book_store_app/views/pages/Registration/registration_binding.dart';
+import 'package:book_store_app/views/pages/Registration/registration_view.dart';
 import 'package:book_store_app/views/pages/Seller_Requests_List/seller_requests.dart';
 import 'package:book_store_app/views/pages/Splash_Screen/splash_screen.dart';
 import 'package:book_store_app/views/pages/Suggestion_Books/suggestion_books_binding.dart';
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       getPages: [
-        GetPage(name: "/addBook", page: () => AddBook()),
+        // GetPage(name: "/addBook", page: () => AddBook()),
         GetPage(name: "/bookDetails", page: () => BookDetails()),
         GetPage(name: "/cart", page: () => Cart()),
         GetPage(name: "/confirmSellerList", page: () => ConfirmSellerList()),
@@ -46,14 +48,14 @@ class MyApp extends StatelessWidget {
             page: () => SuggestionBooksView(),
             binding: SuggestionBooksBinding()),
         GetPage(
-            name: "/login", page: () => LoginPage(), binding: LoginBinding()),
-        GetPage(name: "/registration", page: () => Registration()),
+            name: "/login", page: () => LoginView(), binding: LoginBinding()),
+        GetPage(name: "/registration", page: () => RegistrationView(), binding: RegistrationBinding()),
         GetPage(name: "/sellerRequests", page: () => SellerRequests()),
         GetPage(name: "/splashscreen", page: () => SplashScreen()),
         GetPage(name: "/test", page: () => TestView(), binding: TestBinding()),
       ],
       // initialRoute: "/splashscreen",
-      initialRoute: "/login", // for test
+      initialRoute: "/registration", // for test
     );
   }
 }
