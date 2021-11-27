@@ -17,8 +17,10 @@ import 'package:book_store_app/views/pages/Suggestion_Books/suggestion_books_bin
 import 'package:book_store_app/views/pages/Suggestion_Books/suggestion_books_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
   runApp(MyApp());
 }
 
@@ -39,7 +41,10 @@ class MyApp extends StatelessWidget {
         GetPage(name: "/forgetPassword", page: () => ForgetPassword()),
         // GetPage(name: "/myBooks", page: ()=> MyBooks()),
         GetPage(name: "/home", page: () => HomeView(), binding: HomeBinding()),
-        GetPage(name: "/suggestionbooks", page: () => SuggestionBooksView(), binding: SuggestionBooksBinding()),
+        GetPage(
+            name: "/suggestionbooks",
+            page: () => SuggestionBooksView(),
+            binding: SuggestionBooksBinding()),
         GetPage(
             name: "/login", page: () => LoginPage(), binding: LoginBinding()),
         GetPage(name: "/registration", page: () => Registration()),
@@ -48,7 +53,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: "/test", page: () => TestView(), binding: TestBinding()),
       ],
       // initialRoute: "/splashscreen",
-      initialRoute: "/home", // for test
+      initialRoute: "/login", // for test
     );
   }
 }

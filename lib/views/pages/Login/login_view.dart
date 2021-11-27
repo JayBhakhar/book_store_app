@@ -37,13 +37,7 @@ class LoginPage extends GetView<LoginController> {
               ),
               TextButton(
                 onPressed: () {
-                  Get.toNamed('/forgetPassword');
-                  // Navigator.pushReplacement(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => ForgetPassword(),
-                  //   ),
-                  // );
+                  Get.toNamed('/forgetPassword');                  
                 },
                 child: Text('Forgot Password'),
               ),
@@ -70,14 +64,7 @@ class LoginPage extends GetView<LoginController> {
                         ),
                       ),
                       onPressed: () {
-                        Get.toNamed('/registration');
-                        // Navigator.pushReplacement(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) =>
-                        //         Registration(), //Registration screen
-                        //   ),
-                        // );
+                        Get.toNamed('/registration');                        
                       },
                     )
                   ],
