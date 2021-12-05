@@ -3,7 +3,7 @@ import 'package:book_store_app/models/Book.dart';
 import 'package:get/get.dart';
 
 class BookProvider extends GetConnect {
-  Future<List<Book>> getBook() async {
+  Future<List<Book>> getBooks() async {
     final response =
         await get('$apiBaseURL/books'); // url for books inital 10 books
     // if (response.status.hasError) {

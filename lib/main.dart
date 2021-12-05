@@ -10,6 +10,8 @@ import 'package:book_store_app/views/pages/Home_Screen/home_binding.dart';
 import 'package:book_store_app/views/pages/Home_Screen/home_view.dart';
 import 'package:book_store_app/views/pages/Login/login_binding.dart';
 import 'package:book_store_app/views/pages/Login/login_view.dart';
+import 'package:book_store_app/views/pages/Profile/profile_binding.dart';
+import 'package:book_store_app/views/pages/Profile/profile_view.dart';
 import 'package:book_store_app/views/pages/Registration/registration.dart';
 import 'package:book_store_app/views/pages/Registration/registration_binding.dart';
 import 'package:book_store_app/views/pages/Registration/registration_view.dart';
@@ -52,12 +54,13 @@ class MyApp extends StatelessWidget {
         GetPage(
             name: "/login", page: () => LoginView(), binding: LoginBinding()),
         GetPage(name: "/registration", page: () => RegistrationView(), binding: RegistrationBinding()),
+        GetPage(name: "/profile", page: () => ProfileView(), binding: ProfileBinding()),
         GetPage(name: "/sellerRequests", page: () => SellerRequests()),
         GetPage(name: "/splashscreen", page: () => SplashView(), binding: SplashBinding()),
         GetPage(name: "/test", page: () => TestView(), binding: TestBinding()),
       ],
       // initialRoute: "/splashscreen",
-      initialRoute: "/splashscreen", // for test
+      initialRoute: "/profile", // for test
     );
   }
 }

@@ -6,7 +6,7 @@ class TestController extends GetxController with StateMixin<List<Book>> {
   @override
   void onInit() {
     super.onInit();
-    BookProvider().getBook().then((resp) {
+    BookProvider().getBooks().then((resp) {
       change(
         resp,
         status: RxStatus.success(),
