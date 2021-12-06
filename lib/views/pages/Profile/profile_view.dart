@@ -77,7 +77,7 @@ class ProfileView extends GetView<ProfileController> {
                       bool _isValid =
                           controller.profileFormKey.currentState.validate();
                       if (_isValid) {
-                        controller.editprofileRequest();
+                        controller.getUserRequst();
                       }
                     },
                     child: Text("Save"),

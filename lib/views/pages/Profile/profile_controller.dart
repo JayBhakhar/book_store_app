@@ -24,17 +24,12 @@ class ProfileController extends GetxController {
     phoneNumberController.dispose();
   }
 
-  void editprofileRequest() async {
+  void getUserRequst() async {
     var https = http.Client();
     final url = Uri.parse('$apiBaseURL/registration');
-    Map<String, String> headers = {"Content-type": "application/json"};
-    String json = '{"email":"${emailController.text}",'
-        '"user_name":"${userController.text}",'
-        '"password":"${passwordController.text}",'
-        '"address":"${addressController.text}",'
-        '"phone_number":"${phoneNumberController.text}"}';
-    // make POST request
-    var response = await https.post(url, headers: headers, body: json);
+    Map<String, String> headers = {"Content-type": "application/json"};    
+    // make Get request
+    var response = await https.get(url, headers: headers);
     int statusCode = response.statusCode;
     print(json);
     // this API passes back the id of the new item added to the body

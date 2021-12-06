@@ -18,7 +18,8 @@ Widget ConfirmSellerListCard(
       "Content-type": "application/json",
       'x-access-token': '${prefs.getString('token')}'
     };
-    String json = '{"_id": "${sellers_list[index].user_id}" }';
+    // String json = '{"_id": "${sellers_list[index].user_id}" }';
+    String json = '{"_id": "${sellers_list[index]}" }';
     print(json);
     Response response = await put(url, headers: headers, body: json);
     // check the status code for the result
@@ -34,10 +35,13 @@ Widget ConfirmSellerListCard(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         ListTile(
-          title: Text('${sellers_list[index].userName}'),
+          // title: Text('${sellers_list[index].userName}'),
+          title: Text('${sellers_list[index]}'),
           subtitle: Text(
-              '${sellers_list[index].email} (${sellers_list[index].phone_number})\n'
-              '${sellers_list[index].address}, ${sellers_list[index].city}, ${sellers_list[index].country}'),
+              // '${sellers_list[index].email} (${sellers_list[index].phone_number})\n'
+              '${sellers_list[index].email} (${sellers_list[index]})\n'
+              // '${sellers_list[index].address}, ${sellers_list[index].city}, ${sellers_list[index].country}'),
+              '${sellers_list[index].address}, ${sellers_list[index]}, ${sellers_list[index]}'),
           isThreeLine: true,
         ),
         Row(

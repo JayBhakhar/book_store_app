@@ -18,7 +18,8 @@ Widget SellerRequestsListCard(
       "Content-type": "application/json",
       'x-access-token': '${prefs.getString('token')}'
     };
-    String json = '{"user_id": "${sellers_list[index].user_id}" }';
+    // String json = '{"user_id": "${sellers_list[index].user_id}" }';
+    String json = '{"user_id": "${sellers_list[index]}" }';
     Response response = await put(url, headers: headers, body: json);
     // check the status code for the result
     int statusCode = response.statusCode;
@@ -34,7 +35,8 @@ Widget SellerRequestsListCard(
       "Content-type": "application/json",
       'x-access-token': '${prefs.getString('token')}'
     };
-    String json = '{"user_id": "${sellers_list[index].user_id}" }';
+    String json = '{"user_id": "${sellers_list[index]}" }';
+    // String json = '{"user_id": "${sellers_list[index].user_id}" }';
     print(json);
     Response response = await put(url, headers: headers, body: json);
     // check the status code for the result
@@ -51,10 +53,12 @@ Widget SellerRequestsListCard(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         ListTile(
-          title: Text('${sellers_list[index].userName}'),
+          title: Text('${sellers_list[index]}'),
+          // title: Text('${sellers_list[index].userName}'),
           subtitle: Text(
-              '${sellers_list[index].email} (${sellers_list[index].phone_number})\n'
-              '${sellers_list[index].address}, ${sellers_list[index].city}, ${sellers_list[index].country}'),
+            ''),
+            //   '${sellers_list[index].email} (${sellers_list[index].phone_number})\n'
+            //   '${sellers_list[index].address}, ${sellers_list[index].city}, ${sellers_list[index].country}'),
           isThreeLine: true,
         ),
         Row(

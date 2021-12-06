@@ -28,11 +28,12 @@ class HomeScreenDrawer extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  Text('${user[0].userName}'),
-                  Text('${user[0].email}'),
-                  Text('${user[0].phone_number}'),
-                  Text('${user[0].address}'),
-                  Text('${user[0].admin}'),
+                  // Text('${user[0].userName}'),
+                  // Text('${user[0].email}'),
+                  // Text('${user[0].phone_number}'),
+                  // Text('${user[0].address}'),
+                  // Text('${user[0].admin}'),
+                  Text('${user[0]}'),
                 ],
               ),
             ),
@@ -57,7 +58,8 @@ class HomeScreenDrawer extends StatelessWidget {
               },
             ),
             Builder(builder: (context) {
-              if (user[0].admin)
+              // if (user[0].admin)
+              if (true)
                 return ExpansionTile(
                   leading: Icon(Icons.admin_panel_settings),
                   title: Text('I am admin'),
@@ -107,7 +109,8 @@ class HomeScreenDrawer extends StatelessWidget {
                 );
             }),
             Builder(builder: (context) {
-              if (user[0].confirm_seller) {
+              // if (user[0].confirm_seller) {
+              if (true) {
                 return ExpansionTile(
                   leading: Icon(Icons.add_shopping_cart),
                   title: Text('I am seller'),

@@ -1,54 +1,29 @@
 class User {
-  String user_id;
-  String userName;
+  String userID;
+  String name;
   String email;
-  String phone_number;
+  String phoneNo;
   String address;
-  String passsword;
-  int city;
-  int country;
-  int postindex;
-  bool admin;
-  bool seller;
-  bool confirm_seller;
+  String password;
 
-  User(this.user_id,
-      this.userName,
-      this.email,
-      this.phone_number,
-      this.address,
-      this.passsword,
-      this.city,
-      this.country,
-      this.postindex,
-      this.admin,
-      this.seller,
-      this.confirm_seller,);
+  User({
+    this.userID,
+    this.name,
+    this.email,
+    this.phoneNo,
+    this.address,
+    this.password,
+  });
 
   factory User.fromJson(dynamic json) {
     return User(
-      json['_id'] as String,
-      json['userName'] as String,
-      json['email'] as String,
-      json['phoneNumber'] as String,
-      json['address'] as String,
-      json['passsword'] as String,
-      json['city'] as int,
-      json['country'] as int,
-      json['postindex'] as int,
-      json['admin'] as bool,
-      json['seller'] as bool,
-      json['confirmSeller'] as bool,
-    );
+        userID: json['_id'] as String,
+        name: json['name'] as String,
+        email: json['email'] as String,
+        phoneNo: json['phone_number'] as String,
+        address: json['address'] as String,
+        password: json['password'] as String);
   }
-
-  @override
-  String toString() {
-    return '{ ${this.user_id}, ${this.userName}, ${this.email}, ${this
-        .phone_number},'
-        '${this.address}, ${this.passsword}, ${this.city}, ${this.country},'
-        '${this.postindex}, ${this.admin}, ${this.seller}, ${this
-        .confirm_seller},'
-        '}';
-  }
+  static List<User> listFromJson(list) =>
+      List<User>.from(list.map((x) => User.fromJson(x)));
 }
