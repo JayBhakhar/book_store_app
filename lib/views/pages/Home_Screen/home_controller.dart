@@ -9,7 +9,7 @@ class HomeController extends GetxController with StateMixin<List<Book>> {
   @override
   void onInit() {
     super.onInit();
-    BookProvider().getBooks().then((resp) {
+    BookProvider().getBooks().then((resp) {    
       change(
         resp,
         status: RxStatus.success(),

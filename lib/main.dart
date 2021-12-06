@@ -3,6 +3,8 @@ import 'package:book_store_app/Unit_Test/test_view.dart';
 import 'package:book_store_app/views/pages/Add_Book/add_book.dart';
 import 'package:book_store_app/views/pages/Book_Details/book_details.dart';
 import 'package:book_store_app/views/pages/Cart/cart.dart';
+import 'package:book_store_app/views/pages/Change_Password/change_password_binding.dart';
+import 'package:book_store_app/views/pages/Change_Password/change_password_view.dart';
 import 'package:book_store_app/views/pages/Confirm_Seller_List/cofirm_seller_list.dart';
 import 'package:book_store_app/views/pages/Edit_Book/edit_book.dart';
 import 'package:book_store_app/views/pages/Forget_Password/forget_password.dart';
@@ -57,6 +59,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: "/profile", page: () => ProfileView(), binding: ProfileBinding()),
         GetPage(name: "/sellerRequests", page: () => SellerRequests()),
         GetPage(name: "/splashscreen", page: () => SplashView(), binding: SplashBinding()),
+        GetPage(name: "/changepassword", page: () => ChangePasswordView(), binding: ChangePasswordBinding()),
         GetPage(name: "/test", page: () => TestView(), binding: TestBinding()),
       ],
       // initialRoute: "/splashscreen",

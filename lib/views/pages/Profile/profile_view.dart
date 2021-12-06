@@ -25,63 +25,34 @@ class ProfileView extends GetView<ProfileController> {
                 SizedBox(
                   height: 15,
                 ),
-                customTextFormFieldForStr(
-                  controller: controller.userController,
+                customTextFormFieldForStrWithValidator(
+                  controller: controller.nameController,
                   labelText: 'Name',
                 ),
-                customTextFormFieldForEmail(
-                  controller: controller.emailController,
-                ),
-                customTextFormFieldForPassword(
-                  controller: controller.passwordController,
-                  labelText: 'Password',
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(bottom: 15, left: 10, right: 10),
-                  child: TextFormField(
-                    controller: controller.confirmpasswordController,
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        borderSide: BorderSide(color: Colors.blue, width: 1.5),
-                      ),
-                      labelText: 'Confirm Password',
-                    ),
-                    validator: (String value) {
-                      if (value.isEmpty) {
-                        return 'Please re-enter password';
-                      }
-                      if (controller.passwordController.text !=
-                          controller.confirmpasswordController.text) {
-                        return "Password does not match";
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                customTextFormFieldForInt(
+                customTextFormFieldForIntWithlen(
                   controller: controller.phoneNumberController,
                   labelText: 'Phone No',
+                  length: 10,
                 ),
-                customTextFormFieldForStr(
+                customTextFormFieldForStrWithValidator(
                   controller: controller.addressController,
                   labelText: 'Address',
                 ),
-                SizedBox(
-                  width: 200,
-                  height: 50,
-                  child: TextButton(
-                    onPressed: () {
-                      bool _isValid =
-                          controller.profileFormKey.currentState.validate();
-                      if (_isValid) {
-                        controller.getUserRequst();
-                      }
-                    },
-                    child: Text("Save"),
-                  ),
+                TextButton(
+                  onPressed: () {
+                    Get.toNamed('/changepassword');
+                  },
+                  child: Text('change password'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    bool _isValid =
+                        controller.profileFormKey.currentState.validate();
+                    if (_isValid) {
+                      // controller.userPutRequst();                      
+                    }
+                  },
+                  child: Text("Save My Profile Details"),
                 ),
               ],
             ),

@@ -9,10 +9,10 @@ class SplashController extends GetxController {
     super.onInit();
   }
 
-  void _makepath(){
-    if(box.read('token') == null){ // Todo: untested 
+  void _makepath() {
+    if (box.read('token') == null) {
       Get.toNamed('/login');
-    } else{
+    } else {
       Get.toNamed('/home');
     }
   }
