@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:book_store_app/consts/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,8 +28,10 @@ class ChangePasswordController extends GetxController {
       "Content-type": "application/json",
       'Authorization': 'Bearer $token'
     };
-    String json = '{"current_password":"${currentpasswordController.text}",'
-        '"new_password":"${newpasswordController.text}"}';
+    String json = '{'
+        '"current_password":"${currentpasswordController.text}",'
+        '"new_password":"${newpasswordController.text}"'
+        '}';
     // make Put request
     var response = await https.put(url, headers: headers, body: json);
     int statusCode = response.statusCode;
@@ -44,7 +45,7 @@ class ChangePasswordController extends GetxController {
       String message = jsonDecode(body)['message'];
       Get.defaultDialog(
         title: "Password",
-        middleText: "current password is incorrect",
+        middleText: message,
         textConfirm: "Forget Password",
         textCancel: "Try Again",
         buttonColor: Colors.blue,
