@@ -21,7 +21,7 @@ class ProfileController extends GetxController with StateMixin<List<User>> {
         status: RxStatus.success(),
       );
       List<User> user = resp;
-      usernameController.text = user[0].name;
+      usernameController.text = user[0].userName;
       addressController.text = user[0].address;
       phoneNumberController.text = user[0].phoneNo;
     }, onError: (err) {

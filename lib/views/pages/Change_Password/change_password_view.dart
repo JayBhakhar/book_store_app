@@ -57,7 +57,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                           .changepasswordFormKey.currentState
                           .validate();
                       if (_isValid) {
-                        // controller.changepasswordRequst();
+                        controller.changepasswordRequst();
                       }
                     },
                     child: Text("Change Password"),
