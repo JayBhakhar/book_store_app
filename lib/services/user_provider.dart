@@ -20,7 +20,7 @@ class UserProvider extends GetConnect {
       List<User> _user = User.listFromJson([
         {
           "_id": "8662c7f3-878d-41bd-ad8f-bd50e9801bce",
-          "name": "jay bhakhar",
+          "user_name": "jay bhakhar",
           "email": "jay@jay1.com",
           // "password": "$2b$12$e9QJgmzBI3YtRhiWJ0uVmONNMnywiSrJZW7vAD1tvN/n9mwJ5/wMW",
           "password": "",

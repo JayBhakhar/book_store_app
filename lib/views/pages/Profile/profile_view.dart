@@ -14,19 +14,20 @@ class ProfileView extends GetView<ProfileController> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircleAvatar(
-                  radius: 60,
-                  child: Icon(
-                    Icons.account_circle_sharp,
-                    size: 120,
-                    color: Colors.white,
+                controller.obx(
+                  (user) => Text(
+                    "Your email : ${user[0].email}",
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 SizedBox(
                   height: 15,
                 ),
                 customTextFormFieldForStrWithValidator(
-                  controller: controller.nameController,
+                  controller: controller.usernameController,
                   labelText: 'Name',
                 ),
                 customTextFormFieldForIntWithlen(
@@ -49,7 +50,7 @@ class ProfileView extends GetView<ProfileController> {
                     bool _isValid =
                         controller.profileFormKey.currentState.validate();
                     if (_isValid) {
-                      // controller.userPutRequst();                      
+                      controller.userPutRequst();
                     }
                   },
                   child: Text("Save My Profile Details"),

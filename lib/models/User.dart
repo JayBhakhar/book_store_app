@@ -18,7 +18,7 @@ class User {
   factory User.fromJson(dynamic json) {
     return User(
         userID: json['_id'] as String,
-        name: json['name'] as String,
+        name: json['user_name'] as String,
         email: json['email'] as String,
         phoneNo: json['phone_number'] as String,
         address: json['address'] as String,
