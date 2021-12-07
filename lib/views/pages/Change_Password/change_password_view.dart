@@ -44,6 +44,10 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                           controller.confirmpasswordController.text) {
                         return "Password does not match";
                       }
+                      if (controller.newpasswordController.text ==
+                          controller.currentpasswordController.text) {
+                        return "current password and new password are same";
+                      }
                       return null;
                     },
                   ),
