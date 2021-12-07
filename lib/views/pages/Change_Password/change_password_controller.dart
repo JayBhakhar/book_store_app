@@ -42,7 +42,16 @@ class ChangePasswordController extends GetxController {
       Get.back();
     } else if (statusCode == 401) {
       String message = jsonDecode(body)['message'];
-      Get.snackbar('wrong password', message);
+      Get.defaultDialog(
+        title: "Password",
+        middleText: "current password is incorrect",
+        textConfirm: "Forget Password",
+        textCancel: "Try Again",
+        buttonColor: Colors.blue,
+        radius: 5,
+        confirmTextColor: Colors.white,
+        onConfirm: () => Get.toNamed('/forgetpassword'),
+      );
     } else {
       Get.snackbar('error', 'Something gone wrong');
     }
