@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RegistrationController extends GetxController {
-  final registracionFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> registrationFormKey = GlobalKey<FormState>();
   final userController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -43,7 +43,8 @@ class RegistrationController extends GetxController {
     if (statusCode == 200) {
       String message = jsonDecode(body)['message'];
       Get.snackbar('success msg', message);
-      Get.toNamed('/login');
+      // Get.toNamed('/login');
+      Get.toNamed('/');
     } else {
       Get.snackbar('error', 'Something gone wrong');
     }

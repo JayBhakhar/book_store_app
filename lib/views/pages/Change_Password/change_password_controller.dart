@@ -6,7 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class ChangePasswordController extends GetxController {
-  final changepasswordFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> changepasswordFormKey = GlobalKey<FormState>();
   final currentpasswordController = TextEditingController();
   final newpasswordController = TextEditingController();
   final confirmpasswordController = TextEditingController();

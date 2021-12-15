@@ -10,6 +10,13 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: SafeArea(
+            child: TextButton(
+          child: Text('Profile'),
+          onPressed: () => Get.toNamed('/profile'),
+        )),
+      ),
       appBar: AppBar(
         title: Text("Seach Book"),
         centerTitle: true,

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController with StateMixin<List<User>> {
-  final profileFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> profileFormKey = GlobalKey<FormState>();
   final usernameController = TextEditingController();
   final addressController = TextEditingController();
   final phoneNumberController = TextEditingController();

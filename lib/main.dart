@@ -35,13 +35,21 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    GetStorage box = GetStorage();
+    print(box.hasData('token'));
     return GetMaterialApp(
       title: 'Book Store',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       getPages: [
-        // GetPage(name: "/addBook", page: () => AddBook()),
+        GetPage(
+          name: "/",
+          page: () {
+            return box.hasData('token') ? HomeView() : LoginView();
+          },
+          bindings: [HomeBinding(), LoginBinding()],
+        ),
         GetPage(name: "/bookDetails", page: () => BookDetails()),
         GetPage(name: "/cart", page: () => Cart()),
         GetPage(name: "/confirmSellerList", page: () => ConfirmSellerList()),
@@ -55,15 +63,26 @@ class MyApp extends StatelessWidget {
             binding: SuggestionBooksBinding()),
         GetPage(
             name: "/login", page: () => LoginView(), binding: LoginBinding()),
-        GetPage(name: "/registration", page: () => RegistrationView(), binding: RegistrationBinding()),
-        GetPage(name: "/profile", page: () => ProfileView(), binding: ProfileBinding()),
+        GetPage(
+            name: "/registration",
+            page: () => RegistrationView(),
+            binding: RegistrationBinding()),
+        GetPage(
+            name: "/profile",
+            page: () => ProfileView(),
+            binding: ProfileBinding()),
         GetPage(name: "/sellerRequests", page: () => SellerRequests()),
-        GetPage(name: "/splashscreen", page: () => SplashView(), binding: SplashBinding()),
-        GetPage(name: "/changepassword", page: () => ChangePasswordView(), binding: ChangePasswordBinding()),
+        GetPage(
+            name: "/splashscreen",
+            page: () => SplashView(),
+            binding: SplashBinding()),
+        GetPage(
+            name: "/changepassword",
+            page: () => ChangePasswordView(),
+            binding: ChangePasswordBinding()),
         GetPage(name: "/test", page: () => TestView(), binding: TestBinding()),
       ],
-      // initialRoute: "/splashscreen",
-      initialRoute: "/profile", // for test
+      initialRoute: '/',
     );
   }
 }

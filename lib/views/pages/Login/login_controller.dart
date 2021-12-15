@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class LoginController extends GetxController {
-  final loginFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final box = GetStorage();
@@ -31,14 +31,14 @@ class LoginController extends GetxController {
     if (statusCode == 200) {
       String token = jsonDecode(body)['token'];
       box.write('token', token);
-      // get value 
-      // box.read('token') 
-      Get.toNamed('/home');
+      print(token);
+      // get value
+      // box.read('token')
+      Get.toNamed('/');
     } else if (statusCode == 401) {
       String message = jsonDecode(body)['message'];
       Get.snackbar('login fail', message);
-    }
-    else{      
+    } else {
       Get.snackbar('error', 'Something gone wrong');
     }
   }

@@ -10,7 +10,7 @@ class RegistrationView extends GetView<RegistrationController> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Form(
-            key: controller.registracionFormKey,
+            key: controller.registrationFormKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -75,7 +75,7 @@ class RegistrationView extends GetView<RegistrationController> {
                   child: TextButton(
                     onPressed: () {
                       bool _isValid = controller
-                          .registracionFormKey.currentState
+                          .registrationFormKey.currentState
                           .validate();
                       if (_isValid) {
                         controller.registraionRequest();  
