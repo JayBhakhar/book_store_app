@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RegistrationController extends GetxController {
-  GlobalKey<FormState> registrationFormKey = GlobalKey<FormState>();
   final userController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();

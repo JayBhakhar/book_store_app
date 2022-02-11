@@ -12,9 +12,13 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       drawer: Drawer(
         child: SafeArea(
-            child: TextButton(
-          child: Text('Profile'),
-          onPressed: () => Get.toNamed('/profile'),
+            child: Column(
+          children: [
+            TextButton(
+              child: Text('Profile'),
+              onPressed: () => Get.toNamed('/profile'),
+            ),
+          ],
         )),
       ),
       appBar: AppBar(
@@ -26,7 +30,7 @@ class HomeView extends GetView<HomeController> {
             onPressed: () async {
               showSearch(context: context, delegate: BookSearch());
               // final results = await
-              //     showSearch(context: context, delegate: CitySearch());
+              //     showSearch(context: context, delegate: Search());
 
               // print('Result: $results');
             },

@@ -36,7 +36,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     GetStorage box = GetStorage();
-    print(box.hasData('token'));
     return GetMaterialApp(
       title: 'Book Store',
       theme: ThemeData(
@@ -50,6 +49,7 @@ class MyApp extends StatelessWidget {
           },
           bindings: [HomeBinding(), LoginBinding()],
         ),
+        GetPage(name: "/home", page: () => HomeView()),
         GetPage(name: "/bookDetails", page: () => BookDetails()),
         GetPage(name: "/cart", page: () => Cart()),
         GetPage(name: "/confirmSellerList", page: () => ConfirmSellerList()),

@@ -25,5 +25,5 @@ class User {
         password: json['password'] as String);
   }
   static List<User> listFromJson(list) =>
-      List<User>.from(list.map((x) => User.fromJson(x)));
+    List<User>.from(list.map((x) => User.fromJson(x)));
 }

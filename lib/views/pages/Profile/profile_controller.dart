@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController with StateMixin<List<User>> {
-  GlobalKey<FormState> profileFormKey = GlobalKey<FormState>();
   final usernameController = TextEditingController();
   final addressController = TextEditingController();
   final phoneNumberController = TextEditingController();
@@ -64,7 +63,7 @@ class ProfileController extends GetxController with StateMixin<List<User>> {
     if (statusCode == 200) {
       String message = jsonDecode(body)['message'];
       Get.snackbar('success msg', message);
-      Get.back();
+      Get.toNamed('/');
     } else {
       Get.snackbar('error', 'Something gone wrong');
     }

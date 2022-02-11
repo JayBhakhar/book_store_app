@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RegistrationView extends GetView<RegistrationController> {
+  final GlobalKey<FormState> registrationFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Form(
-            key: controller.registrationFormKey,
+            key: registrationFormKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -74,11 +75,10 @@ class RegistrationView extends GetView<RegistrationController> {
                   height: 50,
                   child: TextButton(
                     onPressed: () {
-                      bool _isValid = controller
-                          .registrationFormKey.currentState
-                          .validate();
+                      bool _isValid =
+                          registrationFormKey.currentState.validate();
                       if (_isValid) {
-                        controller.registraionRequest();  
+                        controller.registraionRequest();
                       }
                     },
                     child: Text("Registration"),

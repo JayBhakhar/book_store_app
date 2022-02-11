@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginView extends GetView<LoginController> {
+  final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(bottom: 1, left: 1, right: 1),
         child: Form(
-          key: controller.loginFormKey,
+          key: loginFormKey,
           child: ListView(
             children: [
               SizedBox(
@@ -46,7 +48,10 @@ class LoginView extends GetView<LoginController> {
                 child: ElevatedButton(
                     child: Text('Login'),
                     onPressed: () {
-                      controller.loginRequest();
+                      bool _isValid = loginFormKey.currentState.validate();
+                      if (_isValid) {
+                        controller.loginRequest();
+                      }
                       // login function
                     }),
               ),
