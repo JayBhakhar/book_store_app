@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Widget ConfirmSellerListCard(
+Widget confirmSellerListCard(
   BuildContext context,
-  final List<User> sellers_list,
+  final List<User> sellersList,
   final int index,
 ) {
   SharedPreferences prefs;
@@ -19,7 +19,7 @@ Widget ConfirmSellerListCard(
       'x-access-token': '${prefs.getString('token')}'
     };
     // String json = '{"_id": "${sellers_list[index].user_id}" }';
-    String json = '{"_id": "${sellers_list[index]}" }';
+    String json = '{"_id": "${sellersList[index]}" }';
     print(json);
     Response response = await put(url, headers: headers, body: json);
     // check the status code for the result
@@ -36,12 +36,12 @@ Widget ConfirmSellerListCard(
       children: <Widget>[
         ListTile(
           // title: Text('${sellers_list[index].userName}'),
-          title: Text('${sellers_list[index]}'),
+          title: Text('${sellersList[index]}'),
           subtitle: Text(
               // '${sellers_list[index].email} (${sellers_list[index].phone_number})\n'
-              '${sellers_list[index].email} (${sellers_list[index]})\n'
+              '${sellersList[index].email} (${sellersList[index]})\n'
               // '${sellers_list[index].address}, ${sellers_list[index].city}, ${sellers_list[index].country}'),
-              '${sellers_list[index].address}, ${sellers_list[index]}, ${sellers_list[index]}'),
+              '${sellersList[index].address}, ${sellersList[index]}, ${sellersList[index]}'),
           isThreeLine: true,
         ),
         Row(

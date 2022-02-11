@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/models/Book.dart';
 import 'package:book_store_app/utils/ProgressIndicatorLoader.dart';
@@ -11,7 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart';
 
 class BookDetails extends StatefulWidget {
-  List<Book> book;
+  final List<Book> book;
   BookDetails({this.book});
 
   @override
@@ -22,7 +21,7 @@ class _BookDetailsState extends State<BookDetails> {
   SharedPreferences prefs;
   bool isLoading = false;
 
-  _add_item_to_cart() async {
+  _addItemToCart() async {
     // set up POST request arguments
     final url = Uri.parse('$apiBaseURL/cart');
     prefs = await SharedPreferences.getInstance();
@@ -40,9 +39,9 @@ class _BookDetailsState extends State<BookDetails> {
     // check the status code for the result
     int statusCode = response.statusCode;
     // this API passes back the id of the new item added to the body
-    String body = response.body;
+    // String body = response.body;
     if (statusCode == 200) {
-      Map<String, dynamic> responseMessage = jsonDecode(body);
+      // Map<String, dynamic> responseMessage = jsonDecode(body);
       // var message = responseMessage['message'];
       // backend message needed
     }
@@ -125,7 +124,7 @@ class _BookDetailsState extends State<BookDetails> {
                         child: Text('add to cart'),
                       ),
                       onPressed: () {
-                        _add_item_to_cart();
+                        _addItemToCart();
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text('Book added'),

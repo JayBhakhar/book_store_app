@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-Widget CustomTextFormFieldForInt({
+Widget customTextFormFieldForInt({
   final TextEditingController controller,
   final String labelText,
 }) {

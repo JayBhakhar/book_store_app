@@ -91,7 +91,7 @@ class _CartState extends State<Cart> {
                   ListTile(
                     title: Text('Items :- ${items.length}'),
                   ),
-                  CartCard(
+                  cartCard(
                     context,
                     items,
                     book

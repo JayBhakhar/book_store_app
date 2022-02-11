@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget CustomTextFormFieldForStr({
+Widget customTextFormFieldForStr({
   final TextEditingController controller,
   final String labelText,
 }) {

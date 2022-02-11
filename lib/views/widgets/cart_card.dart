@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart';
 
-Widget CartCard(
+Widget cartCard(
   BuildContext context,
   final List items,
   final List<Book> book,
 ) {
   SharedPreferences prefs;
-  _remove_item(int index) async {
+  _removeItem(int index) async {
     prefs = await SharedPreferences.getInstance();
     final url = Uri.parse('$apiBaseURL/cart');
     Map<String, String> headers = {
@@ -22,7 +22,7 @@ Widget CartCard(
     String json = '{"_id": "${items[index]['item_id']}" }';
     Response response = await delete(url, headers: headers, body: json);
     // check the status code for the result
-    int statusCode = response.statusCode;
+    // int statusCode = response.statusCode;
     // this API passes back the id of the new item added to the body
     String body = response.body;
     Map<String, dynamic> message = jsonDecode(body);
@@ -60,7 +60,7 @@ Widget CartCard(
                   TextButton(
                     child: const Text('REMOVE'),
                     onPressed: () {
-                      _remove_item(index);
+                      _removeItem(index);
                     },
                   ),
                   const SizedBox(width: 8),

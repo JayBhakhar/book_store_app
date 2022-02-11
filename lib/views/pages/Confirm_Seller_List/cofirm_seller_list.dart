@@ -23,7 +23,7 @@ class ConfirmSellerList extends StatelessWidget {
             mainAxisSpacing: 1.0,
           ),
           itemBuilder: (BuildContext context, index) {
-            return ConfirmSellerListCard(
+            return confirmSellerListCard(
               context,
               confirmSellers,
               index,

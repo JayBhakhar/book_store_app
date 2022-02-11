@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-Widget CustomTextFormFieldForIntWithlen({
+Widget customTextFormFieldForIntWithlen({
   final TextEditingController controller,
   final String labelText,
   final int length,
