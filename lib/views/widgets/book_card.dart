@@ -32,7 +32,7 @@ Widget bookCard(List<Book> _book, int index) {
       ),
     ),
     onTap: () {
-      Get.toNamed('/suggestionbooks');
+      Get.toNamed('/bookdetails', arguments: _book[index].bookID);
     },
   );
 }

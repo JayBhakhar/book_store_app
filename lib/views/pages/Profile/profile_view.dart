@@ -17,15 +17,15 @@ class ProfileView extends GetView<ProfileController> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                controller.obx(
-                  (user) => Text(
+                controller.obx((user) {
+                  return Text(
                     "Your email : ${user[0].email}",
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                     ),
-                  ),
-                ),
+                  );
+                }),
                 SizedBox(
                   height: 15,
                 ),

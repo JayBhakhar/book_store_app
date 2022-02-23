@@ -1,6 +1,7 @@
 import 'package:book_store_app/Unit_Test/test_binding.dart';
 import 'package:book_store_app/Unit_Test/test_view.dart';
-import 'package:book_store_app/views/pages/Book_Details/book_details.dart';
+import 'package:book_store_app/views/pages/Book_Details/book_details_binding.dart';
+import 'package:book_store_app/views/pages/Book_Details/book_details_view.dart';
 import 'package:book_store_app/views/pages/Cart/cart.dart';
 import 'package:book_store_app/views/pages/Change_Password/change_password_binding.dart';
 import 'package:book_store_app/views/pages/Change_Password/change_password_view.dart';
@@ -16,8 +17,6 @@ import 'package:book_store_app/views/pages/Registration/registration_binding.dar
 import 'package:book_store_app/views/pages/Registration/registration_view.dart';
 import 'package:book_store_app/views/pages/Splash_Screen/splash_binding.dart';
 import 'package:book_store_app/views/pages/Splash_Screen/splash_view.dart';
-import 'package:book_store_app/views/pages/Suggestion_Books/suggestion_books_binding.dart';
-import 'package:book_store_app/views/pages/Suggestion_Books/suggestion_books_view.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -32,7 +31,6 @@ List<GetPage> getPagesList = [
     bindings: [HomeBinding(), LoginBinding()],
   ),
   GetPage(name: "/home", page: () => HomeView()),
-  GetPage(name: "/bookDetails", page: () => BookDetails()),
   GetPage(name: "/cart", page: () => Cart()),
   GetPage(name: "/confirmSellerList", page: () => ConfirmSellerList()),
   // GetPage(name: "/editBook", page: () => EditBook()),
@@ -40,9 +38,9 @@ List<GetPage> getPagesList = [
   // GetPage(name: "/myBooks", page: ()=> MyBooks()),
   GetPage(name: "/home", page: () => HomeView(), binding: HomeBinding()),
   GetPage(
-      name: "/suggestionbooks",
-      page: () => SuggestionBooksView(),
-      binding: SuggestionBooksBinding()),
+      name: "/bookdetails",
+      page: () => BookdetailsView(),
+      binding: BookDetailsBinding()),
   GetPage(name: "/login", page: () => LoginView(), binding: LoginBinding()),
   GetPage(
       name: "/registration",

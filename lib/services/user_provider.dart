@@ -16,7 +16,7 @@ class UserProvider extends GetConnect {
       return Future.error(response.statusText);
     } else {
       List<User> _user = User.listFromJson(response.body['User']);
-        return _user;
+      return _user;
     }
   }
 }

@@ -10,17 +10,20 @@ class BookProvider extends GetConnect {
       return Future.error(response.statusText);
     } else {
       List<Book> _book = Book.listFromJson(response.body['Books']);
-       return _book;
+      return _book;
     }
   }
 
-  Future<List<Book>> getsuggestionBook() async {
-    final response =
-        await get('$apiBaseURL/books'); // url for books inital 10 books
+  Future<List<Book>> getBook(String bookId) async {
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      'book_id': '$bookId'
+    };
+    final response = await get('$apiBaseURL/book', headers: headers);
     if (response.status.hasError) {
       return Future.error(response.statusText);
     } else {
-      List<Book> _book = Book.listFromJson(response.body['Books']);
+      List<Book> _book = Book.listFromJson(response.body['Book']);
       return _book;
     }
   }

@@ -42,7 +42,6 @@ class RegistrationController extends GetxController {
     if (statusCode == 200) {
       String message = jsonDecode(body)['message'];
       Get.snackbar('success msg', message);
-      // Get.toNamed('/login');
       Get.toNamed('/');
     } else {
       Get.snackbar('error', 'Something gone wrong');
