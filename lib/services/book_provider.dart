@@ -17,7 +17,7 @@ class BookProvider extends GetConnect {
   Future<List<Book>> getBook(String bookId) async {
     Map<String, String> headers = {
       "Content-type": "application/json",
-      'book_id': '$bookId'
+      "book_id": "$bookId"
     };
     final response = await get('$apiBaseURL/book', headers: headers);
     if (response.status.hasError) {

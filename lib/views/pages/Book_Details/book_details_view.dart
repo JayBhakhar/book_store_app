@@ -17,7 +17,27 @@ class BookdetailsView extends GetView<BookDetailsController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Image.network('https://${_book[0].coverFileUrl}'),
+                  Image.network(
+                    'https://${_book[0].coverFileUrl}',
+                    height: 250,
+                  ),
+                  Text(_book[0].bookName.length > 100
+                      ? "Name :- ${_book[0].bookName}".substring(0, 100) + '...'
+                      : "Name :- ${_book[0].bookName}"),
+                  Text("ISBN No. :- ${_book[0].isbn}"),
+                  Text("Authors :- ${_book[0].authors}"),
+                  Text("Publisher :- ${_book[0].publisher}"),
+                  Text("Year :- ${_book[0].year}"),
+                  Text("Pages :- ${_book[0].numberOfPages}"),
+                  Text("Size :- ${_book[0].size}"),
+                  Text("Weight :- ${_book[0].weight}"),
+                  if (_book[0].annotation.length == 0) ...[
+                    Text(_book[0].annotation.length > 100
+                        ? "Publisher :- ${_book[0].annotation}"
+                                .substring(0, 100) +
+                            '...'
+                        : "Publisher :- ${_book[0].annotation}"),
+                  ],
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       shape: StadiumBorder(),

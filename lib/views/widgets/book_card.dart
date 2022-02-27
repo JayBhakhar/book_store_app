@@ -21,7 +21,9 @@ Widget bookCard(List<Book> _book, int index) {
                     child:
                         Image.network('https://${_book[index].coverFileUrl}'),
                   ),
-                  Text('${_book[index].bookName}'),
+                  Text(_book[index].bookName.length > 25
+                      ? "${_book[index].bookName}".substring(0, 25) + '...'
+                      : "${_book[index].bookName}"),
                   Text('${_book[index].authors}'),
                   Text('₽${_book[index].priceOfSupplier}'),
                 ],

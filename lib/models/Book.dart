@@ -17,16 +17,6 @@ class Book {
   num supplierBookID;
   String supplier;
   num supplierDeliveryTime;
-  String wayAccess0;
-  String wayAccess1;
-  String wayAccess2;
-  String wayAccess3;
-  String wayAccess4;
-  String wayAccess5;
-  String wayAccess6;
-  String wayAccess7;
-  String wayAccess8;
-  String wayAccess9;
 
   Book({
     this.bookID,
@@ -47,16 +37,6 @@ class Book {
     this.supplierBookID,
     this.supplier,
     this.supplierDeliveryTime,
-    this.wayAccess0,
-    this.wayAccess1,
-    this.wayAccess2,
-    this.wayAccess3,
-    this.wayAccess4,
-    this.wayAccess5,
-    this.wayAccess6,
-    this.wayAccess7,
-    this.wayAccess8,
-    this.wayAccess9,
   });
 
   factory Book.fromJson(dynamic json) {
@@ -79,16 +59,6 @@ class Book {
       supplierBookID: json['id_книги_поставщика'] as num,
       supplier: json['поставщик'] as String,
       supplierDeliveryTime: json['срок_отправки_поставщика'] as num,
-      wayAccess0: json['способ_дост_0'] as String,
-      wayAccess1: json['способ_дост_1'] as String,
-      wayAccess2: json['способ_дост_2'] as String,
-      wayAccess3: json['способ_дост_3'] as String,
-      wayAccess4: json['способ_дост_4'] as String,
-      wayAccess5: json['способ_дост_5'] as String,
-      wayAccess6: json['способ_дост_6'] as String,
-      wayAccess7: json['способ_дост_7'] as String,
-      wayAccess8: json['способ_дост_8'] as String,
-      wayAccess9: json['способ_дост_9'] as String,
     );
   }
 
