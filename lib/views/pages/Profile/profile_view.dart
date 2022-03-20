@@ -1,3 +1,4 @@
+import 'package:book_store_app/services/user_provider.dart';
 import 'package:book_store_app/views/pages/Profile/profile_controller.dart';
 import 'package:book_store_app/views/widgets/custom_textFormField_widgets.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,15 @@ class ProfileView extends GetView<ProfileController> {
                 ),
                 customTextFormFieldForStrWithValidator(
                   controller: controller.addressController,
+                  labelText: 'City',
+                ),
+                customTextFormFieldForStrWithValidator(
+                  controller: controller.addressController,
                   labelText: 'Address',
+                ),
+                customTextFormFieldForStrWithValidator(
+                  controller: controller.addressController,
+                  labelText: 'Zip Code',
                 ),
                 TextButton(
                   onPressed: () {
@@ -52,7 +61,14 @@ class ProfileView extends GetView<ProfileController> {
                   onPressed: () {
                     bool _isValid = profileFormKey.currentState.validate();
                     if (_isValid) {
-                      controller.userPutRequst();
+                      // controller.userPutRequst();
+                      String body =
+                          '{"user_name":"${controller.usernameController.text}",'
+                          '"address":"${controller.addressController.text}",'
+                          '"zip_code":"${controller.zipCodeController.text}",'
+                          '"city":"${controller.cityController.text}",'
+                          '"phone_number":"${controller.phoneNumberController.text}"}';
+                      UserProvider().updateUser(body);
                     }
                   },
                   child: Text("Save My Profile Details"),

@@ -5,8 +5,7 @@ import 'package:get/get.dart';
 class BookDetailsController extends GetxController with StateMixin<List<Book>> {
   @override
   void onInit() {
-    super.onInit();
-    
+    super.onInit();    
     var bookId = Get.arguments;
     BookProvider().getBook(bookId).then((resp) {
       change(

@@ -1,3 +1,4 @@
+import 'package:book_store_app/services/user_provider.dart';
 import 'package:book_store_app/views/pages/Registration/registration_controller.dart';
 import 'package:book_store_app/views/widgets/custom_textFormField_widgets.dart';
 import 'package:flutter/material.dart';
@@ -66,9 +67,17 @@ class RegistrationView extends GetView<RegistrationController> {
                   controller: controller.phoneNumberController,
                   labelText: 'Phone No',
                 ),
+                customTextFormFieldForStrWithValidator(
+                  controller: controller.cityController,
+                  labelText: 'City',
+                ),
                 customTextFormFieldForStr(
                   controller: controller.addressController,
                   labelText: 'Address',
+                ),
+                customTextFormFieldForInt(
+                  controller: controller.zipCodeController,
+                  labelText: 'Zip Code',
                 ),
                 SizedBox(
                   width: 200,
@@ -78,7 +87,17 @@ class RegistrationView extends GetView<RegistrationController> {
                       bool _isValid =
                           registrationFormKey.currentState.validate();
                       if (_isValid) {
-                        controller.registraionRequest();
+                        String body =
+                            '{"email":"${controller.emailController.text}",'
+                            '"user_name":"${controller.userController.text}",'
+                            '"password":"${controller.passwordController.text}",'
+                            '"address":"${controller.addressController.text}",'
+                            '"city":"${controller.cityController.text}",'
+                            '"zip_code":"${controller.zipCodeController.text}",'
+                            '"phone_number":"${controller.phoneNumberController.text}",}';
+                        UserProvider().createUser(body);
+
+                        // controller.registraionRequest();
                       }
                     },
                     child: Text("Registration"),

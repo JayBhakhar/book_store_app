@@ -5,6 +5,8 @@ class User {
   String phoneNo;
   String address;
   String password;
+  String city;
+  String zipCode;
 
   User({
     this.userID,
@@ -13,6 +15,8 @@ class User {
     this.phoneNo,
     this.address,
     this.password,
+    this.city,
+    this.zipCode,
   });
 
   factory User.fromJson(dynamic json) {
@@ -22,8 +26,10 @@ class User {
         email: json['email'] as String,
         phoneNo: json['phone_number'] as String,
         address: json['address'] as String,
-        password: json['password'] as String);
+        password: json['password'] as String,
+        city: json['city'] as String,
+        zipCode: json['zip_code'] as String);
   }
   static List<User> listFromJson(list) =>
-    List<User>.from(list.map((x) => User.fromJson(x)));
+      List<User>.from(list.map((x) => User.fromJson(x)));
 }

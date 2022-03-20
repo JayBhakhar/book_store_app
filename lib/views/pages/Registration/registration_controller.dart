@@ -9,8 +9,12 @@ class RegistrationController extends GetxController {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmpasswordController = TextEditingController();
-  final addressController = TextEditingController();
   final phoneNumberController = TextEditingController();
+  final addressController = TextEditingController();
+  final cityController = TextEditingController();
+  final zipCodeController = TextEditingController();
+
+
 
   @override
   void onClose() {
@@ -19,8 +23,10 @@ class RegistrationController extends GetxController {
     emailController.dispose();
     passwordController.dispose();
     confirmpasswordController.dispose();
-    addressController.dispose();
     phoneNumberController.dispose();
+    addressController.dispose();
+    cityController.dispose();
+    zipCodeController.dispose();
   }
 
   void registraionRequest() async {
@@ -31,11 +37,12 @@ class RegistrationController extends GetxController {
         '"user_name":"${userController.text}",'
         '"password":"${passwordController.text}",'
         '"address":"${addressController.text}",'
-        '"phone_number":"${phoneNumberController.text}"}';
+        '"city":"${cityController.text}",'
+        '"zip_code":"${zipCodeController.text}",'
+        '"phone_number":"${phoneNumberController.text}",}';
     // make POST request
     var response = await https.post(url, headers: headers, body: json);
     int statusCode = response.statusCode;
-    print(json);
     // this API passes back the id of the new item added to the body
     String body = response.body;
     // success or error msg

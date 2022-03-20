@@ -10,6 +10,8 @@ import 'package:get/get.dart';
 class ProfileController extends GetxController with StateMixin<List<User>> {
   final usernameController = TextEditingController();
   final addressController = TextEditingController();
+  final cityController = TextEditingController();
+  final zipCodeController = TextEditingController();
   final phoneNumberController = TextEditingController();
 
   void onInit() {
@@ -23,6 +25,8 @@ class ProfileController extends GetxController with StateMixin<List<User>> {
       usernameController.text = user[0].userName;
       addressController.text = user[0].address;
       phoneNumberController.text = user[0].phoneNo;
+      cityController.text = user[0].city;
+      zipCodeController.text = user[0].zipCode;
     }, onError: (err) {
       change(
         null,
@@ -39,6 +43,8 @@ class ProfileController extends GetxController with StateMixin<List<User>> {
     usernameController.dispose();
     addressController.dispose();
     phoneNumberController.dispose();
+    cityController.dispose();
+    zipCodeController.dispose();
   }
 
   void userPutRequst() async {
@@ -52,6 +58,8 @@ class ProfileController extends GetxController with StateMixin<List<User>> {
     };
     String json = '{"user_name":"${usernameController.text}",'
         '"address":"${addressController.text}",'
+        '"zip_code":"${zipCodeController.text}",'
+        '"city":"${cityController.text}",'
         '"phone_number":"${phoneNumberController.text}"}';
     // make Put request
     var response = await https.put(url, headers: headers, body: json);
