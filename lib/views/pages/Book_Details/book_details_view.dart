@@ -31,13 +31,16 @@ class BookdetailsView extends GetView<BookDetailsController> {
                   Text("Pages :- ${_book[0].numberOfPages}"),
                   Text("Size :- ${_book[0].size}"),
                   Text("Weight :- ${_book[0].weight}"),
-                  if (_book[0].annotation.length == 0) ...[
+                  Text("Price :- ${_book[0].priceOfSupplier} rub"),
+                  if (_book[0].annotation != null) ...[
                     Text(_book[0].annotation.length > 100
                         ? "Publisher :- ${_book[0].annotation}"
                                 .substring(0, 100) +
                             '...'
                         : "Publisher :- ${_book[0].annotation}"),
                   ],
+                  Text('deliery charge :- ${controller.deliveryMap['delivery_charge']} rub'),
+                  Text('deliery time :- ${controller.deliveryMap['delivery_time']} days'),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       shape: StadiumBorder(),

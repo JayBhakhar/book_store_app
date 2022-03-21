@@ -64,7 +64,6 @@ class ProfileController extends GetxController with StateMixin<List<User>> {
     // make Put request
     var response = await https.put(url, headers: headers, body: json);
     int statusCode = response.statusCode;
-    print(json);
     // this API passes back the id of the new item added to the body
     String body = response.body;
     // success or error msg

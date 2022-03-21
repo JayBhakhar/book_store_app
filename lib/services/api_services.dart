@@ -1,0 +1,23 @@
+import 'package:book_store_app/consts/constants.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+
+class ApiServices extends GetConnect {
+  Future<Map> getDeliveryCharges(double weight) async {
+    final box = GetStorage();
+    final token = box.read('token');
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer $token',
+      'weight': '$weight'
+    };
+    print(headers);
+    final response =
+        await get('$apiBaseURL/delivery_charges', headers: headers);
+    if (response.status.hasError) {
+      return Future.error(response.statusText);
+    } else {
+      return response.body;
+    }
+  }
+}
