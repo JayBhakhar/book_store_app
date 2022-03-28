@@ -61,7 +61,6 @@ class ProfileView extends GetView<ProfileController> {
                   onPressed: () {
                     bool _isValid = profileFormKey.currentState.validate();
                     if (_isValid) {
-                      // controller.userPutRequst();
                       String body =
                           '{"user_name":"${controller.usernameController.text}",'
                           '"address":"${controller.addressController.text}",'

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/models/User.dart';
@@ -37,7 +36,6 @@ class UserProvider extends GetConnect {
 
   void updateUser(String body) async {
     final response = await put(url, body, headers: headers);
-    print(body);
     if (response.status.hasError) {
       return Future.error(response.statusText);
     } else {
