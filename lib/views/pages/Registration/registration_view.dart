@@ -1,5 +1,6 @@
 import 'package:book_store_app/services/user_provider.dart';
 import 'package:book_store_app/views/pages/Registration/registration_controller.dart';
+import 'package:book_store_app/views/widgets/city_dropdownbutton.dart';
 import 'package:book_store_app/views/widgets/custom_textFormField_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -71,22 +72,7 @@ class RegistrationView extends GetView<RegistrationController> {
                   controller: controller.cityController,
                   labelText: 'City',
                 ),
-                DropdownButton(
-                    hint: Text('select city'),
-                    onChanged: (newValue) {
-                      controller.selectedCity = newValue;
-                      controller.update();
-                    },
-                    value: controller.selectedCity,
-                    items: [
-                      for (var data in controller.cityList)
-                        DropdownMenuItem(
-                          child: new Text(
-                            data,
-                          ),
-                          value: data,
-                        )
-                    ]),
+                cityDropdownButton(),
                 // todo: untested
                 customTextFormFieldForStr(
                   controller: controller.addressController,
@@ -104,6 +90,7 @@ class RegistrationView extends GetView<RegistrationController> {
                       bool _isValid =
                           registrationFormKey.currentState.validate();
                       if (_isValid) {
+                        print(controller.selectedCity);
                         String body =
                             '{"email":"${controller.emailController.text}",'
                             '"user_name":"${controller.userController.text}",'

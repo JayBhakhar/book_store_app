@@ -1,5 +1,6 @@
 import 'package:book_store_app/services/user_provider.dart';
 import 'package:book_store_app/views/pages/Profile/profile_controller.dart';
+import 'package:book_store_app/views/widgets/city_dropdownbutton.dart';
 import 'package:book_store_app/views/widgets/custom_textFormField_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,6 +44,7 @@ class ProfileView extends GetView<ProfileController> {
                   controller: controller.cityController,
                   labelText: 'City',
                 ),
+                cityDropdownButton(),
                 customTextFormFieldForStrWithValidator(
                   controller: controller.addressController,
                   labelText: 'Address',
