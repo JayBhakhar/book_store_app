@@ -25,7 +25,6 @@ Widget bookCard(List<Book> _book, int index) {
                       ? "${_book[index].bookName}".substring(0, 25) + '...'
                       : "${_book[index].bookName}"),
                   Text('${_book[index].authors}'),
-                  Text('₽${_book[index].priceOfSupplier}'),
                 ],
               ),
             ),

@@ -7,20 +7,18 @@ SharedPreferences prefs;
 
 class HomeController extends GetxController with StateMixin<List<Book>> {
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
-    BookProvider().getBooks().then((resp) {    
-      change(
-        resp,
-        status: RxStatus.success(),
-      );
-    }, onError: (err) {
-      change(
-        null,
-        status: RxStatus.error(
-          err.toString(),
-        ),
-      );
-    });
+    try {
+      change(null, status: RxStatus.loading());
+      final _books = await BookProvider().getBooks();
+      if (_books == []) {
+        change([], status: RxStatus.empty());
+      } else {
+        change(_books, status: RxStatus.success());
+      }
+    } catch (err) {
+      change(null, status: RxStatus.error('$err'));
+    }
   }
 }

@@ -71,6 +71,23 @@ class RegistrationView extends GetView<RegistrationController> {
                   controller: controller.cityController,
                   labelText: 'City',
                 ),
+                DropdownButton(
+                    hint: Text('select city'),
+                    onChanged: (newValue) {
+                      controller.selectedCity = newValue;
+                      controller.update();
+                    },
+                    value: controller.selectedCity,
+                    items: [
+                      for (var data in controller.cityList)
+                        DropdownMenuItem(
+                          child: new Text(
+                            data,
+                          ),
+                          value: data,
+                        )
+                    ]),
+                // todo: untested
                 customTextFormFieldForStr(
                   controller: controller.addressController,
                   labelText: 'Address',
@@ -96,8 +113,6 @@ class RegistrationView extends GetView<RegistrationController> {
                             '"zip_code":"${controller.zipCodeController.text}",'
                             '"phone_number":"${controller.phoneNumberController.text}",}';
                         UserProvider().createUser(body);
-
-                        // controller.registraionRequest();
                       }
                     },
                     child: Text("Registration"),

@@ -12,11 +12,7 @@ class Book {
   String coverType;
   String annotation;
   String coverFileUrl;
-  num priceOfSupplier;
   num ownBookID;
-  num supplierBookID;
-  String supplier;
-  num supplierDeliveryTime;
 
   Book({
     this.bookID,
@@ -32,11 +28,7 @@ class Book {
     this.coverType,
     this.annotation,
     this.coverFileUrl,
-    this.priceOfSupplier,
     this.ownBookID,
-    this.supplierBookID,
-    this.supplier,
-    this.supplierDeliveryTime,
   });
 
   factory Book.fromJson(dynamic json) {
@@ -54,11 +46,7 @@ class Book {
       coverType: json['Тип_обл.'] as String,
       annotation: json['Аннотация'] as String,
       coverFileUrl: json['файл_обложки'] as String,
-      priceOfSupplier: json['Цена_поставщика'] as num,
       ownBookID: json['id_книги_наш'] as num,
-      supplierBookID: json['id_книги_поставщика'] as num,
-      supplier: json['поставщик'] as String,
-      supplierDeliveryTime: json['срок_отправки_поставщика'] as num,
     );
   }
 

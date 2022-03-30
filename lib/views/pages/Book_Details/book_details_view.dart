@@ -31,7 +31,6 @@ class BookdetailsView extends GetView<BookDetailsController> {
                   Text("Pages :- ${_book[0].numberOfPages}"),
                   Text("Size :- ${_book[0].size}"),
                   Text("Weight :- ${_book[0].weight}"),
-                  Text("Price :- ${_book[0].priceOfSupplier} rub"),
                   if (_book[0].annotation != null) ...[
                     Text(_book[0].annotation.length > 100
                         ? "Publisher :- ${_book[0].annotation}"

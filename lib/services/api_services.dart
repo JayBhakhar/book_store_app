@@ -11,7 +11,6 @@ class ApiServices extends GetConnect {
       'Authorization': 'Bearer $token',
       'weight': '$weight'
     };
-    print(headers);
     final response =
         await get('$apiBaseURL/delivery_charges', headers: headers);
     if (response.status.hasError) {

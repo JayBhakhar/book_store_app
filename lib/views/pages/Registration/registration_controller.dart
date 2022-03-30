@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'package:book_store_app/consts/constants.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,8 +10,71 @@ class RegistrationController extends GetxController {
   final addressController = TextEditingController();
   final cityController = TextEditingController();
   final zipCodeController = TextEditingController();
-
-
+  String selectedCity = 'Москва';
+  final List<String> cityList = [
+    'Москва',
+    'Санкт-Петербург',
+    'Вологда',
+    'Псков',
+    'Новгород',
+    'Белгород',
+    'Брянск',
+    'Владимир',
+    'Воронеж',
+    'Иваново',
+    'Калуга',
+    'Кострома',
+    'Курск',
+    'Липецк',
+    'Орел',
+    'Рязань',
+    'Смоленск',
+    'Тамбов',
+    'Тверь',
+    'Тула',
+    'Ярославль',
+    'Уфа',
+    'Киров',
+    'Йошкар-Ола',
+    'Саранск',
+    'Нижний Новгород',
+    'Оренбург',
+    'Пенза',
+    'Пермь',
+    'Самара',
+    'Саратов',
+    'Казань',
+    'Ижевск',
+    'Ульяновск',
+    'Чебоксары',
+    'Майкоп',
+    'Астрахань',
+    'Волгоград',
+    'Элиста',
+    'Краснодар',
+    'Ростов-на-Дону',
+    'Курган',
+    'Мурманск',
+    'Петрозаводск',
+    'Сыктывкар',
+    'Екатеринбург',
+    'Тюмень',
+    'Челябинск',
+    'Нальчик',
+    'Черкесск',
+    'Владикавказ',
+    'Ставрополь',
+    'Архангельск',
+    'Горно-Алтайск',
+    'Барнаул',
+    'Кемерово',
+    'Красноярск',
+    'Новосибирск',
+    'Омск',
+    'Томск',
+    'Абакан',
+    'Ханты-Мансийск',
+  ];
 
   @override
   void onClose() {
@@ -27,31 +87,5 @@ class RegistrationController extends GetxController {
     addressController.dispose();
     cityController.dispose();
     zipCodeController.dispose();
-  }
-
-  void registraionRequest() async {
-    var https = http.Client();
-    final url = Uri.parse('$apiBaseURL/registration');
-    Map<String, String> headers = {"Content-type": "application/json"};
-    String json = '{"email":"${emailController.text}",'
-        '"user_name":"${userController.text}",'
-        '"password":"${passwordController.text}",'
-        '"address":"${addressController.text}",'
-        '"city":"${cityController.text}",'
-        '"zip_code":"${zipCodeController.text}",'
-        '"phone_number":"${phoneNumberController.text}",}';
-    // make POST request
-    var response = await https.post(url, headers: headers, body: json);
-    int statusCode = response.statusCode;
-    // this API passes back the id of the new item added to the body
-    String body = response.body;
-    // success or error msg
-    if (statusCode == 200) {
-      String message = jsonDecode(body)['message'];
-      Get.snackbar('success msg', message);
-      Get.toNamed('/');
-    } else {
-      Get.snackbar('error', 'Something gone wrong');
-    }
   }
 }

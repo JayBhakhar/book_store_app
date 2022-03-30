@@ -40,7 +40,7 @@ class ProfileView extends GetView<ProfileController> {
                   length: 10,
                 ),
                 customTextFormFieldForStrWithValidator(
-                  controller: controller.addressController,
+                  controller: controller.cityController,
                   labelText: 'City',
                 ),
                 customTextFormFieldForStrWithValidator(
@@ -48,7 +48,7 @@ class ProfileView extends GetView<ProfileController> {
                   labelText: 'Address',
                 ),
                 customTextFormFieldForStrWithValidator(
-                  controller: controller.addressController,
+                  controller: controller.zipCodeController,
                   labelText: 'Zip Code',
                 ),
                 TextButton(
