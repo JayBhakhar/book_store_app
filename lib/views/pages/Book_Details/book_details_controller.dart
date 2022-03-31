@@ -1,29 +1,23 @@
 import 'package:book_store_app/models/Book.dart';
-import 'package:book_store_app/services/api_services.dart';
 import 'package:book_store_app/services/book_provider.dart';
 import 'package:get/get.dart';
 
 class BookDetailsController extends GetxController with StateMixin<List<Book>> {
-  Map deliveryMap = {};
-
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
-    var bookId = Get.arguments;
-
-    BookProvider().getBook(bookId).then((resp) async {
-      deliveryMap = await ApiServices().getDeliveryCharges(resp[0].weight);
-      change(
-        resp,
-        status: RxStatus.success(),
-      );
-    }, onError: (err) {
-      change(
-        null,
-        status: RxStatus.error(
-          err.toString(),
-        ),
-      );
-    });
+    try {
+      change(null, status: RxStatus.loading());
+      var bookId = Get.arguments;
+      final _book = await BookProvider().getBook(bookId);
+      if (_book == []) {
+        change([], status: RxStatus.empty());
+      } else {
+        // deliveryMap = await ApiServices().getDeliveryCharges(resp[0].weight); 
+        change(_book, status: RxStatus.success());
+      }
+    } catch (err) {
+      change(null, status: RxStatus.error('$err'));
+    }
   }
 }

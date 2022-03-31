@@ -19,4 +19,23 @@ class ApiServices extends GetConnect {
       return response.body;
     }
   }
+
+  Future<List> getSupplierOptions({String ourBookId, double bookWeight}) async {
+    final box = GetStorage();
+    final token = box.read('token');
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      'Authorization': 'Bearer $token',
+      "our_book_id": "$ourBookId",
+      "book_weight": "$bookWeight",
+    };
+    final response =
+        await get('$apiBaseURL/supplier_options', headers: headers);
+    if (response.status.hasError) {
+      return Future.error(response.statusText);
+    } else {
+      // List _supplier_options = Book.listFromJson(response.body['Book']);
+      return response.body;
+    }
+  }
 }

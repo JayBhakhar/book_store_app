@@ -5,6 +5,8 @@ import 'package:book_store_app/views/pages/Book_Details/book_details_view.dart';
 import 'package:book_store_app/views/pages/Cart/cart.dart';
 import 'package:book_store_app/views/pages/Change_Password/change_password_binding.dart';
 import 'package:book_store_app/views/pages/Change_Password/change_password_view.dart';
+import 'package:book_store_app/views/pages/Choose_Supplier/choose_supplier_binding.dart';
+import 'package:book_store_app/views/pages/Choose_Supplier/choose_supplier_view.dart';
 import 'package:book_store_app/views/pages/Confirm_Seller_List/cofirm_seller_list.dart';
 import 'package:book_store_app/views/pages/Forget_Password/forget_password.dart';
 import 'package:book_store_app/views/pages/Home_Screen/home_binding.dart';
@@ -56,5 +58,9 @@ List<GetPage> getPagesList = [
       name: "/changepassword",
       page: () => ChangePasswordView(),
       binding: ChangePasswordBinding()),
+  GetPage(
+      name: "/chooseSupplier",
+      page: () => ChooseSupplierView(),
+      binding: ChooseSupplierBinding()),
   GetPage(name: "/test", page: () => TestView(), binding: TestBinding()),
 ];
