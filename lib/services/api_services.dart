@@ -1,4 +1,5 @@
 import 'package:book_store_app/consts/constants.dart';
+import 'package:book_store_app/models/ChooseSupplier.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -20,7 +21,7 @@ class ApiServices extends GetConnect {
     }
   }
 
-  Future<List> getSupplierOptions({String ourBookId, double bookWeight}) async {
+  Future<List<ChooseSupplier>> getSupplierOptions({int ourBookId, double bookWeight}) async {
     final box = GetStorage();
     final token = box.read('token');
     Map<String, String> headers = {
@@ -34,8 +35,8 @@ class ApiServices extends GetConnect {
     if (response.status.hasError) {
       return Future.error(response.statusText);
     } else {
-      // List _supplier_options = Book.listFromJson(response.body['Book']);
-      return response.body;
+      List<ChooseSupplier> supplierOptions = ChooseSupplier.listFromJson(response.body['ChooseSupplier']);
+      return supplierOptions;
     }
   }
 }

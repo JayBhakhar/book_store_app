@@ -39,9 +39,9 @@ class UserProvider extends GetConnect {
     if (response.status.hasError) {
       return Future.error(response.statusText);
     } else {
-      String message = jsonDecode(response.body)['message'];
-      Get.snackbar('success msg', message);
-      Get.toNamed('/');
+      String message = (response.body)['message'];
+      Get.snackbar('success', message, snackPosition: SnackPosition.BOTTOM);
+      Get.offNamed('/');
     }
   }
 }

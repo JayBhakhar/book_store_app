@@ -7,7 +7,6 @@ class ChooseSupplierController extends GetxController
   @override
   void onInit() async {
     super.onInit();
-    // todo: not tested
     try {
       change(null, status: RxStatus.loading());
       var arg = Get.arguments;
@@ -24,5 +23,3 @@ class ChooseSupplierController extends GetxController
     }
   }
 }
-
-// {'_id': 'c34fbcdd-da03-4ed0-928e-ce71726660b6', 'Цена_поставщика': 623.0, 'id_книги_наш': 31504, 'id_книги_поставщика': 13214, 'поставщик': 'Бакен', 'срок_отправки_поставщика': 5, 'delivery_charge': 129, 'delivery_name': '5post'}

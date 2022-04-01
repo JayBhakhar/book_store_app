@@ -1,5 +1,6 @@
 import 'package:book_store_app/services/user_provider.dart';
 import 'package:book_store_app/views/pages/Profile/profile_controller.dart';
+import 'package:book_store_app/views/pages/Registration/registration_controller.dart';
 import 'package:book_store_app/views/widgets/city_dropdownbutton.dart';
 import 'package:book_store_app/views/widgets/custom_textFormField_widgets.dart';
 import 'package:flutter/material.dart';
@@ -40,10 +41,6 @@ class ProfileView extends GetView<ProfileController> {
                   labelText: 'Phone No',
                   length: 10,
                 ),
-                customTextFormFieldForStrWithValidator(
-                  controller: controller.cityController,
-                  labelText: 'City',
-                ),
                 cityDropdownButton(),
                 customTextFormFieldForStrWithValidator(
                   controller: controller.addressController,
@@ -61,13 +58,14 @@ class ProfileView extends GetView<ProfileController> {
                 ),
                 TextButton(
                   onPressed: () {
+                    final RegistrationController _regC = Get.find();
                     bool _isValid = profileFormKey.currentState.validate();
                     if (_isValid) {
                       String body =
                           '{"user_name":"${controller.usernameController.text}",'
                           '"address":"${controller.addressController.text}",'
                           '"zip_code":"${controller.zipCodeController.text}",'
-                          '"city":"${controller.cityController.text}",'
+                          '"city":"${_regC.selectedCity}",'
                           '"phone_number":"${controller.phoneNumberController.text}"}';
                       UserProvider().updateUser(body);
                     }
@@ -78,7 +76,7 @@ class ProfileView extends GetView<ProfileController> {
                   child: Text('Log out'),
                   onPressed: () {
                     box.remove('token');
-                    Get.toNamed('/');
+                    Get.offAllNamed('/');
                   },
                 )
               ],

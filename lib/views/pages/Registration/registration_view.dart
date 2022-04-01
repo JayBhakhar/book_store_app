@@ -68,12 +68,7 @@ class RegistrationView extends GetView<RegistrationController> {
                   controller: controller.phoneNumberController,
                   labelText: 'Phone No',
                 ),
-                customTextFormFieldForStrWithValidator(
-                  controller: controller.cityController,
-                  labelText: 'City',
-                ),
                 cityDropdownButton(),
-                // todo: untested
                 customTextFormFieldForStr(
                   controller: controller.addressController,
                   labelText: 'Address',
@@ -90,13 +85,12 @@ class RegistrationView extends GetView<RegistrationController> {
                       bool _isValid =
                           registrationFormKey.currentState.validate();
                       if (_isValid) {
-                        print(controller.selectedCity);
                         String body =
                             '{"email":"${controller.emailController.text}",'
                             '"user_name":"${controller.userController.text}",'
                             '"password":"${controller.passwordController.text}",'
                             '"address":"${controller.addressController.text}",'
-                            '"city":"${controller.cityController.text}",'
+                            '"city":"${controller.selectedCity}",'
                             '"zip_code":"${controller.zipCodeController.text}",'
                             '"phone_number":"${controller.phoneNumberController.text}",}';
                         UserProvider().createUser(body);

@@ -1,12 +1,13 @@
 import 'package:book_store_app/models/User.dart';
 import 'package:book_store_app/services/user_provider.dart';
+import 'package:book_store_app/views/pages/Registration/registration_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController with StateMixin<List<User>> {
+  final RegistrationController _regC = Get.find();
   final usernameController = TextEditingController();
   final addressController = TextEditingController();
-  final cityController = TextEditingController();
   final zipCodeController = TextEditingController();
   final phoneNumberController = TextEditingController();
 
@@ -21,7 +22,7 @@ class ProfileController extends GetxController with StateMixin<List<User>> {
         usernameController.text = _user[0].userName;
         addressController.text = _user[0].address;
         phoneNumberController.text = _user[0].phoneNo;
-        cityController.text = _user[0].city;
+        _regC.selectedCity.value = _user[0].city;
         zipCodeController.text = _user[0].zipCode;
         change(_user, status: RxStatus.success());
       }
@@ -36,7 +37,6 @@ class ProfileController extends GetxController with StateMixin<List<User>> {
     usernameController.dispose();
     addressController.dispose();
     phoneNumberController.dispose();
-    cityController.dispose();
     zipCodeController.dispose();
   }
 }
