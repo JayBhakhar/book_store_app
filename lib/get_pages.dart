@@ -2,7 +2,6 @@ import 'package:book_store_app/Unit_Test/test_binding.dart';
 import 'package:book_store_app/Unit_Test/test_view.dart';
 import 'package:book_store_app/views/pages/Book_Details/book_details_binding.dart';
 import 'package:book_store_app/views/pages/Book_Details/book_details_view.dart';
-import 'package:book_store_app/views/pages/Cart/cart.dart';
 import 'package:book_store_app/views/pages/Change_Password/change_password_binding.dart';
 import 'package:book_store_app/views/pages/Change_Password/change_password_view.dart';
 import 'package:book_store_app/views/pages/Choose_Supplier/choose_supplier_binding.dart';
@@ -13,6 +12,8 @@ import 'package:book_store_app/views/pages/Home_Screen/home_binding.dart';
 import 'package:book_store_app/views/pages/Home_Screen/home_view.dart';
 import 'package:book_store_app/views/pages/Login/login_binding.dart';
 import 'package:book_store_app/views/pages/Login/login_view.dart';
+import 'package:book_store_app/views/pages/My_Cart/my_cart_binding.dart';
+import 'package:book_store_app/views/pages/My_Cart/my_cart_view.dart';
 import 'package:book_store_app/views/pages/Profile/profile_binding.dart';
 import 'package:book_store_app/views/pages/Profile/profile_view.dart';
 import 'package:book_store_app/views/pages/Registration/registration_binding.dart';
@@ -33,7 +34,6 @@ List<GetPage> getPagesList = [
     bindings: [HomeBinding(), LoginBinding()],
   ),
   GetPage(name: "/home", page: () => HomeView()),
-  GetPage(name: "/cart", page: () => Cart()),
   GetPage(name: "/confirmSellerList", page: () => ConfirmSellerList()),
   // GetPage(name: "/editBook", page: () => EditBook()),
   GetPage(name: "/forgetPassword", page: () => ForgetPassword()),
@@ -44,6 +44,7 @@ List<GetPage> getPagesList = [
       page: () => BookdetailsView(),
       binding: BookDetailsBinding()),
   GetPage(name: "/login", page: () => LoginView(), binding: LoginBinding()),
+  GetPage(name: "/myCart", page: () => MyCartView(), binding: MyCartBinding()),
   GetPage(
       name: "/registration",
       page: () => RegistrationView(),

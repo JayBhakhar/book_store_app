@@ -1,6 +1,6 @@
 import 'package:book_store_app/models/Book.dart';
 import 'package:book_store_app/views/pages/Choose_Supplier/choose_supplier_controller.dart';
-import 'package:book_store_app/views/widgets/choose_supplier_cart.dart';
+import 'package:book_store_app/views/widgets/choose_supplier_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

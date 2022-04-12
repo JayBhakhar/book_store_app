@@ -21,7 +21,8 @@ class ApiServices extends GetConnect {
     }
   }
 
-  Future<List<ChooseSupplier>> getSupplierOptions({int ourBookId, double bookWeight}) async {
+  Future<List<ChooseSupplier>> getSupplierOptions(
+      {int ourBookId, double bookWeight}) async {
     final box = GetStorage();
     final token = box.read('token');
     Map<String, String> headers = {
@@ -36,7 +37,8 @@ class ApiServices extends GetConnect {
     if (response.status.hasError) {
       return Future.error(response.statusText);
     } else {
-      List<ChooseSupplier> supplierOptions = ChooseSupplier.listFromJson(response.body['ChooseSupplier']);
+      List<ChooseSupplier> supplierOptions =
+          ChooseSupplier.listFromJson(response.body['ChooseSupplier']);
       return supplierOptions;
     }
   }

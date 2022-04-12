@@ -16,6 +16,10 @@ class HomeView extends GetView<HomeController> {
               child: Text('Profile'),
               onPressed: () => Get.toNamed('/profile'),
             ),
+            TextButton(
+              child: Text('My Cart'),
+              onPressed: () => Get.toNamed('/myCart'),
+            ),
           ],
         )),
       ),
@@ -43,7 +47,7 @@ class HomeView extends GetView<HomeController> {
           itemCount: _book.length,
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 300.0,
-            mainAxisExtent: 190,
+            mainAxisExtent: 210,
             crossAxisSpacing: 0.5,
             mainAxisSpacing: 0.5,
           ),

@@ -97,14 +97,17 @@ Widget chooseSupplierCard(
             onPressed: () {
               final box = GetStorage();
               List addCardList = box.read('addCardList');
-              String body = '{"book_name":"${book[0].bookName}",'
-                  '"supplier_name":"${chooseSupplier[index].supplier}",'
-                  '"supplier_book_id":"${chooseSupplier[index].supplierBookID}",'
-                  '"total":"${(chooseSupplier[index].deliveryCharge + chooseSupplier[index].supplierPrice)}",'
-                  '"post":"${chooseSupplier[index].deliveryName.toString()}"}';
+              Map body = {
+                'book': book[0],
+                'supplier_name': '${chooseSupplier[index].supplier}',
+                'supplier_book_id': chooseSupplier[index].supplierBookID,
+                'total': (chooseSupplier[index].deliveryCharge +
+                    chooseSupplier[index].supplierPrice),
+                'post': '${chooseSupplier[index].deliveryName}'
+              };
               addCardList.add(body);
+              // addCardList.remove(body);
               box.write('addCardList', addCardList);
-              // _choC.addCardList.remove(body);
               Get.snackbar('success', 'added to cart',
                   snackPosition: SnackPosition.BOTTOM);
             },
