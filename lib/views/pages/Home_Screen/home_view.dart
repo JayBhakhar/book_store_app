@@ -43,7 +43,7 @@ class HomeView extends GetView<HomeController> {
           itemCount: _book.length,
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 300.0,
-            mainAxisExtent: 250,
+            mainAxisExtent: 190,
             crossAxisSpacing: 0.5,
             mainAxisSpacing: 0.5,
           ),

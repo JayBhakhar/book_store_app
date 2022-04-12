@@ -5,6 +5,7 @@ import 'package:book_store_app/get_pages.dart';
 
 void main() async {
   await GetStorage.init();
+  box.write('addCardList', []);
   runApp(MyApp());
 }
 

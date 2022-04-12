@@ -2,33 +2,20 @@ import 'package:book_store_app/models/Book.dart';
 import 'package:book_store_app/models/ChooseSupplier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 Widget chooseSupplierCard(
     List<ChooseSupplier> chooseSupplier, List<Book> book, int index) {
   return Card(
     child: Row(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: Image.network('https://${book[0].coverFileUrl}'),
+        SizedBox(
+          width: 5,
         ),
         Expanded(
           child: Column(
             children: [
-              SizedBox(height: 3),
-              Row(
-                children: [
-                  Text(
-                    'Name: ',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(book[0].bookName.length > 27
-                      ? "${book[0].bookName}".substring(0, 27) + '...'
-                      : "${book[0].bookName}"),
-                ],
-              ),
               Row(
                 children: [
                   Text(
@@ -94,14 +81,38 @@ Widget chooseSupplierCard(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text((chooseSupplier[index].deliveryCharge +
-                          chooseSupplier[index].supplierPrice)
-                      .toString()),
+                  Text(
+                    (chooseSupplier[index].deliveryCharge +
+                            chooseSupplier[index].supplierPrice)
+                        .toString(),
+                  ),
                 ],
               ),
             ],
           ),
         ),
+        Container(
+          width: 100,
+          child: IconButton(
+            onPressed: () {
+              final box = GetStorage();
+              List addCardList = box.read('addCardList');
+              String body = '{"book_name":"${book[0].bookName}",'
+                  '"supplier_name":"${chooseSupplier[index].supplier}",'
+                  '"supplier_book_id":"${chooseSupplier[index].supplierBookID}",'
+                  '"total":"${(chooseSupplier[index].deliveryCharge + chooseSupplier[index].supplierPrice)}",'
+                  '"post":"${chooseSupplier[index].deliveryName.toString()}"}';
+              addCardList.add(body);
+              box.write('addCardList', addCardList);
+              // _choC.addCardList.remove(body);
+              Get.snackbar('success', 'added to cart',
+                  snackPosition: SnackPosition.BOTTOM);
+            },
+            icon: Icon(
+              Icons.add_shopping_cart,
+            ),
+          ),
+        )
       ],
     ),
   );
