@@ -96,7 +96,7 @@ Widget chooseSupplierCard(
           child: IconButton(
             onPressed: () {
               final box = GetStorage();
-              List addCardList = box.read('addCardList');
+              var data = box.read('addCardList');
               Map body = {
                 'book': book[0],
                 'supplier_name': '${chooseSupplier[index].supplier}',
@@ -105,9 +105,9 @@ Widget chooseSupplierCard(
                     chooseSupplier[index].supplierPrice),
                 'post': '${chooseSupplier[index].deliveryName}'
               };
-              addCardList.add(body);
+              data.add(body);
               // addCardList.remove(body);
-              box.write('addCardList', addCardList);
+              box.write('addCardList', data);
               Get.snackbar('success', 'added to cart',
                   snackPosition: SnackPosition.BOTTOM);
             },

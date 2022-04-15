@@ -29,7 +29,7 @@ class ChooseSupplierView extends GetView<ChooseSupplierController> {
                   mainAxisSpacing: 1,
                 ),
                 itemBuilder: (BuildContext context, index) {
-                  return chooseSupplierCard(state, _book,index );
+                  return chooseSupplierCard(state, _book, index);
                 },
               ),
             ),
@@ -67,8 +67,8 @@ Widget bookCardSupplier(List<Book> _book) {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(_book[0].bookName.length > 27
-                        ? "${_book[0].bookName}".substring(0, 27) + '...'
+                    Text(_book[0].bookName.length > 25
+                        ? "${_book[0].bookName}".substring(0, 25) + '...'
                         : "${_book[0].bookName}"),
                   ],
                 ),
@@ -80,9 +80,12 @@ Widget bookCardSupplier(List<Book> _book) {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(_book[0].authors.length > 27
-                        ? "${_book[0].authors}".substring(0, 27) + '...'
-                        : "${_book[0].authors}"),
+                    if (_book[0].authors != null)
+                      Text(_book[0].authors.length > 24
+                          ? "${_book[0].authors}".substring(0, 24) + '...'
+                          : "${_book[0].authors}")
+                    else
+                      Text('-')
                   ],
                 ),
               ],
