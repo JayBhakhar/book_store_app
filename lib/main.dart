@@ -5,10 +5,7 @@ import 'package:book_store_app/get_pages.dart';
 
 void main() async {
   await GetStorage.init();
-  print(box.read('addCardList'));
   // box.write('addCardList', <Cart>[]);
-  print('++++++++++++++++++++++');
-  print(box.read('addCardList'));
   runApp(MyApp());
 }
 

@@ -99,8 +99,10 @@ Widget addCartCard(List<Cart> _cart, int index) {
                 barrierDismissible: true,
                 content: Text('remove book'),
                 onConfirm: () {
+                  var data = box.read('addCardList');
+                  data.removeAt(index);
                   _myCC.addCartList.removeAt(index);
-                  box.write('addCardList', _myCC.addCartList);
+                  box.write('addCardList', data);
                   Get.back();
                   Get.snackbar('success', 'removed to cart',
                       snackPosition: SnackPosition.BOTTOM);
