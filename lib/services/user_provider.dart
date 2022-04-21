@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/models/User.dart';
@@ -28,8 +27,8 @@ class UserProvider extends GetConnect {
     if (response.status.hasError) {
       return Future.error(response.statusText);
     } else {
-      String message = jsonDecode(body)['message'];
-      Get.snackbar('success msg', message);
+      String message = response.body['message'];
+      Get.snackbar('success msg', message, snackPosition: SnackPosition.BOTTOM);
       Get.toNamed('/');
     }
   }
@@ -39,7 +38,7 @@ class UserProvider extends GetConnect {
     if (response.status.hasError) {
       return Future.error(response.statusText);
     } else {
-      String message = (response.body)['message'];
+      String message = response.body['message'];
       Get.snackbar('success', message, snackPosition: SnackPosition.BOTTOM);
       Get.offNamed('/');
     }

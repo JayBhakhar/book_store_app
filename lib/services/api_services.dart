@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class ApiServices extends GetConnect {
+  final box = GetStorage();
   Future<Map> getDeliveryCharges(double weight) async {
-    final box = GetStorage();
     final token = box.read('token');
     Map<String, String> headers = {
       'Content-type': 'application/json',
@@ -23,7 +23,6 @@ class ApiServices extends GetConnect {
 
   Future<List<ChooseSupplier>> getSupplierOptions(
       {int ourBookId, double bookWeight}) async {
-    final box = GetStorage();
     final token = box.read('token');
     Map<String, String> headers = {
       "Content-type": "application/json",
@@ -40,6 +39,24 @@ class ApiServices extends GetConnect {
       List<ChooseSupplier> supplierOptions =
           ChooseSupplier.listFromJson(response.body['ChooseSupplier']);
       return supplierOptions;
+    }
+  }
+
+  void getLoginRequst(String jsonBody) async {
+    Map<String, String> headers = {"Content-type": "application/json"};
+    final response =
+        await post('$apiBaseURL/login', jsonBody, headers: headers);
+    if (response.status.code == 200) {
+      String token = response.body['token'];
+      box.write('token', token);
+      Get.toNamed('/home');
+    } else if (response.status.code == 401) {
+      String message = response.body['message'];
+      Get.snackbar('login fail', message);
+    } else if (!response.hasError) {
+      return Future.error(response.statusText);
+    } else {
+      Get.snackbar('error', 'Something gone wrong');
     }
   }
 }

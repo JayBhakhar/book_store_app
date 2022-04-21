@@ -1,3 +1,4 @@
+import 'package:book_store_app/services/api_services.dart';
 import 'package:book_store_app/views/pages/Login/login_controller.dart';
 import 'package:book_store_app/views/widgets/custom_textFormField_widgets.dart';
 import 'package:flutter/material.dart';
@@ -50,9 +51,11 @@ class LoginView extends GetView<LoginController> {
                     onPressed: () {
                       bool _isValid = loginFormKey.currentState.validate();
                       if (_isValid) {
-                        controller.loginRequest();
+                        String jsonBody =
+                            '{"email":"${controller.emailController.text}",'
+                            '"password":"${controller.passwordController.text}"}';
+                        ApiServices().getLoginRequst(jsonBody);
                       }
-                      // login function
                     }),
               ),
               Container(

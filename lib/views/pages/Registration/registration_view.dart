@@ -90,9 +90,9 @@ class RegistrationView extends GetView<RegistrationController> {
                             '"user_name":"${controller.userController.text}",'
                             '"password":"${controller.passwordController.text}",'
                             '"address":"${controller.addressController.text}",'
-                            '"city":"${controller.selectedCity}",'
+                            '"city":"${controller.selectedCity.value}",'
                             '"zip_code":"${controller.zipCodeController.text}",'
-                            '"phone_number":"${controller.phoneNumberController.text}",}';
+                            '"phone_number":"${controller.phoneNumberController.text}"}';                      
                         UserProvider().createUser(body);
                       }
                     },
