@@ -26,6 +26,9 @@ class UserProvider extends GetConnect {
     final response = await post(url, body);
     if (response.status.hasError) {
       return Future.error(response.statusText);
+    } else if (response.status.code == 409) {
+      String message = response.body['message'];
+      Get.snackbar('success msg', message, snackPosition: SnackPosition.BOTTOM);
     } else {
       String message = response.body['message'];
       Get.snackbar('success msg', message, snackPosition: SnackPosition.BOTTOM);
