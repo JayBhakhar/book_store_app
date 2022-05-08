@@ -52,8 +52,10 @@ class ApiServices extends GetConnect {
       Get.toNamed('/home');
     } else if (response.status.code == 401) {
       String message = response.body['message'];
-      Get.snackbar('login fail', message);
+      Get.snackbar('login fail', message, snackPosition: SnackPosition.BOTTOM);
     } else if (!response.hasError) {
+      Get.snackbar('Error', response.statusText,
+          snackPosition: SnackPosition.BOTTOM);
       return Future.error(response.statusText);
     } else {
       Get.snackbar('error', 'Something gone wrong');

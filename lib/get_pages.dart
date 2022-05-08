@@ -20,15 +20,16 @@ import 'package:book_store_app/views/pages/Registration/registration_binding.dar
 import 'package:book_store_app/views/pages/Registration/registration_view.dart';
 import 'package:book_store_app/views/pages/Splash_Screen/splash_binding.dart';
 import 'package:book_store_app/views/pages/Splash_Screen/splash_view.dart';
+import 'package:book_store_app/views/pages/payment/payment_binding.dart';
+import 'package:book_store_app/views/pages/payment/payment_view.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:get_storage/get_storage.dart';
-
-GetStorage box = GetStorage();
 
 List<GetPage> getPagesList = [
   GetPage(
     name: "/",
     page: () {
+      GetStorage box = GetStorage();
       return box.hasData('token') ? HomeView() : LoginView();
     },
     bindings: [HomeBinding(), LoginBinding()],
@@ -64,4 +65,6 @@ List<GetPage> getPagesList = [
       page: () => ChooseSupplierView(),
       binding: ChooseSupplierBinding()),
   GetPage(name: "/test", page: () => TestView(), binding: TestBinding()),
+  GetPage(
+      name: "/payment", page: () => PaymentView(), binding: PaymentBinding()),
 ];

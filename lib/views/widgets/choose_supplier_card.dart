@@ -95,9 +95,8 @@ Widget chooseSupplierCard(
           width: 100,
           child: IconButton(
             onPressed: () {
-              final box = GetStorage();
-              var data = box.read('addCardList');
-              print(data.runtimeType);
+              GetStorage box = GetStorage();
+              var data = box.read('addCardList');           
               Map body = {
                 'book': book[0],
                 'supplier_name': '${chooseSupplier[index].supplier}',

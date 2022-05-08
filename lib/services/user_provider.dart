@@ -15,6 +15,8 @@ class UserProvider extends GetConnect {
   Future<List<User>> getUser() async {
     final response = await get(url, headers: headers);
     if (response.status.hasError) {
+      Get.snackbar('Error', response.statusText,
+          snackPosition: SnackPosition.BOTTOM);
       return Future.error(response.statusText);
     } else {
       List<User> _user = User.listFromJson(response.body['User']);
@@ -24,14 +26,16 @@ class UserProvider extends GetConnect {
 
   void createUser(String body) async {
     final response = await post(url, body);
-    if (response.status.hasError) {
-      return Future.error(response.statusText);
-    } else if (response.status.code == 409) {
+    if (response.status.code == 409) {
       String message = response.body['message'];
-      Get.snackbar('success msg', message, snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Error', message, snackPosition: SnackPosition.BOTTOM);
+    } else if (response.status.hasError) {
+      Get.snackbar('Error', response.statusText,
+          snackPosition: SnackPosition.BOTTOM);
+      return Future.error(response.statusText);
     } else {
       String message = response.body['message'];
-      Get.snackbar('success msg', message, snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Success', message, snackPosition: SnackPosition.BOTTOM);
       Get.toNamed('/');
     }
   }
@@ -39,6 +43,8 @@ class UserProvider extends GetConnect {
   void updateUser(String body) async {
     final response = await put(url, body, headers: headers);
     if (response.status.hasError) {
+      Get.snackbar('Error', response.statusText,
+          snackPosition: SnackPosition.BOTTOM);
       return Future.error(response.statusText);
     } else {
       String message = response.body['message'];
