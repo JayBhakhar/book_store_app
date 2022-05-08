@@ -96,15 +96,17 @@ Widget chooseSupplierCard(
           child: IconButton(
             onPressed: () {
               GetStorage box = GetStorage();
-              var data = box.read('addCardList');           
-              Map body = {
-                'book': book[0],
-                'supplier_name': '${chooseSupplier[index].supplier}',
-                'supplier_book_id': chooseSupplier[index].supplierBookID,
-                'total': (chooseSupplier[index].deliveryCharge +
+              var data = box.read('addCardList');
+              Map<String, dynamic> body = {
+                "book": book[0],
+                "supplier_name": "${chooseSupplier[index].supplier}",
+                "supplier_book_id": chooseSupplier[index].supplierBookID,
+                "total": (chooseSupplier[index].deliveryCharge +
                     chooseSupplier[index].supplierPrice),
-                'post': '${chooseSupplier[index].deliveryName}'
+                "post": "${chooseSupplier[index].deliveryName}"
               };
+              print(body);
+              print(body.runtimeType);
               data.add(body);
               box.write('addCardList', data);
               Get.snackbar('success', 'added to cart',

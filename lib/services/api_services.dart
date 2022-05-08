@@ -42,7 +42,7 @@ class ApiServices extends GetConnect {
     }
   }
 
-  void getLoginRequst(String jsonBody) async {
+  void postLoginRequst(String jsonBody) async {
     Map<String, String> headers = {"Content-type": "application/json"};
     final response =
         await post('$apiBaseURL/login', jsonBody, headers: headers);
@@ -53,6 +53,29 @@ class ApiServices extends GetConnect {
     } else if (response.status.code == 401) {
       String message = response.body['message'];
       Get.snackbar('login fail', message, snackPosition: SnackPosition.BOTTOM);
+    } else if (!response.hasError) {
+      Get.snackbar('Error', response.statusText,
+          snackPosition: SnackPosition.BOTTOM);
+      return Future.error(response.statusText);
+    } else {
+      Get.snackbar('error', 'Something gone wrong');
+    }
+  }
+
+  void postOrderRequst(String jsonBody) async {
+    final token = box.read('token');
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+    final response =
+        await post('$apiBaseURL/order', jsonBody, headers: headers);
+    print(response.status.code);
+    if (response.status.code == 200) {
+      String message = response.body['message'];
+      Get.snackbar('Order Success', message,
+          snackPosition: SnackPosition.BOTTOM);
+      // Get.toNamed('/home');
     } else if (!response.hasError) {
       Get.snackbar('Error', response.statusText,
           snackPosition: SnackPosition.BOTTOM);

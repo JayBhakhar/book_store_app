@@ -76,11 +76,8 @@ class MyCartView extends GetView<MyCartController> {
                             total.forEach((e) {
                               sum += e;
                             });
-                            print(sum);
-                            print(controller.addCartList);
                             GetStorage box = GetStorage();
-                            Get.toNamed('/payment',
-                                arguments: [sum, box.read('addCardList')]);
+                            Get.toNamed('/payment', arguments: sum);
                           },
                           child: const Text('Order Now'),
                         )

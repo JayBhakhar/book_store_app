@@ -54,7 +54,7 @@ class LoginView extends GetView<LoginController> {
                         String jsonBody =
                             '{"email":"${controller.emailController.text}",'
                             '"password":"${controller.passwordController.text}"}';
-                        ApiServices().getLoginRequst(jsonBody);
+                        ApiServices().postLoginRequst(jsonBody);
                       }
                     }),
               ),
