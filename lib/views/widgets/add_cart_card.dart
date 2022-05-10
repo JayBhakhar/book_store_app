@@ -1,11 +1,11 @@
 import 'package:book_store_app/models/Cart.dart';
-import 'package:book_store_app/views/pages/My_Cart/my_cart_controller.dart';
+import 'package:book_store_app/views/pages/Cart/cart_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 Widget addCartCard(List<Cart> _cart, int index) {
-  MyCartController _myCC = Get.find();
+  CartController _myCC = Get.find();
   return Card(
     child: Row(
       children: [

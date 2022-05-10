@@ -4,7 +4,7 @@ import 'package:get_storage/get_storage.dart';
 
 final box = GetStorage();
 
-class MyCartController extends GetxController {
+class CartController extends GetxController {
   var data;
   RxList<Cart> addCartList;
 

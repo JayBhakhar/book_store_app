@@ -20,6 +20,14 @@ class HomeView extends GetView<HomeController> {
               child: Text('My Cart'),
               onPressed: () => Get.toNamed('/myCart'),
             ),
+            TextButton(
+              child: Text('My Order'),
+              onPressed: () => Get.toNamed('/myOrder'),
+            ),
+            // TextButton(
+            //   child: Text('Client Order'),
+            //   onPressed: () => Get.toNamed('/clientOrder'),
+            // ),
           ],
         )),
       ),
@@ -59,15 +67,4 @@ class HomeView extends GetView<HomeController> {
     );
   }
 }
-
-
-// Column(
-//         children: [
-//           ListView.builder(
-//               itemCount: bookController.books.length,
-//               itemBuilder: (context, index) {
-//                 return Text(bookController.books[index].bookName);
-//               })
-//         ],
-//       ),);
     
