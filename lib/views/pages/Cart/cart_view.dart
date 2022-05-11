@@ -2,7 +2,6 @@ import 'package:book_store_app/views/pages/Cart/cart_controller.dart';
 import 'package:book_store_app/views/widgets/add_cart_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class MyCartView extends GetView<CartController> {
   @override
@@ -76,7 +75,6 @@ class MyCartView extends GetView<CartController> {
                             total.forEach((e) {
                               sum += e;
                             });
-                            GetStorage box = GetStorage();
                             Get.toNamed('/payment', arguments: sum);
                           },
                           child: const Text('Order Now'),

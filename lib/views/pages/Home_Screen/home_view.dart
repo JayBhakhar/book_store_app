@@ -18,11 +18,11 @@ class HomeView extends GetView<HomeController> {
             ),
             TextButton(
               child: Text('My Cart'),
-              onPressed: () => Get.toNamed('/myCart'),
+              onPressed: () => Get.toNamed('/cart'),
             ),
             TextButton(
               child: Text('My Order'),
-              onPressed: () => Get.toNamed('/myOrder'),
+              onPressed: () => Get.toNamed('/order'),
             ),
             // TextButton(
             //   child: Text('Client Order'),

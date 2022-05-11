@@ -1,5 +1,6 @@
 import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/models/ChooseSupplier.dart';
+import 'package:book_store_app/models/Order.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -82,6 +83,23 @@ class ApiServices extends GetConnect {
       return Future.error(response.statusText);
     } else {
       Get.snackbar('error', 'Something gone wrong');
+    }
+  }
+
+  Future<List<Order>> getOrderRequst()async {
+    final token = box.read('token');
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+    final response =
+        await get('$apiBaseURL/order', headers: headers);
+    if (response.status.hasError) {
+      return Future.error(response.statusText);
+    } else {
+      List<Order> orderList =
+          Order.listFromJson(response.body['Order']);
+      return orderList;
     }
   }
 }

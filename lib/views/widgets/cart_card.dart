@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/models/Book.dart';
 import 'package:flutter/material.dart';

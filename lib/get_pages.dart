@@ -14,6 +14,8 @@ import 'package:book_store_app/views/pages/Login/login_binding.dart';
 import 'package:book_store_app/views/pages/Login/login_view.dart';
 import 'package:book_store_app/views/pages/Cart/cart_binding.dart';
 import 'package:book_store_app/views/pages/Cart/cart_view.dart';
+import 'package:book_store_app/views/pages/Order/order_binding.dart';
+import 'package:book_store_app/views/pages/Order/order_view.dart';
 import 'package:book_store_app/views/pages/Profile/profile_binding.dart';
 import 'package:book_store_app/views/pages/Profile/profile_view.dart';
 import 'package:book_store_app/views/pages/Registration/registration_binding.dart';
@@ -45,7 +47,7 @@ List<GetPage> getPagesList = [
       page: () => BookdetailsView(),
       binding: BookDetailsBinding()),
   GetPage(name: "/login", page: () => LoginView(), binding: LoginBinding()),
-  GetPage(name: "/myCart", page: () => MyCartView(), binding: CartBinding()),
+  GetPage(name: "/cart", page: () => MyCartView(), binding: CartBinding()),
   GetPage(
       name: "/registration",
       page: () => RegistrationView(),
@@ -67,4 +69,6 @@ List<GetPage> getPagesList = [
   GetPage(name: "/test", page: () => TestView(), binding: TestBinding()),
   GetPage(
       name: "/payment", page: () => PaymentView(), binding: PaymentBinding()),
+  GetPage(
+      name: "/order", page: () => OrderView(), binding: OrderBinding()),
 ];
