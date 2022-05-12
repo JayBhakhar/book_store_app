@@ -1,4 +1,5 @@
 import 'package:book_store_app/views/pages/Home_Screen/home_controller.dart';
+import 'package:book_store_app/views/pages/Splash_Screen/splash_controller.dart';
 import 'package:book_store_app/views/widgets/book_card.dart';
 import 'package:book_store_app/views/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:get/get.dart';
 class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
+    SplashController _splC = Get.find();
     return Scaffold(
       drawer: Drawer(
         child: SafeArea(
@@ -22,12 +24,13 @@ class HomeView extends GetView<HomeController> {
             ),
             TextButton(
               child: Text('My Order'),
-              onPressed: () => Get.toNamed('/order'),
+              onPressed: () => Get.toNamed('/order', arguments: false),
             ),
-            // TextButton(
-            //   child: Text('Client Order'),
-            //   onPressed: () => Get.toNamed('/clientOrder'),
-            // ),
+            if (_splC.user[0].isSeller)
+              TextButton(
+                child: Text("Client's Order"),
+                onPressed: () => Get.toNamed('/order', arguments: true),
+              )           
           ],
         )),
       ),
@@ -67,4 +70,3 @@ class HomeView extends GetView<HomeController> {
     );
   }
 }
-    

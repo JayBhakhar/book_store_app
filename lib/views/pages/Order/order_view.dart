@@ -1,14 +1,16 @@
 import 'package:book_store_app/views/pages/Order/order_controller.dart';
+import 'package:book_store_app/views/pages/Splash_Screen/splash_controller.dart';
 import 'package:book_store_app/views/widgets/order_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OrderView extends GetView<OrderController> {
+  final SplashController _splC = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Order'),
+        title: _splC.user[0].isSeller ?Text("My Client's Order"): Text('My Order'),
       ),
       body: controller.obx(
         (state) => state.isEmpty

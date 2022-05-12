@@ -5,7 +5,11 @@ import 'package:get/get.dart';
 class SplashView extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
     // Todo: put a logo in case of loading could be appire
   }
 }

@@ -3,12 +3,14 @@ import 'package:book_store_app/services/api_services.dart';
 import 'package:get/get.dart';
 
 class OrderController extends GetxController with StateMixin<List<Order>> {
+  bool isClientsOrder = Get.arguments;
   @override
   void onInit() async {
     super.onInit();
     try {
       change(null, status: RxStatus.loading());
-      final List<Order> orderList = await ApiServices().getOrderRequst();
+      final List<Order> orderList =
+          await ApiServices().getOrderRequst(isClientsOrder);
       if (orderList == []) {
         change([], status: RxStatus.empty());
       } else {

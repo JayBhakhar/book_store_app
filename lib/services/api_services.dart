@@ -76,7 +76,7 @@ class ApiServices extends GetConnect {
       String message = response.body['message'];
       Get.snackbar('Order Success', message,
           snackPosition: SnackPosition.BOTTOM);
-      // Get.toNamed('/home');
+      Get.toNamed('/home');
     } else if (!response.hasError) {
       Get.snackbar('Error', response.statusText,
           snackPosition: SnackPosition.BOTTOM);
@@ -86,19 +86,18 @@ class ApiServices extends GetConnect {
     }
   }
 
-  Future<List<Order>> getOrderRequst()async {
+  Future<List<Order>> getOrderRequst(bool isClientsOrder) async {
     final token = box.read('token');
     Map<String, String> headers = {
       'Content-type': 'application/json',
-      'Authorization': 'Bearer $token'
+      'Authorization': 'Bearer $token',
+      'is_clients_order': '$isClientsOrder'
     };
-    final response =
-        await get('$apiBaseURL/order', headers: headers);
+    final response = await get('$apiBaseURL/order', headers: headers);
     if (response.status.hasError) {
       return Future.error(response.statusText);
     } else {
-      List<Order> orderList =
-          Order.listFromJson(response.body['Order']);
+      List<Order> orderList = Order.listFromJson(response.body['Order']);      
       return orderList;
     }
   }

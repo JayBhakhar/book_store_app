@@ -32,11 +32,11 @@ List<GetPage> getPagesList = [
     name: "/",
     page: () {
       GetStorage box = GetStorage();
-      return box.hasData('token') ? HomeView() : LoginView();
+      return box.hasData('token') ? SplashView() : LoginView();
     },
-    bindings: [HomeBinding(), LoginBinding()],
+    bindings: [SplashBinding(), LoginBinding()],
   ),
-  GetPage(name: "/home", page: () => HomeView()),
+  GetPage(name: "/home", page: () => HomeView(), binding: HomeBinding()),
   GetPage(name: "/confirmSellerList", page: () => ConfirmSellerList()),
   // GetPage(name: "/editBook", page: () => EditBook()),
   GetPage(name: "/forgetPassword", page: () => ForgetPassword()),
@@ -69,6 +69,5 @@ List<GetPage> getPagesList = [
   GetPage(name: "/test", page: () => TestView(), binding: TestBinding()),
   GetPage(
       name: "/payment", page: () => PaymentView(), binding: PaymentBinding()),
-  GetPage(
-      name: "/order", page: () => OrderView(), binding: OrderBinding()),
+  GetPage(name: "/order", page: () => OrderView(), binding: OrderBinding()),
 ];

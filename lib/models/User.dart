@@ -7,6 +7,7 @@ class User {
   String password;
   String city;
   String zipCode;
+  bool isSeller;
 
   User({
     this.userID,
@@ -17,6 +18,7 @@ class User {
     this.password,
     this.city,
     this.zipCode,
+    this.isSeller,
   });
 
   factory User.fromJson(dynamic json) {
@@ -29,6 +31,7 @@ class User {
       password: json['password'] as String,
       city: json['city'] as String,
       zipCode: json['zip_code'] as String,
+      isSeller: json['is_seller'] as bool,
     );
   }
   static List<User> listFromJson(list) =>

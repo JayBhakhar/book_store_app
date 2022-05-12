@@ -2,9 +2,6 @@ import 'package:book_store_app/models/Book.dart';
 import 'package:book_store_app/services/book_provider.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-SharedPreferences prefs;
 
 class HomeController extends GetxController with StateMixin<List<Book>> {
   @override
