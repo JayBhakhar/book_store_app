@@ -1,6 +1,7 @@
 import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/models/ChooseSupplier.dart';
 import 'package:book_store_app/models/Order.dart';
+import 'package:book_store_app/views/pages/Cart/cart_controller.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -76,6 +77,8 @@ class ApiServices extends GetConnect {
       String message = response.body['message'];
       Get.snackbar('Order Success', message,
           snackPosition: SnackPosition.BOTTOM);
+      box.write('addCardList', []);
+      Get.delete<CartController>();
       Get.toNamed('/home');
     } else if (!response.hasError) {
       Get.snackbar('Error', response.statusText,
@@ -97,7 +100,7 @@ class ApiServices extends GetConnect {
     if (response.status.hasError) {
       return Future.error(response.statusText);
     } else {
-      List<Order> orderList = Order.listFromJson(response.body['Order']);      
+      List<Order> orderList = Order.listFromJson(response.body['Order']);
       return orderList;
     }
   }

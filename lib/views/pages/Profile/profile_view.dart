@@ -1,17 +1,17 @@
 import 'package:book_store_app/services/user_provider.dart';
 import 'package:book_store_app/views/pages/Profile/profile_controller.dart';
 import 'package:book_store_app/views/pages/Registration/registration_controller.dart';
+import 'package:book_store_app/views/pages/Splash_Screen/splash_controller.dart';
 import 'package:book_store_app/views/widgets/city_dropdownbutton.dart';
 import 'package:book_store_app/views/widgets/custom_textFormField_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class ProfileView extends GetView<ProfileController> {
   final GlobalKey<FormState> profileFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    GetStorage box = GetStorage();
+    final SplashController _splC = Get.find();
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -20,15 +20,13 @@ class ProfileView extends GetView<ProfileController> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                controller.obx((user) {
-                  return Text(
-                    "Your email : ${user[0].email}",
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  );
-                }),
+                Text(
+                  "Your email : ${_splC.user[0].email}",
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 SizedBox(
                   height: 15,
                 ),
@@ -58,16 +56,22 @@ class ProfileView extends GetView<ProfileController> {
                 ),
                 TextButton(
                   onPressed: () {
-                    final RegistrationController _regC = Get.find();
-                    bool _isValid = profileFormKey.currentState.validate();
-                    if (_isValid) {
-                      String body =
-                          '{"user_name":"${controller.usernameController.text}",'
-                          '"address":"${controller.addressController.text}",'
-                          '"zip_code":"${controller.zipCodeController.text}",'
-                          '"city":"${_regC.selectedCity}",'
-                          '"phone_number":"${controller.phoneNumberController.text}"}';
-                      UserProvider().updateUser(body);
+                    if (_splC.user[0].isSeller) {
+                      Get.snackbar('seller can not change profile',
+                          'please contact to admin for change profile',
+                          snackPosition: SnackPosition.BOTTOM);
+                    } else {
+                      final RegistrationController _regC = Get.find();
+                      bool _isValid = profileFormKey.currentState.validate();
+                      if (_isValid) {
+                        String body =
+                            '{"user_name":"${controller.usernameController.text}",'
+                            '"address":"${controller.addressController.text}",'
+                            '"zip_code":"${controller.zipCodeController.text}",'
+                            '"city":"${_regC.selectedCity}",'
+                            '"phone_number":"${controller.phoneNumberController.text}"}';
+                        UserProvider().updateUser(body);
+                      }
                     }
                   },
                   child: Text("Save My Profile Details"),
