@@ -6,6 +6,7 @@ import 'package:book_store_app/views/widgets/city_dropdownbutton.dart';
 import 'package:book_store_app/views/widgets/custom_textFormField_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ProfileView extends GetView<ProfileController> {
   final GlobalKey<FormState> profileFormKey = GlobalKey<FormState>();
@@ -79,8 +80,9 @@ class ProfileView extends GetView<ProfileController> {
                 TextButton(
                   child: Text('Log out'),
                   onPressed: () {
+                    GetStorage box = GetStorage();
                     box.remove('token');
-                    Get.offAllNamed('/');
+                    Get.offNamed('/');
                   },
                 )
               ],

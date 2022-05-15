@@ -1,7 +1,9 @@
 import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/models/ChooseSupplier.dart';
 import 'package:book_store_app/models/Order.dart';
+import 'package:book_store_app/services/user_provider.dart';
 import 'package:book_store_app/views/pages/Cart/cart_controller.dart';
+import 'package:book_store_app/views/pages/Splash_Screen/splash_controller.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -51,7 +53,13 @@ class ApiServices extends GetConnect {
     if (response.status.code == 200) {
       String token = response.body['token'];
       box.write('token', token);
-      Get.toNamed('/home');
+      try {
+        SplashController _splC = Get.find();
+        _splC.user = await UserProvider().getUser();
+        Get.toNamed('/home');
+      } catch (err) {
+        Get.snackbar('login fail', err, snackPosition: SnackPosition.BOTTOM);
+      }
     } else if (response.status.code == 401) {
       String message = response.body['message'];
       Get.snackbar('login fail', message, snackPosition: SnackPosition.BOTTOM);
@@ -72,7 +80,6 @@ class ApiServices extends GetConnect {
     };
     final response =
         await post('$apiBaseURL/order', jsonBody, headers: headers);
-    print(response.status.code);
     if (response.status.code == 200) {
       String message = response.body['message'];
       Get.snackbar('Order Success', message,

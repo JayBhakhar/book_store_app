@@ -3,16 +3,16 @@ import 'package:book_store_app/consts/constants.dart';
 import 'package:book_store_app/models/User.dart';
 import 'package:get_storage/get_storage.dart';
 
-final box = GetStorage();
-final token = box.read('token');
-final url = '$apiBaseURL/registration';
-Map<String, String> headers = {
-  "Content-type": "application/json",
-  'Authorization': 'Bearer $token'
-};
-
 class UserProvider extends GetConnect {
+  GetStorage box = GetStorage();
+  final url = '$apiBaseURL/registration';
+  
   Future<List<User>> getUser() async {
+    final token = box.read('token');
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      'Authorization': 'Bearer $token'
+    };
     final response = await get(url, headers: headers);
     if (response.status.hasError) {
       Get.snackbar('Error', response.statusText,
@@ -41,6 +41,11 @@ class UserProvider extends GetConnect {
   }
 
   void updateUser(String body) async {
+    final token = box.read('token');
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      'Authorization': 'Bearer $token'
+    };
     final response = await put(url, body, headers: headers);
     if (response.status.hasError) {
       Get.snackbar('Error', response.statusText,
