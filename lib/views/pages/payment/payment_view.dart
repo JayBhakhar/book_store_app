@@ -18,6 +18,9 @@ class PaymentView extends GetView<PaymentController> {
               order.add(
                 {
                   '"book_id"': '"${_myCC.addCartList[i].book.bookID}"',
+                  '"book_image"': '"${_myCC.addCartList[i].book.coverFileUrl}"',
+                  '"book_name"': '"${_myCC.addCartList[i].book.bookName}"',
+                  '"book_author"': '"${_myCC.addCartList[i].book.authors}"',
                   '"supplier_name"': '"${_myCC.addCartList[i].supplierName}"',
                   '"supplier_book_id"':
                       "${_myCC.addCartList[i].supplierBookId}",
@@ -27,6 +30,7 @@ class PaymentView extends GetView<PaymentController> {
               );
             }
             String jsonBody = '{"order": $order}';
+            print(jsonBody);
             ApiServices().postOrderRequst(jsonBody);
           },
         ),

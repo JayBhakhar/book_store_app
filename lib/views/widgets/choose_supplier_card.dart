@@ -105,8 +105,6 @@ Widget chooseSupplierCard(
                     chooseSupplier[index].supplierPrice),
                 "post": "${chooseSupplier[index].deliveryName}"
               };
-              print(body);
-              print(body.runtimeType);
               data.add(body);
               box.write('addCardList', data);
               Get.snackbar('success', 'added to cart',

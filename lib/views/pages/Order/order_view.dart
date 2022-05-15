@@ -25,7 +25,7 @@ class OrderView extends GetView<OrderController> {
                     itemCount: state.length,
                     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 400.0,
-                      mainAxisExtent: 180,
+                      mainAxisExtent: 120,
                       crossAxisSpacing: 0.5,
                       mainAxisSpacing: 0.5,
                     ),
