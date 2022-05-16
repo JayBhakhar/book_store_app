@@ -111,4 +111,17 @@ class ApiServices extends GetConnect {
       return orderList;
     }
   }
+
+  void putOrderRequst(String jsonBody) async {
+    Map<String, String> headers = {"Content-type": "application/json"};
+    final response = await put('$apiBaseURL/order', jsonBody, headers: headers);
+    if (response.status.hasError) {
+      Get.snackbar('Error', response.statusText,
+          snackPosition: SnackPosition.BOTTOM);
+      return Future.error(response.statusText);
+    } else {
+      String message = response.body['message'];
+      Get.snackbar('success', message, snackPosition: SnackPosition.BOTTOM);
+    }
+  }
 }

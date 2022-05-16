@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:book_store_app/models/Order.dart';
+import 'package:book_store_app/services/api_services.dart';
 import 'package:book_store_app/views/pages/Order/order_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -118,10 +119,14 @@ Widget clientOrderCard(RxList<Order> orderList, index) {
                               ],
                             ),
                           ),
-                          onConfirm: () {
-                            print(_ordC.selectedOrderStatus.value);
-                            // todo: put requst to order 
-                            Get.back();
+                          onConfirm: () async {
+                            String jsonBody = '{"id":"${orderList[index].id}",'
+                                '"status":"${_ordC.selectedOrderStatus.value}"}';
+                            ApiServices().putOrderRequst(jsonBody);
+                            _ordC.orderList =
+                                await ApiServices().getOrderRequst(true);
+                            Get.delete<OrderController>();
+                            Get.offNamed('/home');
                           },
                         );
                       },
