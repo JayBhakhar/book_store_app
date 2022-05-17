@@ -30,7 +30,6 @@ class PaymentView extends GetView<PaymentController> {
               );
             }
             String jsonBody = '{"order": $order}';
-            print(jsonBody);
             ApiServices().postOrderRequst(jsonBody);
           },
         ),

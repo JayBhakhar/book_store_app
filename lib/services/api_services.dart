@@ -56,7 +56,7 @@ class ApiServices extends GetConnect {
       try {
         SplashController _splC = Get.find();
         _splC.user = await UserProvider().getUser();
-        Get.toNamed('/home');
+        Get.offNamed('/home');
       } catch (err) {
         Get.snackbar('login fail', err, snackPosition: SnackPosition.BOTTOM);
       }
@@ -107,6 +107,7 @@ class ApiServices extends GetConnect {
     if (response.status.hasError) {
       return Future.error(response.statusText);
     } else {
+      print(response.body['Order']);
       List<Order> orderList = Order.listFromJson(response.body['Order']);
       return orderList;
     }

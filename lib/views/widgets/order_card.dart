@@ -29,10 +29,11 @@ Widget orderCard(RxList<Order> orderList, index) {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(orderList[index].bookName.length > 25
-                        ? "${orderList[index].bookName}".substring(0, 25) +
-                            '...'
-                        : "${orderList[index].bookName}")
+                    if (orderList[index].bookName != null)
+                      Text(orderList[index].bookName.length > 25
+                          ? "${orderList[index].bookName}".substring(0, 25) +
+                              '...'
+                          : "${orderList[index].bookName}")
                   ],
                 ),
                 Row(
