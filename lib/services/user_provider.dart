@@ -5,7 +5,7 @@ import 'package:get_storage/get_storage.dart';
 
 class UserProvider extends GetConnect {
   GetStorage box = GetStorage();
-  final url = '$apiBaseURL/registration';
+  final url = '$apiBaseURL/user';
   
   Future<List<User>> getUser() async {
     final token = box.read('token');
