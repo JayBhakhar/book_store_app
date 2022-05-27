@@ -7,9 +7,8 @@ class SplashView extends GetView<SplashController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: CircularProgressIndicator(),
+        child: Image.asset('assets/images/logo.png'),
       ),
     );
-    // Todo: put a logo in case of loading could be appire
   }
 }

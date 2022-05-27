@@ -6,7 +6,6 @@ import 'package:book_store_app/views/pages/Change_Password/change_password_bindi
 import 'package:book_store_app/views/pages/Change_Password/change_password_view.dart';
 import 'package:book_store_app/views/pages/Choose_Supplier/choose_supplier_binding.dart';
 import 'package:book_store_app/views/pages/Choose_Supplier/choose_supplier_view.dart';
-import 'package:book_store_app/views/pages/Confirm_Seller_List/cofirm_seller_list.dart';
 import 'package:book_store_app/views/pages/Forget_Password/forget_password.dart';
 import 'package:book_store_app/views/pages/Home_Screen/home_binding.dart';
 import 'package:book_store_app/views/pages/Home_Screen/home_view.dart';
@@ -37,10 +36,7 @@ List<GetPage> getPagesList = [
     bindings: [SplashBinding(), LoginBinding()],
   ),
   GetPage(name: "/home", page: () => HomeView(), binding: HomeBinding()),
-  GetPage(name: "/confirmSellerList", page: () => ConfirmSellerList()),
-  // GetPage(name: "/editBook", page: () => EditBook()),
   GetPage(name: "/forgetPassword", page: () => ForgetPassword()),
-  // GetPage(name: "/myBooks", page: ()=> MyBooks()),
   GetPage(name: "/home", page: () => HomeView(), binding: HomeBinding()),
   GetPage(
       name: "/bookdetails",
