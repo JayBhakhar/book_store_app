@@ -14,6 +14,21 @@ class BookProvider extends GetConnect {
     }
   }
 
+  Future<List<Book>> getSearchBooks(String query) async {
+    query = Uri.encodeComponent(query.toString());
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "query": "$query"
+    };
+    final response = await get('$apiBaseURL/search_books', headers: headers);
+    if (response.status.hasError) {
+      return Future.error(response.statusText);
+    } else {
+      List<Book> _book = Book.listFromJson(response.body['Books']);
+      return _book;
+    }
+  }
+
   Future<List<Book>> getBook(String bookId) async {
     Map<String, String> headers = {
       "Content-type": "application/json",

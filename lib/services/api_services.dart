@@ -107,7 +107,6 @@ class ApiServices extends GetConnect {
     if (response.status.hasError) {
       return Future.error(response.statusText);
     } else {
-      print(response.body['Order']);
       List<Order> orderList = Order.listFromJson(response.body['Order']);
       return orderList;
     }

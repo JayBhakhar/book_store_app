@@ -40,7 +40,7 @@ class ChangePasswordController extends GetxController {
     if (statusCode == 200) {
       String message = jsonDecode(body)['message'];
       Get.snackbar('success msg', message);
-      Get.toNamed('/');
+      Get.toNamed('/home');
     } else if (statusCode == 401) {
       String message = jsonDecode(body)['message'];
       Get.defaultDialog(
