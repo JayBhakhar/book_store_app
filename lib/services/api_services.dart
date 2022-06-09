@@ -63,7 +63,7 @@ class ApiServices extends GetConnect {
     } else if (response.status.code == 401) {
       String message = response.body['message'];
       Get.snackbar('login fail', message, snackPosition: SnackPosition.BOTTOM);
-    } else if (!response.hasError) {
+    } else if (response.hasError) {
       Get.snackbar('Error', response.statusText,
           snackPosition: SnackPosition.BOTTOM);
       return Future.error(response.statusText);
