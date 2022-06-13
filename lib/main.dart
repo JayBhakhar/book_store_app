@@ -8,6 +8,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   runApp(GetMaterialApp(
+    debugShowCheckedModeBanner: false,
     onInit: () {
       Get.put(SplashController());
     },
