@@ -1,4 +1,5 @@
-Book Store App
+**Book Store App**
+
 The Book Store App is a cross-platform mobile application developed using Flutter. It provides a comprehensive solution for managing a bookstore, including features for browsing, purchasing, and selling books.
 
 Key Features:
